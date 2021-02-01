@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-3 col-md-2">
                         <a href="{{url('/')}}">
-                            <img class="logo logo-dark" alt="logo" src="{{asset('frontend/branding/logo.png')}}">
-                            <img class="logo logo-light" alt="logo" src="{{asset('frontend/branding/logo.png')}}"> </a>
+                            <img class="logo logo-dark" alt="logo" src="{{asset('frontend/branding/oz-window-logo.png')}}">
+                            <img class="logo logo-light" alt="logo" src="{{asset('frontend/branding/oz-window-logo.png')}}"> </a>
                     </div>
                     <div class="col-9 col-md-10 text-right">
                         <a href="#" class="hamburger-toggle" data-toggle-class="#menu1;hidden-xs hidden-sm"> <i class="icon icon--sm stack-interface stack-menu"></i> </a>
@@ -20,7 +20,7 @@
                     <div class="col-lg-1 col-md-2 hidden-xs">
                         <div class="bar__module">
                             <a href="{{url('/')}}">
-                                <img class=" logo-light" alt="logo" src="{{asset('frontend/branding/logo.png')}}"></a>
+                                <img class=" logo-light" alt="logo" src="{{asset('frontend/branding/oz-window-logo.png')}}"></a>
                         </div>
                     </div>
                     <div class="col-lg-11 col-md-12 text-right text-left-xs text-left-sm">
@@ -57,31 +57,28 @@
                                                     <div class="col-lg-3">
                                                         <h5>Brand 1</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{asset('product')}}">Product 1</a> </li>
-                                                            <li> <a href="{{asset('product')}}">Product 2</a> </li>
-                                                            <li> <a href="{{asset('product')}}">Product 3</a> </li>
+                                                            <li> <a href="{{url('product')}}">Product 1</a> </li>
+                                                            <li> <a href="{{url('product')}}">Product 2</a> </li>
+                                                            <li> <a href="{{url('product')}}">Product 3</a> </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <h5>Brand 2</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{asset('product')}}">Product 1</a> </li>
+                                                            <li> <a href="{{url('product')}}">Product 1</a> </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <h5>Brand 3</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{asset('product')}}">Product 1</a> </li>
-                                                            <li> <a href="{{asset('product')}}">Product 2</a> </li>
+                                                            <li> <a href="{{url('product')}}">Product 1</a> </li>
+                                                            <li> <a href="{{url('product')}}">Product 2</a> </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        <h5>Brand 4</h5>
+                                                        <h5>All</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{asset('product')}}">Product 1</a> </li>
-                                                            <li> <a href="{{asset('product')}}">Product 2</a> </li>
-                                                            <li> <a href="{{asset('product')}}">Product 3</a> </li>
-                                                            <li> <a href="{{asset('product')}}">Product 4</a> </li>
+                                                            <li> <a href="{{url('products')}}">All Products</a> </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -91,10 +88,50 @@
                                 </li>
                             </ul>
                         </div>
+
                         <div class="bar__module">
-                            <a class="btn btn--sm btn--primary type--uppercase" href="{{url('login')}}"> <span class="btn__text">
-                                    Account Login
-                                </span> </a>
+                            @guest
+                                @if (Route::has('login'))
+                                    <a class="btn btn--sm btn--primary type--uppercase" href="{{url('login')}}">
+                                        <span class="btn__text">Account Login</span>
+                                    </a>
+                                @endif
+                            @else
+                                <li class="dropdown list-no-bullets">
+                                    <span class="dropdown__trigger btn btn--sm btn--primary text-white type--uppercase">
+                                        <i class="icon icon-Arrow-Down text-white"></i>
+                                        {{ Auth::user()->name }}
+                                    </span>
+                                    <div class="dropdown__container">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="dropdown__content col-lg-2">
+                                                    <ul class="menu-vertical">
+                                                        <li>
+                                                            <a href="{{asset('dashboard')}}">Dashboard</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{asset('cart')}}">Cart</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                               onclick="event.preventDefault();
+                                                                document.getElementById('logout-form').submit();">
+                                                                {{ __('Logout') }}
+                                                            </a>
+
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                                @csrf
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            @endguest
                         </div>
                     </div>
                 </div>

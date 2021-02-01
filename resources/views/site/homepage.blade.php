@@ -4,37 +4,41 @@
 
     <section class="cover cover-features imagebg space--lg parallax" data-overlay="2">
         <div class="background-image-holder">
-            <img alt="background" src="{{asset('frontend/images/What-You-Need-to-Know-About-Same-Day-Window-Tinting-Instant-Windscreens-1024x682.jpg')}}">
+            <img alt="cover image" src="{{asset('frontend/images/fb-cover_1_opacity20.jpg')}}">
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-lg-7">
-                    <h1> Build stylish, lean sites with Stack </h1>
-                    <p class="lead"> Stack offers a clean and contemporary look to suit a range of purposes from corporate, tech startup, marketing site to digital storefront. </p>
+                    <h1 class="type--bold"> Oz Window Films </h1>
+                    <p class="lead font-weight-bold"> OZ Window Films is committed to supplying exceptional quality window film to our
+                        industry professionals who are experienced and dedicated to their customers. </p>
                     <a class="btn btn--primary type--uppercase" href="#"> <span class="btn__text">
-                    View The Demos
+                    View Products
                 </span> </a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="feature feature-2 boxed boxed--border bg--white"> <i class="icon icon-Clock-Back color--primary"></i>
+                <div class="col-md-4 mh-85">
+                    <div class="feature feature-2 boxed boxed--border bg--white">
+                        <img class="mw-50 p-0" alt="logo" src="{{asset('frontend/branding/global_crop.jpg')}}">
                         <div class="feature__body">
-                            <p> Save time with a multitude of styled components designed to showcase your content </p>
+                            <h4> Global Window Films </h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature feature-2 boxed boxed--border bg--white"> <i class="icon icon-Duplicate-Window color--primary"></i>
+                <div class="col-md-4 mh-85">
+                    <div class="feature feature-2 boxed boxed--border bg--white">
+                        <img class="mw-50" alt="logo" src="{{asset('frontend/branding/ixrtreme_1.png')}}">
                         <div class="feature__body">
-                            <p> Construct mockups or production-ready pages in-browser with Variant Page Builder </p>
+                            <h4> OZ Window Films </h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature feature-2 boxed boxed--border bg--white"> <i class="icon icon-Life-Jacket color--primary"></i>
+                <div class="col-md-4 mh-85">
+                    <div class="feature feature-2 boxed boxed--border bg--white">
+                        <img class="mw-50" alt="luxe logo" src="{{asset('frontend/branding/LuxeLogo_0819_200x98.png')}}">
                         <div class="feature__body">
-                            <p> Take comfort in 6 months included support with a dedicated support forum </p>
+                            <h4> Luxe Lightwrap </h4>
                         </div>
                     </div>
                 </div>
@@ -118,11 +122,11 @@
                                 <h4>Let's get you started</h4>
                             </div>
                             <div class="col-lg-4">
-                                <p class="lead"> Start building pages in your browser </p>
+                                <p class="lead"> Apply for your account here. </p>
                             </div>
                             <div class="col-lg-4 text-center">
-                                <a class="btn btn--primary type--uppercase" href="#"> <span class="btn__text">
-                                Try Builder
+                                <a class="btn btn--primary type--uppercase" href="{{url('register')}}"> <span class="btn__text">
+                                Account Application
                             </span> </a>
                             </div>
                         </div>
@@ -140,7 +144,7 @@
                     </div>
                     <form class="row">
                         <div class="col-md-8"> <input type="email" name="email" placeholder="Email Address"> </div>
-                        <div class="col-md-4"> <button type="submit" class="btn btn--primary type--uppercase">Get Started</button> </div>
+                        <div class="col-md-4"> <button type="submit" class="btn btn--primary type--uppercase">Subscribe</button> </div>
                     </form>
                 </div>
             </div>

@@ -4,6 +4,12 @@
 
     <section class="switchable bg--primary">
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Contact</h1>
+                    <hr>
+                </div>
+            </div>
             <div class="row justify-content-between">
                 <div class="col-lg-6 col-md-7 col-12">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14100.170159727706!2d153.3697204!3d-27.9313411!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xee8d16860caa5cbc!2sTint%20Daddy&#39;s%20Gold%20Coast%2C%20Australia!5e0!3m2!1sen!2sau!4v1611894434986!5m2!1sen!2sau"
@@ -28,6 +34,9 @@
     </section>
     <section class="text-center bg--dark">
         <div class="container">
+            <div class="row justify-content-center">
+                <h2>Contact us directly</h2>
+            </div>
             <div class="row justify-content-center no-gutters">
                 <div class="col-md-8 col-lg-7">
                     <form class="text-left form-email row mx-0"
@@ -48,8 +57,10 @@
                             <label>Message:</label>
                             <textarea rows="6" name="message" class="validate-required"></textarea>
                         </div>
-                        @captcha
-                        <div class="col-md-5 col-lg-4">
+                        <div class="col-md-6 col-xs-12 mt--1">
+                            @captcha
+                        </div>
+                        <div class="col-md-6 col-xs-12 pull-right mt--1">
                             <button type="submit" class="btn btn--primary type--uppercase">Send Enquiry</button>
                         </div>
                     </form>

@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-md-7 col-lg-5">
                 <h2>Login to continue</h2>
-                <p class="lead"> Welcome back, sign in with your existing Stack account credentials </p>
+                <p class="lead"> Welcome back, sign in with your account credentials </p>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="row">

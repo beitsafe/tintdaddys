@@ -1,1 +1,14 @@
 /*! Place your custom styles here */
+
+.mw-50{
+    max-width: 50px!important;
+    margin-bottom: 0!important;
+}
+
+.mh-85{
+    max-height: 85px!important;
+}
+
+.list-no-bullets{
+    list-style-type: none!important;
+}

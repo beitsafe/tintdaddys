@@ -43,16 +43,15 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <span class="type--fine-print">©<span class="update-year"></span> Stack Inc.</span>
+                <span class="type--fine-print">©<span class="update-year"></span> Oz Window Films</span>
                 <a class="type--fine-print" href="#">Privacy Policy</a>
-                <a class="type--fine-print" href="#">Legal</a>
+                <a class="type--fine-print" href="#">Terms</a>
             </div>
             <div class="col-sm-6 text-right text-left-xs">
                 <ul class="social-list list-inline list--hover">
-                    <li><a href="#"><i class="socicon socicon-google icon icon--xs"></i></a></li>
-                    <li><a href="#"><i class="socicon socicon-twitter icon icon--xs"></i></a></li>
-                    <li><a href="#"><i class="socicon socicon-facebook icon icon--xs"></i></a></li>
-                    <li><a href="#"><i class="socicon socicon-instagram icon icon--xs"></i></a></li>
+                    <li><a href="https://www.facebook.com/ozwindowfilms.com.au/"><i class="socicon socicon-facebook icon icon--xs"></i></a></li>
+                    <li><a href="https://www.instagram.com/globalaustralianewzealand/"><i class="socicon socicon-instagram icon icon--xs"></i></a></li>
+                    <li><a href="https://www.linkedin.com/public-profile/in/gordon-gross-344633100"><i class="socicon socicon-linkedin icon icon--xs"></i></a></li>
                 </ul>
             </div>
         </div>

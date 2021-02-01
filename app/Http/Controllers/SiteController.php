@@ -26,6 +26,16 @@ class SiteController extends Controller
         return view('site.productSingle');
     }
 
+    public function products()
+    {
+        return view('site.products');
+    }
+
+    public function cart()
+    {
+        return view('admin.cart');
+    }
+
     public function privacy()
     {
         return view('site.privacy');

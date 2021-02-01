@@ -4,3 +4,8 @@
 
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="{{asset('frontend/branding/oz-window-logo.png')}}">
+
+

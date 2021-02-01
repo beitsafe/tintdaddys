@@ -21,6 +21,10 @@ Route::get('faqs', [SiteController::class, 'faqs']);
 Route::get('privacy', [SiteController::class, 'privacy']);
 Route::get('terms', [SiteController::class, 'terms']);
 Route::get('product', [SiteController::class, 'product']);
+Route::get('products', [SiteController::class, 'products']);
+
+
+Route::get('cart', [SiteController::class, 'cart']);
 
 
 Route::get('contact', [SiteController::class, 'contact'])->name('contact');
@@ -28,7 +32,7 @@ Route::post('send-contact', [EnquiryController::class, 'store']);
 
 
 Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+    return view('admin.home');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

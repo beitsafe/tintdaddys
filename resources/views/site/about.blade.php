@@ -5,10 +5,22 @@
     <section class="text-center bg--dark">
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-lg-8">
-                    <h1>Simple Centered</h1>
-                    <p class="lead"> Stack's visual style is simple yet distinct, making it an ideal starting point for
-                        your project whether it be a basic marketing site, or multi-page company presence. </p>
+                <div class="col-md-10">
+                    <h1>About US</h1>
+                    <p class="lead">OZ Window Films is committed to supplying exceptional quality window film to our
+                        industry professionals who are experienced and dedicated to their customers.  Our vast
+                        experience in the industry, allows us to share our knowledge of the products and technical
+                        techniques to our installers, allowing us to provide the service and support you need to grow
+                        your business.</p>
+                    <p>
+                        ​OZ Window Films provides competitively priced  tools and superior window films, backed by our
+                        dedicated sales team and technical support available to all our professional dealers.
+                        Global Window Films have a world wide reputation for producing the most reliable, high quality
+                        window film available.  Backed by a strong, manufacturer's lifetime warranty, you can rest
+                        assured you have made the right choice.</p>
+                    <p>
+                        OZ Window Films is the factory direct, Authorized Distributor for Global Window Films.  We also
+                        proudly supply Australia and New Zealand with many products exclusively available only through us. </p>
                     <img alt="background" src="{{asset('frontend/images/0fde740f4dfdb4b8027c429803509314.jpg')}}">
                 </div>
             </div>
@@ -20,12 +32,12 @@
                 <div class="col">
                     <div class="slider slider--inline-arrows slider--arrows-hover text-center" data-arrows="true">
                         <ul class="slides">
-                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="img/partner-1.png"> </li>
-                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="img/partner-2.png"> </li>
-                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="img/partner-3.png"> </li>
-                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="img/partner-4.png"> </li>
-                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="img/partner-5.png"> </li>
-                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="img/partner-6.png"> </li>
+                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="{{asset('frontend/branding/global_crop.jpg')}}"> </li>
+                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="{{asset('frontend/branding/LuxeLogo_0819_200x98.png')}}"> </li>
+                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="{{asset('frontend/branding/ixrtreme_1.png')}}"> </li>
+                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="{{asset('frontend/branding/global_crop.jpg')}}"> </li>
+                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="{{asset('frontend/branding/LuxeLogo_0819_200x98.png')}}"> </li>
+                            <li class="col-md-3 col-6"> <img alt="Image" class="image--xxs" src="{{asset('frontend/branding/ixrtreme_1.png')}}"> </li>
                         </ul>
                     </div>
                 </div>
@@ -36,22 +48,36 @@
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-md-6">
-                    <h4>Meet Stack HTML Template</h4>
-                    <p class="lead"> Stack is a robust, multipurpose template built with reuse and modularity at the core. Blending contemporary styling with beautiful markup, Stack forms the ideal starting point to website projects of any kind. </p>
-                    <p> Stack ships with over 140 content layouts, including 30 tailored niche homepages (from startup landing page to restaurant, portfolio and more) showcasing just a glimpse of what is possible with the detailed block and element library — from working social media feeds, contact forms and subscription blocks to fullscreen lightbox galleries and filterable portfolios, Stack is infinitely reusable, the ideal go-to template for your client projects. </p>
-                    <p> Each of Stack’s 240+ interface blocks are powered by the vast collection of customisable elements. This modular system empowers developers to create their own blocks quickly and easily leaving more time for layout and interface experimentation. </p>
+                    <h4>Oz Window Films</h4>
+                    <p class="lead">OZ Window Films is committed to supplying exceptional quality window film to our
+                        industry professionals who are experienced and dedicated to their customers.  Our vast
+                        experience in the industry, allows us to share our knowledge of the products and technical
+                        techniques to our installers, allowing us to provide the service and support you need to grow
+                        your business.</p>
+                    <p>
+                        ​OZ Window Films provides competitively priced  tools and superior window films, backed by our
+                        dedicated sales team and technical support available to all our professional dealers.
+                        Global Window Films have a world wide reputation for producing the most reliable, high quality
+                        window film available.  Backed by a strong, manufacturer's lifetime warranty, you can rest
+                        assured you have made the right choice.</p>
+                    <p>
+                        OZ Window Films is the factory direct, Authorized Distributor for Global Window Films.  We also
+                        proudly supply Australia and New Zealand with many products exclusively available only through us. </p>
                 </div>
                 <div class="col-md-6">
-                    <div class="boxed boxed--lg boxed--border bg--secondary"> <img alt="image" src="img/cowork-6.jpg" class="border--round">
-                        <h5>Save Development Time</h5>
-                        <p> Drastically reduce the time it takes to move from initial concept to production-ready with Stack and Variant Page Builder. Your clients will love you for it! </p>
+                    <div class="boxed boxed--lg boxed--border bg--secondary">
+                        <img alt="image" src="{{asset('frontend/branding/global_crop.jpg')}}" class="border--round">
+                        <h5>Authorised Distributer</h5>
+                        <p>Australias only</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <section class="imagebg parallax" data-overlay="4">
-        <div class="background-image-holder"> <img alt="background" src="{{asset('frontend/images/window-tinting.jpg')}}"> </div>
+        <div class="background-image-holder">
+            <img alt="background" src="{{asset('frontend/images/car-2797169_1280.jpg')}}">
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -61,12 +87,12 @@
                                 <h4>Let's get you started</h4>
                             </div>
                             <div class="col-lg-4">
-                                <p class="lead"> Start building pages in your browser </p>
+                                <p class="lead"> Apply for your account here. </p>
                             </div>
                             <div class="col-lg-4 text-center">
-                                <a class="btn btn--primary type--uppercase" href="#"> <span class="btn__text">
-                                    Try Builder
-                                </span> </a>
+                                <a class="btn btn--primary type--uppercase" href="{{url('register')}}"> <span class="btn__text">
+                                Account Application
+                            </span> </a>
                             </div>
                         </div>
                     </div>
@@ -82,23 +108,39 @@
                         <ul class="slides">
                             <li class="col-md-6 col-12">
                                 <div class="project-thumb">
-                                    <a href="#"> <img alt="Image" class="border--round" src="img/work-6.jpg"> </a>
-                                    <h4>Nike Active</h4> <span>Print Marketing</span> </div>
+                                    <a href="#">
+                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/82379557_2497935026982956_2603389641876832256_o.jpg')}}">
+                                    </a>
+                                    <h4>Date Here</h4>
+                                    <span>Product Here</span>
+                                </div>
                             </li>
                             <li class="col-md-6 col-12">
                                 <div class="project-thumb">
-                                    <a href="#"> <img alt="Image" class="border--round" src="img/work-2.jpg"> </a>
-                                    <h4>Get Lost in Thailand</h4> <span>Print Marketing</span> </div>
+                                    <a href="#">
+                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/119707829_3108691262573993_819842247806930449_n.jpg')}}">
+                                    </a>
+                                    <h4>Date Here</h4>
+                                    <span>Product Here</span>
+                                </div>
                             </li>
                             <li class="col-md-6 col-12">
                                 <div class="project-thumb">
-                                    <a href="#"> <img alt="Image" class="border--round" src="img/work-3.jpg"> </a>
-                                    <h4>M&amp;D Stairs Company</h4> <span>Branding &amp; Identity</span> </div>
+                                    <a href="#">
+                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/120818188_1461701384031042_6945197032842348310_o.jpg')}}">
+                                    </a>
+                                    <h4>Date Here</h4>
+                                    <span>Product Here</span>
+                                </div>
                             </li>
                             <li class="col-md-6 col-12">
                                 <div class="project-thumb">
-                                    <a href="#"> <img alt="Image" class="border--round" src="img/work-4.jpg"> </a>
-                                    <h4>Blossom Naturals</h4> <span>Branding &amp; Identity</span> </div>
+                                    <a href="#">
+                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/141371367_3573446906077318_5881571861096716927_o.jpg')}}">
+                                    </a>
+                                    <h4>Date Here</h4>
+                                    <span>Product Here</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
