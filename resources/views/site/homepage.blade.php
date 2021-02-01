@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section class="cover cover-features imagebg space--lg parallax" data-overlay="2">
+    <section class="cover cover-features imagebg space--lg" data-overlay="2">
         <div class="background-image-holder">
             <img alt="cover image" src="{{asset('frontend/images/fb-cover_1_opacity20.jpg')}}">
         </div>
