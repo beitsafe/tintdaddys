@@ -50,26 +50,26 @@
             <div class="row">
                 <div class="col-md-6 col-lg-3">
                     <div class="text-block"> <i class="icon icon--lg icon-Mail-3 color--dark"></i>
-                        <h4>Mailer Integrations</h4>
-                        <p> for marketing campaigns </p>
+                        <h4>Lorem Ipsum</h4>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="text-block"> <i class="icon icon--lg icon-Air-Balloon color--dark"></i>
-                        <h4>Diverse Icons</h4>
-                        <p> from a library over over 1,000 </p>
+                        <h4>Lorem Ipsum</h4>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="text-block"> <i class="icon icon--lg icon-Bacteria color--dark"></i>
-                        <h4>Modular Design</h4>
-                        <p> for maximum flexibility </p>
+                        <h4>Lorem Ipsum</h4>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="text-block"> <i class="icon icon--lg icon-Fingerprint-2 color--dark"></i>
-                        <h4>Modular Design</h4>
-                        <p> for maximum flexibility </p>
+                        <h4>Lorem Ipsum</h4>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
                     </div>
                 </div>
             </div>
@@ -80,28 +80,36 @@
             <div class="row justify-content-between">
                 <div class="col-md-6 col-lg-5">
                     <div class="switchable__text">
-                        <h2>Perfect for bootstrapped startups</h2>
-                        <p class="lead"> Launching an attractive and scalable website quickly and affordably is important for modern startups — Stack offers massive value without looking 'bargain-bin'. </p>
+                        <h2>Lorum Ipsum</h2>
+                        <p class="lead"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </P>
+                        <P>Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="boxed boxed--lg boxed--border">
                         <div class="feature feature-2"> <i class="icon icon-Clock-Back color--primary"></i>
                             <div class="feature__body">
-                                <h5>Design Faster</h5>
-                                <p> Save time with a multitude of styled components designed to showcase your content </p>
+                                <h5>Lorum Ipsum</h5>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
                             </div>
                         </div>
                         <div class="feature feature-2"> <i class="icon icon-Duplicate-Window color--primary"></i>
                             <div class="feature__body">
-                                <h5>Rapid Development</h5>
-                                <p> Construct mockups or production-ready pages in-browser with Variant Page Builder </p>
+                                <h5>Lorum Ipsum</h5>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
                             </div>
                         </div>
                         <div class="feature feature-2"> <i class="icon icon-Life-Jacket color--primary"></i>
                             <div class="feature__body">
-                                <h5>Elite Support</h5>
-                                <p> Take comfort in 6 months included support with a dedicated support forum </p>
+                                <h5>Lorum Ipsum</h5>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit </p>
                             </div>
                         </div>
                     </div>
