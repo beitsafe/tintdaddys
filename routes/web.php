@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\EnquiryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SiteController::class, 'homepage'])->name('homepage');
+Route::get('about', [SiteController::class, 'about']);
+Route::get('faqs', [SiteController::class, 'faqs']);
+Route::get('privacy', [SiteController::class, 'privacy']);
+Route::get('terms', [SiteController::class, 'terms']);
+Route::get('product', [SiteController::class, 'product']);
+
+
+Route::get('contact', [SiteController::class, 'contact'])->name('contact');
+Route::post('send-contact', [EnquiryController::class, 'store']);
+
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

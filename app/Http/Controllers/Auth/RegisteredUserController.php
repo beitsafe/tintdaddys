@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\NewUser;
 
 class RegisteredUserController extends Controller
 {
@@ -45,6 +46,10 @@ class RegisteredUserController extends Controller
         ]));
 
         event(new Registered($user));
+
+        $user = User::find(1);
+
+        $user->notify(new NewUser($user));
 
         return redirect(RouteServiceProvider::HOME);
     }
