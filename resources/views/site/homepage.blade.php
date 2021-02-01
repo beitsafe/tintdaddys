@@ -17,8 +17,8 @@
                 </span> </a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 mh-85">
+            <div class="row ">
+                <div class="col-md-4 mh-85 d-none d-sm-block">
                     <div class="feature feature-2 boxed boxed--border bg--white">
                         <img class="mw-50 p-0" alt="logo" src="{{asset('frontend/branding/global_crop.jpg')}}">
                         <div class="feature__body">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mh-85">
+                <div class="col-md-4 mh-85 d-none d-sm-block">
                     <div class="feature feature-2 boxed boxed--border bg--white">
                         <img class="mw-50" alt="logo" src="{{asset('frontend/branding/ixrtreme_1.png')}}">
                         <div class="feature__body">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mh-85">
+                <div class="col-md-4 mh-85 d-none d-sm-block">
                     <div class="feature feature-2 boxed boxed--border bg--white">
                         <img class="mw-50" alt="luxe logo" src="{{asset('frontend/branding/LuxeLogo_0819_200x98.png')}}">
                         <div class="feature__body">

@@ -28,6 +28,9 @@
                                     <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-billing;hidden">Billing Details</a>
                                 </li>
                                 <li>
+                                    <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-orders;hidden">My Orders</a>
+                                </li>
+                                <li>
                                     <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-password;hidden">Password</a>
                                 </li>
                                 <li>
@@ -90,23 +93,29 @@
                                         <li class="row">
                                             <div class="col-md-6">
                                                 <p>
-                                                    <i class="material-icons">credit_card</i>
-                                                    <span> Mastercard ending in
-                                                                <strong>4722</strong>
-                                                            </span>
+                                                    <span>Card ending in
+                                                        <strong class="text-white">4722</strong>
+                                                    </span>
                                                 </p>
                                             </div>
                                             <div class="col-md-3 text-right text-left-xs">
                                                 <button type="submit" class="btn bg--error">Remove</button>
                                             </div>
                                             <div class="col-md-3 text-right text-left-xs">
-                                                <button type="submit" class="btn">Edit</button>
+                                                <button type="submit" class="btn text-white">Edit</button>
                                             </div>
                                         </li>
                                     </ul>
                                     <hr>
-                                    <button type="submit" class="btn">Add New Method</button>
+                                    <button type="submit" class="btn text-white">Add New Method</button>
                                 </form>
+                            </div>
+                        </div>
+                        <div id="account-orders" class="hidden account-tab">
+                            <h4>Order Details</h4>
+                            <div class="boxed boxed--border bg--secondary">
+                                <h5>Coming Soon</h5>
+
                             </div>
                         </div>
                         <div id="account-password" class="hidden account-tab">

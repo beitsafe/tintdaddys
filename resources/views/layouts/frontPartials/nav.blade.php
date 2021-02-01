@@ -99,8 +99,8 @@
                             @else
                                 <li class="dropdown list-no-bullets">
                                     <span class="dropdown__trigger btn btn--sm btn--primary text-white type--uppercase">
-                                        <i class="icon icon-Arrow-Down text-white"></i>
                                         {{ Auth::user()->name }}
+                                        <i class="icon icon-Arrow-Down text-white"></i>
                                     </span>
                                     <div class="dropdown__container">
                                         <div class="container">
