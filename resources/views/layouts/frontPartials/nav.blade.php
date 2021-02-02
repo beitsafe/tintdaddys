@@ -55,30 +55,29 @@
                                             <div class="row">
                                                 <div class="dropdown__content row w-100">
                                                     <div class="col-lg-3">
-                                                        <h5>Brand 1</h5>
+                                                        <h5 class="xs-menu-text">Brand 1</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{url('product')}}">Product 1</a> </li>
-                                                            <li> <a href="{{url('product')}}">Product 2</a> </li>
-                                                            <li> <a href="{{url('product')}}">Product 3</a> </li>
+                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 1</a> </li>
+                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 2</a> </li>
+                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 3</a> </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        <h5>Brand 2</h5>
+                                                        <h5 class="xs-menu-text">Brand 2</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{url('product')}}">Product 1</a> </li>
+                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 1</a> </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        <h5>Brand 3</h5>
+                                                        <h5 class="xs-menu-text">Brand 3</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{url('product')}}">Product 1</a> </li>
-                                                            <li> <a href="{{url('product')}}">Product 2</a> </li>
+                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 1</a> </li>
+                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 2</a> </li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        <h5>All</h5>
                                                         <ul class="menu-vertical">
-                                                            <li> <a href="{{url('products')}}">All Products</a> </li>
+                                                            <li> <a class="btn btn--sm btn--primary text-white type--uppercase" href="{{url('products')}}">All Products</a> </li>
                                                         </ul>
                                                     </div>
                                                 </div>

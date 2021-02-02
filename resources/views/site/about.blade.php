@@ -32,7 +32,7 @@
                 <div class="col">
                     <div class="slider slider--inline-arrows slider--arrows-hover text-center" data-arrows="true">
                         <ul class="slides">
-                            <li class="col-4">
+                            <li class="col-12 col-sm-4">
                                 <div class="col mh-85">
                                     <div class="feature feature-2 boxed boxed--border bg--white">
                                         <img class="mw-50 p-0" alt="logo" src="{{asset('frontend/branding/global_crop.jpg')}}">
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-4">
+                            <li class="col-12 col-sm-4">
                                 <div class="col mh-85 d-none d-sm-block">
                                     <div class="feature feature-2 boxed boxed--border bg--white">
                                         <img class="mw-50" alt="logo" src="{{asset('frontend/branding/ixrtreme_1.png')}}">
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-4">
+                            <li class="col-12 col-sm-4">
                                 <div class="col mh-85 d-none d-sm-block">
                                     <div class="feature feature-2 boxed boxed--border bg--white">
                                         <img class="mw-50" alt="luxe logo" src="{{asset('frontend/branding/LuxeLogo_0819_200x98.png')}}">
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-4">
+                            <li class="col-12 col-sm-4">
                                 <div class="col mh-85">
                                     <div class="feature feature-2 boxed boxed--border bg--white">
                                         <img class="mw-50 p-0" alt="logo" src="{{asset('frontend/branding/global_crop.jpg')}}">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-4">
+                            <li class="col-12 col-sm-4">
                                 <div class="col mh-85 d-none d-sm-block">
                                     <div class="feature feature-2 boxed boxed--border bg--white">
                                         <img class="mw-50" alt="logo" src="{{asset('frontend/branding/ixrtreme_1.png')}}">
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-4">
+                            <li class="col-12 col-sm-4">
                                 <div class="col mh-85 d-none d-sm-block">
                                     <div class="feature feature-2 boxed boxed--border bg--white">
                                         <img class="mw-50" alt="luxe logo" src="{{asset('frontend/branding/LuxeLogo_0819_200x98.png')}}">
@@ -109,7 +109,7 @@
                         techniques to our installers, allowing us to provide the service and support you need to grow
                         your business.</p>
                     <p>
-                        ​OZ Window Films provides competitively priced  tools and superior window films, backed by our
+                        OZ Window Films provides competitively priced  tools and superior window films, backed by our
                         dedicated sales team and technical support available to all our professional dealers.
                         Global Window Films have a world wide reputation for producing the most reliable, high quality
                         window film available.  Backed by a strong, manufacturer's lifetime warranty, you can rest
@@ -118,7 +118,7 @@
                         OZ Window Films is the factory direct, Authorized Distributor for Global Window Films.  We also
                         proudly supply Australia and New Zealand with many products exclusively available only through us. </p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5 ml-md-3">
                     <div class="boxed boxed--lg boxed--border bg--secondary">
                         <img alt="image" src="{{asset('frontend/branding/global_crop.jpg')}}" class="border--round">
                         <h5>Authorised Distributer</h5>
