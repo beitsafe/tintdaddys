@@ -11,7 +11,7 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
-            <div class="col-sm-6 col-md-3 col-xs-6 ml-3">
+            <div class="col-sm-6 col-md-3 col-xs-6">
                 <h6 class="type--uppercase">Global Film</h6>
                 <ul class="list--hover">
                     <li><a href="#">Quick Dry Plus</a></li>
@@ -27,7 +27,7 @@
                     <li><a href="#">Cc Xtreme</a></li>
                 </ul>
             </div>
-            <div class="col-sm-6 col-md-3 col-xs-6 pl-3 pl-sm-0">
+            <div class="col-sm-6 col-md-3 col-xs-6">
                 <h6 class="type--uppercase">Luxe Lightwrap</h6>
                 <ul class="list--hover">
                     <li><a href="#">Dark Smoke</a></li>
