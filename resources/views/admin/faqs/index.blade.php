@@ -26,4 +26,4 @@
     </div>
 @endsection
 
-@include('admin.layouts.partials._datatable_scripts')
+@include('layouts.backPartials._datatable_scripts')
