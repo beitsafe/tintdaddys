@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,7 @@ use App\Http\Controllers\EnquiryController;
 |
 */
 
-Route::get('/', [SiteController::class, 'homepage'])->name('homepage');
+Route::get('/', [SiteController::class, 'homepage']);
 Route::get('about', [SiteController::class, 'about']);
 Route::get('faqs', [SiteController::class, 'faqs']);
 Route::get('privacy', [SiteController::class, 'privacy']);
@@ -27,12 +29,20 @@ Route::get('products', [SiteController::class, 'products']);
 Route::get('cart', [SiteController::class, 'cart']);
 
 
-Route::get('contact', [SiteController::class, 'contact'])->name('contact');
+Route::get('contact', [SiteController::class, 'contact']);
 Route::post('send-contact', [EnquiryController::class, 'store']);
 
 
-Route::get('/dashboard', function () {
-    return view('admin.home');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dash'])->name('dashboard');
+});
+
+Route::middleware(['is.admin'])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'adminDash'])->name('admin.dashboard');
+
+    Route::resources([
+        'faqs' => FaqController::class,
+    ]);
+});
 
 require __DIR__.'/auth.php';

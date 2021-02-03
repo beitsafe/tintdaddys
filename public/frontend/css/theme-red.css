@@ -121,10 +121,6 @@ h5,
   font-size: 1em;
   line-height: 1.85714286em;
 }
-.xs-menu-text {
-    font-size: 1.8em;
-    line-height: 2.15714286em;
-}
 h6,
 .h6 {
   font-size: 0.85714286em;
@@ -135,6 +131,10 @@ h6,
   line-height: 1.68421053em;
 }
 @media all and (max-width: 767px) {
+    .xs-menu-text {
+        font-size: 1.8em;
+        line-height: 2.15714286em;
+    }
   h1,
   .h1 {
     font-size: 2.35714286em;
