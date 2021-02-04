@@ -31,22 +31,6 @@
                                         Home
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="about">
-                                        About
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="faqs">
-                                        Faqs
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="contact">
-                                        Contact
-                                    </a>
-                                </li>
-
                                 <li class="dropdown"> <span class="dropdown__trigger">
                                         Products
                                     </span>
@@ -77,13 +61,28 @@
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <ul class="menu-vertical">
-                                                            <li> <a class="btn btn--sm btn--primary text-white type--uppercase" href="{{url('products')}}">All Products</a> </li>
+                                                            <li> <a class="btn btn--sm btn--outline type--uppercase" href="{{url('products')}}">All Products</a> </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </li>
+                                <li>
+                                    <a href="about">
+                                        About
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="faqs">
+                                        Faqs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact">
+                                        Contact
+                                    </a>
                                 </li>
                             </ul>
                         </div>

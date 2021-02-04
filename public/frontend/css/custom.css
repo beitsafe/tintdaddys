@@ -12,3 +12,13 @@
 .list-no-bullets{
     list-style-type: none!important;
 }
+
+.btn--outline {
+    border-color: #ee3124 !important;
+    color: #ee3124 !important;
+}
+
+.btn--outline:hover {
+    background-color: #ee3124;
+    color: #fff !important;
+}
