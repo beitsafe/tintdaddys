@@ -12,6 +12,10 @@
 .list-no-bullets{
     list-style-type: none!important;
 }
+.btn--outline {
+    color: #ee3124!important;
+    border-color: #ee3124!important;
+}
 
 .btn--outline {
     border-color: #ee3124 !important;

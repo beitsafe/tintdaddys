@@ -84,6 +84,11 @@
                                         Contact
                                     </a>
                                 </li>
+                                @role('admin')
+                                <li>
+                                    <a class="btn btn-outline-light" href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i>C.M.S.</a>
+                                </li>
+                                @endrole
                             </ul>
                         </div>
 

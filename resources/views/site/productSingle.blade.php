@@ -15,9 +15,13 @@
                     </div>
                 </div>
                 <div class="col-md-5 col-lg-4">
-                    <h2>Tivoli Model One</h2>
-                    <div class="text-block"> <span class="h4 type--strikethrough inline-block">$549.99</span> <span class="h4 inline-block">$479</span> </div>
-                    <p> Tivoli's most popular line of consumer digital radios just got a refresh — expect clearer highs and deeper lows. Massive style upgrade with high-calibre aluminum frame and plush knobs and dials. </p>
+                    <h2>{{$product->name}}</h2>
+                    <div class="text-block">
+                        @auth()
+                            <span class="h4 inline-block">${{$product->price}}</span>
+                        @endauth
+                    </div>
+                    <p>{!! $product->shortDescription !!}</p>
                     <ul class="accordion accordion-2 accordion--oneopen">
                         <li>
                             <div class="accordion__title"> <span class="h5">Specifications</span> </div>
@@ -42,19 +46,13 @@
                         <li>
                             <div class="accordion__title"> <span class="h5">Shipping Info</span> </div>
                             <div class="accordion__content">
-                                <p> Generally ships between 2 - 4 working days from order confirmation. Orders only confirmed once payment has successfully processed. NOTE: When using services such as Skrill, payments can take longer to process (approx. 4 days). </p>
+                                <p> Generally ships between 2 - 4 working days from order confirmation. Orders only
+                                    confirmed once payment has successfully processed. NOTE: When using services such as
+                                    Skrill, payments can take longer to process (approx. 4 days). </p>
                             </div>
                         </li>
                     </ul>
                     <form>
-                        <div class="col-md-12">
-                            <div class="input-select"> <select name="finish">
-                                    <option selected="selected" value="Default">Select A Finish</option>
-                                    <option value="Small">Wood Grain</option>
-                                    <option value="Medium">Brushed Aluminium</option>
-                                    <option value="Larger">Gunmetal Grey</option>
-                                </select> </div>
-                        </div>
                         <div class="col-md-6 col-lg-4"> <input type="text" name="quantity" placeholder="QTY"> </div>
                         <div class="col-md-6 col-lg-8"> <button type="submit" class="btn btn--primary">Add To Cart</button> </div>
                     </form>

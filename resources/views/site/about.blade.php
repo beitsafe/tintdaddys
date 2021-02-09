@@ -13,7 +13,7 @@
                         techniques to our installers, allowing us to provide the service and support you need to grow
                         your business.</p>
                     <p>
-                        ​OZ Window Films provides competitively priced  tools and superior window films, backed by our
+                        OZ Window Films provides competitively priced  tools and superior window films, backed by our
                         dedicated sales team and technical support available to all our professional dealers.
                         Global Window Films have a world wide reputation for producing the most reliable, high quality
                         window film available.  Backed by a strong, manufacturer's lifetime warranty, you can rest
@@ -156,6 +156,9 @@
     </section>
     <section class="text-center bg--dark">
         <div class="container">
+            <div class="row justify-content-center">
+                <h2>Our Work</h2>
+            </div>
             <div class="row">
                 <div class="col">
                     <div class="slider" data-paging="true">

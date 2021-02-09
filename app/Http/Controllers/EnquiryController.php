@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\EnquiryDataTable;
 use App\Mail\EnquirySent;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Enquiry;
@@ -14,9 +15,10 @@ class EnquiryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(EnquiryDataTable $dataTable, Request $request)
     {
-        return view('admin.equiries');
+        return $dataTable->render('admin.enquiries.index');
+
     }
 
     /**

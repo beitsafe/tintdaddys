@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -21,14 +22,16 @@ class SiteController extends Controller
         return view('site.faqs');
     }
 
-    public function product()
+    public function product(Product $product)
     {
-        return view('site.productSingle');
+        return view('site.productSingle', compact('product'));
     }
 
     public function products()
     {
-        return view('site.products');
+        $Product = Product::all();
+
+        return view('site.products', compact('Product'));
     }
 
     public function cart()
