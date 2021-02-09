@@ -50,7 +50,7 @@ class ProductController extends Controller
     public function store(Request $request, Product $product)
     {
         $this->_save($request, $product);
-        Alert::success('Product created successfully!', 'Success');
+//        Alert::success('Product created successfully!', 'Success');
 
         return redirect()->route('admin.products.index');
     }
@@ -86,7 +86,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $this->_save($request, $product);
-        Alert::success('Product updated successfully!', 'Success');
+//        Alert::success('Product updated successfully!', 'Success');
 
         return redirect()->route('admin.products.index');
     }
@@ -119,18 +119,16 @@ class ProductController extends Controller
         $altval = [];
 
         if($session_files =  session()->get('filepath')){
-            $altval = session()->get('altval');
             $crop_path = session()->get('crop_path');
             $i=0;
             foreach ($session_files as $session_file) {
                 if(@$crop_path[$i]){
                     $session_file = @$crop_path[$i];
                 }
-                $model->resources()->create(["filepath"=>$session_file,"resourceable_type"=>"App\Models\Product",'altval'=>@$altval[$i]]);
+                $model->resources()->create(["filepath"=>$session_file,"resourceable_type"=>"App\Models\Product"]);
                 $i++;
             }
             session()->forget('filepath');
-            session()->forget('altval');
             session()->forget('crop_path');
             session()->forget('resourceable_type');
         }

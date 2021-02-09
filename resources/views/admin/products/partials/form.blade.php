@@ -115,7 +115,7 @@
     <script src="{{asset('backend/js/slim.kickstart.min.js')}}" type="text/javascript"></script>
 
     <script type="text/javascript">
-        var id = $('#product_id').val();
+        var id = '{{  @$model->id }}';
         var drop = $('#dz-preview-template').html();
 
         $("#dropzone").dropzone({
@@ -276,11 +276,11 @@
         function load_uploaded_images()
         {
 
-            var url = (id) ?  '/load_uploaded_files/' + id+'/product':'/load_uploaded_files/' ;
+            var url = (id) ?  '/load_uploaded_files/' + id+'/product' : '/load_uploaded_files/';
 
             $.ajax({
                 method: 'GET',
-                url: '/load_uploaded_files/' + id,
+                url: url,
                 success: function (html) {
                     $('#uploaded_images').html(html);
                 },

@@ -6,7 +6,7 @@
                 <div class="el-card-item">
                     <div class="el-card-avatar el-overlay-1">
                         @php($img_url = Storage::disk('public')->url($resource->filepath))
-                        <img src="{{ $img_url }}" alt="{{ $resource->altval }}">
+                        <img src="{{ $img_url }}" alt="{{ $resource->altval }}" width="200">
                     </div>
                     <div class="el-card-content">
                         {!! Form::text("altval", $resource->altval, ['class' => 'form-control', 'placeholder' => 'Alt value', 'id' => 'alt-value-' . $resource->id]) !!}
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-    @endforeach    
+    @endforeach
     @else
     @foreach($session_files as $key=>$session_file)
         <div class="col-lg-3 col-md-6 resource-uploads">
@@ -27,7 +27,7 @@
                 <div class="el-card-item">
                     <div class="el-card-avatar el-overlay-1">
                         @php($img_url = Storage::disk('public')->url($session_file))
-                        <img src="{{ $img_url }}" >
+                        <img src="{{ $img_url }}"  width="200">
                     </div>
                     <div class="el-card-content">
                         {!! Form::text("altval", '', ['class' => 'form-control', 'placeholder' => 'Alt value', 'id' => 'alt-value-' . $key]) !!}
@@ -40,6 +40,6 @@
                 </div>
             </div>
         </div>
-    @endforeach 
+    @endforeach
     @endif
 </div>

@@ -11,35 +11,7 @@
             dom: 'lBfrtip',
             oLanguage: {
                 "sLengthMenu": "Show _MENU_",
-            },
-            buttons: [
-                {
-                    extend: 'copy',
-                    exportOptions: {
-                        columns: 'th:not(.no-export)',
-                    }
-                },
-                {
-                    extend: 'csv',
-                    title: "Export",
-                    exportOptions: {
-                        columns: 'th:not(.no-export)'
-                    }
-                },
-                {
-                    extend: 'pdf',
-                    title: "Export",
-                    exportOptions: {
-                        columns: 'th:not(.no-export)'
-                    }
-                },
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns: 'th:not(.no-export)'
-                    }
-                }
-            ]
+            }
         };
 
         var addt_params = $table.data('params');
@@ -47,7 +19,7 @@
         if (typeof addt_params != 'undefined') {
             $.extend(params, addt_params);
         }
-
+console.log(params);
         var $dataTable = $table.DataTable(params);
 
         $('body').on('click', '.btn-delete', function () {
