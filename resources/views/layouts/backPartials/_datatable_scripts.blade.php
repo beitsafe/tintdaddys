@@ -10,9 +10,9 @@
     {!! $dataTable->scripts() !!}
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
 
-            $("body").on("click", ".btn-delete", function() {
+            $("body").on("click", ".btn-delete", function () {
                 $this = $(this);
 
                 swal({
@@ -36,31 +36,28 @@
                     //         })
                     // }
                 }).then(function (isConfirm) {
-                    if(isConfirm.value) {
+                    if (isConfirm) {
                         $.ajax({
                             method: "DELETE",
                             url: '/admin/' + $this.data('model') + '/' + $this.data('id'),
-                            data: {'_token': '{{ csrf_token() }}'}
-                        })
-                            .done(function (msg) {
-                                swal({
-                                    title: 'Deleted!',
-                                    text: 'Your record has been deleted.',
-                                    type: 'success',
-                                    confirmButtonClass: 'btn btn-success'
-                                });
-
-                                $('#datatable-buttons').DataTable().draw(false);
-                            })
-                            .fail(function () {
-                                swal({
-                                    title: 'Something Went Wrong!',
-                                    text: "You're record could not be deleted.",
-                                    type: 'warning',
-                                    confirmButtonClass: 'btn btn-warning',
-                                    confirmButtonText: 'Acknowledge'
-                                })
+                        }).done(function (msg) {
+                            swal({
+                                title: 'Deleted!',
+                                text: 'Your record has been deleted.',
+                                type: 'success',
+                                confirmButtonClass: 'btn btn-success'
                             });
+
+                            $('#datatable-buttons').DataTable().draw(false);
+                        }).fail(function () {
+                            swal({
+                                title: 'Something Went Wrong!',
+                                text: "You're record could not be deleted.",
+                                type: 'warning',
+                                confirmButtonClass: 'btn btn-warning',
+                                confirmButtonText: 'Acknowledge'
+                            })
+                        });
                     }
                 });
 

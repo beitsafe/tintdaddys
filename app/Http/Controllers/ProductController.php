@@ -94,7 +94,7 @@ class ProductController extends Controller
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $requesot, $id)
+    public function destroy(Request $request, $id)
     {
         $product = Product::findOrFail($id);
         if ($product) {
