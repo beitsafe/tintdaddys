@@ -27,5 +27,5 @@
 @endsection
 
 @push('scripts')
-    {!! $dataTable->scripts() !!}
+    @include('layouts.backPartials._datatable_scripts')
 @endpush

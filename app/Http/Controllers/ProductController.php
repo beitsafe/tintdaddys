@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Alert;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -50,9 +49,8 @@ class ProductController extends Controller
     public function store(Request $request, Product $product)
     {
         $this->_save($request, $product);
-//        Alert::success('Product created successfully!', 'Success');
 
-        return redirect()->route('admin.products.index');
+        return redirect()->route('admin.products.index')->with('success', 'Product created successfully!');
     }
 
     /**
@@ -86,9 +84,8 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $this->_save($request, $product);
-//        Alert::success('Product updated successfully!', 'Success');
 
-        return redirect()->route('admin.products.index');
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
     }
 
     /**
@@ -97,7 +94,7 @@ class ProductController extends Controller
      * @param \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $requesot, $id)
     {
         $product = Product::findOrFail($id);
         if ($product) {

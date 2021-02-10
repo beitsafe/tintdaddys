@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('layouts.backPartials.head')
+    @stack('styles')
 </head>
 
 <body>

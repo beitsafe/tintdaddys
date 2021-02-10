@@ -105,8 +105,8 @@
 </div>
 
 @push('scripts')
-    @include('admin.layouts.partials.select2_scripts')
-    @include('admin.layouts.partials.summernote_scripts')
+    @include('layouts.backPartials.select2_scripts')
+    @include('layouts.backPartials.summernote_scripts')
 
     <link rel="stylesheet" type="text/css" href="{{asset('backend/css/dropzone.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('backend/css/slim.min.css')}}">
