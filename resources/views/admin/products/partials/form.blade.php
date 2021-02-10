@@ -13,8 +13,8 @@
                 </div>
 
                 <div class="form-group col-md-4">
-                    {{ Form::label('category', 'Category') }}
-                    {{ Form::select('category', $categories, @$model->categories()->id, ['class' => 'form-control','placeholder'=>'Select Category']) }}
+                    {{ Form::label('category_id', 'Category') }}
+                    {{ Form::select('category_id', $categories, @$model->category_id, ['class' => 'form-control','placeholder'=>'Select Category']) }}
                 </div>
 
 

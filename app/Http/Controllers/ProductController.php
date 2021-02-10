@@ -109,11 +109,8 @@ class ProductController extends Controller
 
     protected function _save($request, $model)
     {
-        $model->fill($request->except(['_token', 'category']));
+        $model->fill($request->except(['_token']));
         $model->save();
-        $model->categories();
-
-        $altval = [];
 
         if($session_files =  session()->get('filepath')){
             $crop_path = session()->get('crop_path');

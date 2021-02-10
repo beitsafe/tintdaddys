@@ -44,7 +44,7 @@ class Product extends Model
         return $this->morphMany(Resource::class, 'resourceable');
     }
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
