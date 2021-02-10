@@ -11,4 +11,16 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    function swal_error(jqXHR) {
+        var response = form_error(jqXHR);
+
+        swal({
+            title: response.title,
+            html: response.text,
+            type: 'warning',
+            confirmButtonClass: 'btn btn-warning',
+            confirmButtonText: 'Close'
+        });
+    }
 </script>

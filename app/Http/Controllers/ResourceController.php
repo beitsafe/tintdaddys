@@ -117,4 +117,9 @@ class ResourceController extends Controller
         unset($filepath[$id]);
         session()->put('filepath', $filepath);
     }
+
+    public function destroy(Resource $resource)
+    {
+        $resource->delete();
+    }
 }
