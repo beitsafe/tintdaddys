@@ -29,14 +29,9 @@ class SiteController extends Controller
 
     public function products()
     {
-        $Product = Product::all();
+        $products = Product::all();
 
-        return view('site.products', compact('Product'));
-    }
-
-    public function cart()
-    {
-        return view('admin.cart');
+        return view('site.products', compact('products'));
     }
 
     public function privacy()

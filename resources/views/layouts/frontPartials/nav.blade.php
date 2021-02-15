@@ -114,7 +114,13 @@
                                                             <a href="{{asset('dashboard')}}">Dashboard</a>
                                                         </li>
                                                         <li>
-                                                            <a href="{{asset('cart')}}">Cart</a>
+                                                            <a href="{{ route('cart.index')}}">
+                                                                Cart
+                                                                <span class="badge badge-pill badge-primary">
+                                                                    <i class="cartcount"></i> -
+                                                                    <i class="cart-total"></i>
+                                                                </span>
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a class="dropdown-item" href="{{ route('logout') }}"

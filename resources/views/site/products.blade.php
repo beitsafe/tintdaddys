@@ -26,28 +26,27 @@
                             </div>
                         </div>
                         <div class="masonry__container row">
-                            @foreach($Product as $products)
+                            @foreach($products as $product)
                                 <div class="masonry__item col-md-4" data-masonry-filter="Computing">
                                     <div class="product product--tile bg--secondary text-center">
                                         <span class="label">Sale</span>
-                                        <a href="{{url('product')}}">
-                                            <img alt="Image" src="frontend/img/product-small-1.png" />
+                                        <a href="{{route('product.view',$product)}}">
+                                            <img alt="Image" src="frontend/img/product-small-1.png"/>
                                         </a>
                                         <a class="block" href="{{url('product')}}">
                                             <div>
-                                                <h5>{{$products->name}}</h5>
-                                                <span>{!! $products->shortDescription !!}</span>
+                                                <h5>{{$product->name}}</h5>
+                                                <span>{!! $product->shortDescription !!}</span>
                                             </div>
                                             <div>
                                                 @auth()
-                                                 <span class="h4 inline-block">${{$products->price}}</span>
+                                                    <span class="h4 inline-block">${{$product->price}}</span>
                                                 @endauth
                                             </div>
                                         </a>
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                         <!--end masonry container-->
                     </div>

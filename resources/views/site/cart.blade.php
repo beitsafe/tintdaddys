@@ -18,33 +18,21 @@
         <div class="container">
             <form class="cart-form">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="product">
-                            <span class="label">QTY: 1</span>
-                            <img alt="Image" src="{{asset('frontend/images/HTB1oISFnuSSBuNjy0Flq6zBpVXav.jpg')}}" />
-                            <div>
-                                <h5>Canon 550D</h5>
-                                <span> 18MP DSLR Camera</span>
-                            </div>
-                            <div>
-                                <span class="h4 inline-block">$849</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end item-->
-                    <div class="col-md-4">
-                        <div class="product">
-                            <span class="label">QTY: 1</span>
-                            <img alt="Image" src="{{asset('frontend/images/HTB1oISFnuSSBuNjy0Flq6zBpVXav.jpg')}}" />
-                            <div>
-                                <h5>Microsoft Surface</h5>
-                                <span> 256GB Core i7</span>
-                            </div>
-                            <div>
-                                <span class="h4 inline-block">$1399</span>
+                    @foreach($items as $id => $item)
+                        <div class="col-md-4 cart-item" data-pid="{{$id}}" data-unitprice="{{ $item['unitprice'] }}">
+                            <div class="product">
+                                <span class="label">QTY: {{ $item['qty'] }}</span>
+                                <img alt="{{ $item['name'] }}" src="{{ $item['thumb'] }}"/>
+                                <div>
+                                    <h5>{{ $item['name'] }}</h5>
+                                    <span> 18MP DSLR Camera</span>
+                                </div>
+                                <div>
+                                    <span class="h4 inline-block">${{ $item['total'] }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <hr>
@@ -84,7 +72,7 @@
                                     <span class="h5">Cart Subtotal:</span>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <span>$989.98</span>
+                                    <span>${{$cart_total}}</span>
                                 </div>
                             </div>
                             <div class="row">
@@ -92,16 +80,16 @@
                                     <span class="h5">Shipping (US):</span>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <span>$39</span>
+                                    <span>$0</span>
                                 </div>
                             </div>
-                            <hr />
+                            <hr/>
                             <div class="row">
                                 <div class="col-6">
                                     <span class="h5">Total:</span>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <span class="h5">$1,028.98</span>
+                                    <span class="h5">${{ $cart_total }}</span>
                                 </div>
                             </div>
                         </div>
@@ -112,14 +100,11 @@
                         </div>
                     </div>
                 </div>
-
                 <!--end of row-->
-
                 <!--end of row-->
             </form>
             <!--end checkout form-->
         </div>
         <!--end of container-->
     </section>
-
 @stop

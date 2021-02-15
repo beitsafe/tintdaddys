@@ -55,7 +55,7 @@ class Product extends Model
             return $resource->url;
         }
 
-        return url('frontend/img/products/product-1.jpg');
+        return url('frontend/images/default-product.jpg');
     }
 
     public function getDefaultThumbAttribute()
@@ -64,7 +64,7 @@ class Product extends Model
             return $resource->thumb_url;
         }
 
-        return url('frontend/img/products/product-1.jpg');
+        return url('frontend/images/default-product.jpg');
     }
 
 }
