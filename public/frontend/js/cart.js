@@ -13,16 +13,12 @@ function refreshCart(response) {
     if(response.items!=null){
         var count = Object.keys(response.items).length;
     }
-       var $cartActionElem = $('.go-cart-action'),
-           $miniCartActionElem = $('.go-minicart-action');
+
     if (count == 0) {
         if ($('#cart-form').length > 0) {
             $('#empty-cart').removeClass('d-none');
             $('#cart-form').addClass('d-none');
         }
-        $('.go-cart-btn').html('Go Shopping');
-        $cartActionElem.attr('href', $cartActionElem.data('shop-href'));
-        $miniCartActionElem.attr('href', $cartActionElem.data('shop-href'));
     }else{
         if ($('.cartcount').length > 0) {
             $('.cartcount').html(count);
@@ -30,9 +26,6 @@ function refreshCart(response) {
             $('.cart-total').html('$ ' + totalfee.toFixed(2));
         }
 
-        $('.go-cart-btn').html('My Cart / $ ' + totalfee.toFixed(2));
-        $cartActionElem.attr('href', $cartActionElem.data('cart-href'));
-        $miniCartActionElem.attr('href', $cartActionElem.data('cart-href'));
         $('#empty-cart').addClass('d-none');
         $('#cart-form').removeClass('d-none');
         cartSummaryRefresh(response);
@@ -75,14 +68,16 @@ function cartSummaryRefresh(response) {
 
     const summaryTbl = $('.cart-totals'),
         subTotal = parseFloat(response.cart_total).toFixed(2),
-        taxFee = parseFloat(subTotal/10).toFixed(2);
+        taxFee = 0;
+        // taxFee = parseFloat(subTotal/10).toFixed(2);
 
     if(response.error){
         Swal.fire('',response.error,'error');
     }
 
     summaryTbl.find('#cart-tax').html(`$${taxFee}`);
-    summaryTbl.find('#cart-total').html('$' + parseFloat(parseFloat(subTotal)).toFixed(2));
+    summaryTbl.find('#cart-subtotal').html('$' + parseFloat(parseFloat(subTotal)).toFixed(2));
+    summaryTbl.find('#cart-total').html('$' + parseFloat(parseFloat(subTotal) + parseFloat(taxFee)).toFixed(2));
 }
 
 function flashNotify(message) {
@@ -104,18 +99,14 @@ $(document).ready(function () {
 
     $('body').on('click', '.remove-cart', function (e) {
         e.preventDefault();
-        removeFromCart($(this).closest('tr').data('pid'));
-        $(this).closest('tr').remove();
+        let _row = $(this).closest('.cart-item');
+        removeFromCart(_row.data('pid'));
+        _row.remove();
         return false;
     });
 
-    $('body').on('click','.go-cart-btn',function(){
 
-
-    });
-
-
-    $('body').on('click', '.change-qty [type="button"]', function () {
+    $('body').on('click', '[data-trigger="change-qty"]', function () {
         _that = $(this).closest('.cart-item');
         addToCart(_that.data('pid'), _that.find("[name='quantity']").val());
     });
