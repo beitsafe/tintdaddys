@@ -48,25 +48,25 @@
                     </div>
 
                     <div class="form-group row ">
-                        {{ Form::label('length', 'Length',["class"=>"col-sm-4 col-form-label"]) }}
+                        {{ Form::label('length', 'Length (mm)',["class"=>"col-sm-4 col-form-label"]) }}
                         <div class="col-sm-8">
                             {{ Form::text('length', old('length'), ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('width', 'Width',["class"=>"col-sm-4 col-form-label"]) }}
+                        {{ Form::label('width', 'Width (mm)',["class"=>"col-sm-4 col-form-label"]) }}
                         <div class="col-sm-8">
                             {{ Form::text('width', old('width'), ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('height', 'Height',["class"=>"col-sm-4 col-form-label"]) }}
+                        {{ Form::label('height', 'Height (mm)',["class"=>"col-sm-4 col-form-label"]) }}
                         <div class="col-sm-8">
                             {{ Form::text('height', old('height'), ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{ Form::label('weight', 'Weight',["class"=>"col-sm-4 col-form-label"]) }}
+                        {{ Form::label('weight', 'Weight (kg)',["class"=>"col-sm-4 col-form-label"]) }}
                         <div class="col-sm-8">
                             {{ Form::text('weight', old('weight'), ['class' => 'form-control']) }}
                         </div>
@@ -123,7 +123,7 @@
             // previewTemplate: drop,
             // previewsContainer: "#template-preview",
             maxFilesize         :       6,
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
             params: {'resourceable_id':id,'resourceable_type':'\App\\Models\\Product' },
             paramName: "file",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
