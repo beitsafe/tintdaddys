@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <section class="height-70 text-center bg--dark">
+    <section class="height-auto text-center bg--dark">
         <div class="container pos-vertical-center">
             <div class="row">
-                <div class="col-md-7 col-lg-5">
+                <div class="col-md-7 col-lg-7">
                     <h2>Register an account</h2>
                     <p class="lead"> Welcome, register a new account in the form below.
                         An admin will respond once the approve process is completed </p>
@@ -46,6 +46,8 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+
+                            @include('auth.partials.clientForm')
 
                             <div class="col-md-12">
                                 <input id="password"
