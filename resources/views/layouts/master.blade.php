@@ -19,7 +19,7 @@
 </div>
 
 @include('layouts.frontPartials.scripts')
-
+@stack('scripts')
 </body>
 
 </html>

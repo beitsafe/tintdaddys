@@ -10,8 +10,9 @@ function sum(obj) {
 }
 
 function refreshCart(response) {
+    let count = 0;
     if(response.items!=null){
-        var count = Object.keys(response.items).length;
+        count = Object.keys(response.items).length;
     }
 
     if (count == 0) {

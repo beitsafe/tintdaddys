@@ -5,19 +5,25 @@ namespace App\Http\Controllers;
 use App\Events\NewOrderPlaced;
 use App\Http\Helpers\PaymentHelper;
 use App\Http\Requests\Web\StoreOrderRequest;
+use App\Models\Client;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
+use Auspost;
+use Calendar;
 use Fontis\Auspost\Api\Postage\Domestic\Parcel\Cost\CalculationParams;
 use Fontis\Auspost\Model\Postage\Enum\ServiceCode;
 use Illuminate\Http\Request;
-use Calendar;
-use Auspost;
 
 class CartController extends Controller
 {
     public function index()
     {
         $data = $this->_get_cart_items();
+        $loggedUser = auth()->user();
+        $data['paymentMethods'] = $loggedUser->paymentMethods()->filter(function ($i){ return $i->type == 'card'; });
+        $data['client'] = $loggedUser->client;
+
         return view('site.cart', $data);
     }
 
@@ -69,44 +75,58 @@ class CartController extends Controller
 
     public function store(StoreOrderRequest $request)
     {
+        $data = $request->except(['_token']);
+        $cartSession = $this->_get_cart_items();
+
+        $order = new Order();
+        $order->billing = $data['client'];
+        $order->subtotal = $cartSession['cart_total'];
+        $order->instructions = $data['instructions'];
+        $loggedUser = auth()->user();
+
         try {
-            $data = $request->except(['_token']);
-            $items = $this->_get_cart_items(@$data['shipping']['postalcode']);
-            $model = new Order();
-            $model->billing = $data['billing'];
-            $model->shipping = $data['shipping'];
-            $model->items = $items;
-            $model->requestinfos = $data;
-            $model->subtotal = $items['cart_total'];
-            $model->shippingfee = $items['shippingfee'];
+            $loggedUser->createOrGetStripeCustomer([
+                'description' => $data['client']['business']
+            ]);
+            $loggedUser->addPaymentMethod($request->paymentMethodId);
 
-            $payment = new PaymentHelper();
-            $payment->chargeOrder($data['payment']['token'], $model);
-            if ($payment->status) {
-                $model->paymentid = $payment->paymentid;
-                $model->responseinfos = $payment->response;
-                $model->user_id = auth()->user()->id;
-                $model->save();
+            $stripeCharge = $loggedUser->charge(
+                $order->total, $request->paymentMethodId
+            );
 
-                event(new NewOrderPlaced($model));
 
-                $request->session()->forget("cart");
-                return response()->json(['status' => 'success', 'id' => $model->id]);
-            } else {
-                if($payment->redirectUrl){
-                    $request->session()->forget("cart");
-                    return response()->json(['status' => 'true', 'redirectUrl' => $payment->redirectUrl]);
-                }
-                return response()->json(['status' => 'failure', 'message' => $payment->response]);
+            $order->paymentid = $stripeCharge->id;
+            $order->responseinfos = $stripeCharge;
+            $order->user_id = $loggedUser->id;
+            $order->save();
+
+            foreach ($cartSession['items'] as $pid => $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $pid,
+                    'quantity' => $item['qty'],
+                    'unitprice' => $item['unitprice'],
+                ]);
             }
+
+            if (!$loggedUser->client) {
+                $client = $order->billing;
+                $client['user_id'] = $loggedUser->id;
+
+                Client::create($client);
+            }
+
+            $request->session()->forget("cart");
+            return redirect()->route('cart.thankyou', $order->id)->with('success', 'Order Placed Successfully');
         } catch (\Exception $e) {
-            return response()->json(['status' => 'failure', 'id' => $e->getMessage()]);
+            dd($e->getMessage(), $e->getLine());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
     public function thankyou($id)
     {
         $order = Order::find($id);
-        return view('site.shop.thankyou', compact('order'));
+        return view('site.thankyou', compact('order'));
     }
 }
