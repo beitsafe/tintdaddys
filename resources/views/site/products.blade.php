@@ -33,7 +33,7 @@
                                         <a href="{{route('product.view',$product)}}">
                                             <img alt="Image" src="frontend/img/product-small-1.png"/>
                                         </a>
-                                        <a class="block" href="{{url('product')}}">
+                                        <a class="block" href="{{route('product.view',$product)}}">
                                             <div>
                                                 <h5>{{$product->name}}</h5>
                                                 <span>{!! $product->shortDescription !!}</span>

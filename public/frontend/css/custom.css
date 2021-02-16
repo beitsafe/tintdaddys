@@ -26,3 +26,23 @@
     background-color: #ee3124;
     color: #fff !important;
 }
+
+.input-number [class^="stack-"] {
+    color: #666666 !important;
+}
+
+.input-number .input-number__controls > span {
+    padding: 4px;
+}
+
+.w-40 {
+    width: 40% !important;
+}
+
+.h-2em {
+    height: 2em !important;
+}
+
+.top-0 {
+    top: 0 !important;
+}
