@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Resource extends Model
 {
-    protected $fillable = ['filepath','altval','resourceable_id','resourceable_type'];
+    protected $fillable = ['filepath', 'altvalue', 'msds', 'resourceable_id', 'resourceable_type'];
 
     public function resourceable()
     {
@@ -21,7 +21,7 @@ class Resource extends Model
 
     public function getThumbUrlAttribute()
     {
-        if(Storage::disk('public')->exists("thumb/{$this->filepath}")) {
+        if (Storage::disk('public')->exists("thumb/{$this->filepath}")) {
             return Storage::disk('public')->url("thumb/{$this->filepath}");
         }
 

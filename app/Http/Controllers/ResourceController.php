@@ -59,11 +59,11 @@ class ResourceController extends Controller
 
         if (!$request->session_id) {
             $resource = Resource::find($id);
-            $resource->altval = $request->altval;
+            $resource->altvalue = $request->altvalue;
+            $resource->msds = $request->msds;
             $resource->save();
         } else {
-            $request->session()->put('altval.' . $id, $request->altval);
-
+            $request->session()->put('altvalue.' . $id, $request->altvalue);
         }
 
         return response()->json(true);

@@ -65,7 +65,7 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
     });
 
 
-Route::post('/resource/{id}/save_alt', [ResourceController::class, 'save_alt']);
+Route::post('/resource/{id}/save_alt', [ResourceController::class, 'save_alt'])->name('resources.savealt');
 Route::post('/slim_upload_image', [ResourceController::class, 'slim_upload_image']);
 Route::post('/delete_temp_image', [ResourceController::class, 'delete_temp_image']);
 Route::post('/upload_dropzone_file', [ResourceController::class, 'upload_dropzone_file']);

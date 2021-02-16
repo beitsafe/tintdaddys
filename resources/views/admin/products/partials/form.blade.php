@@ -123,7 +123,7 @@
             // previewTemplate: drop,
             // previewsContainer: "#template-preview",
             maxFilesize         :       6,
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            acceptedFiles: "image/*,application/pdf",
             params: {'resourceable_id':id,'resourceable_type':'\App\\Models\\Product' },
             paramName: "file",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -152,7 +152,6 @@
                 });
 
                 this.on("queuecomplete", function (file, xhr, formData) {
-                    console.log('q complete');
                     load_uploaded_images();
                 });
             }
@@ -214,30 +213,24 @@
                 e.preventDefault();
 
                 var id = $(this).data('id');
+                let params = {},
+                    endpoint = '{{ route('resources.savealt',':ID') }}';
                 if(id) {
-                    $.ajax({
-                        method: 'POST',
-                        url: '{{ url('resource') }}' + '/' + id + '/save_alt',
-                        data: {'altval': $('#alt-value-' + id).val()},
-                        success: function (data) {
-                            swal("Success!", "Alt value saved", "success");
-                        },
-                        error: function (jqXhr) {
-                        }
-                    });
+                    params.altvalue = $('#alt-value-' + id).val();
+                    params.msds = $('#msds-' + id).is(':checked') ? 1 : 0;
+                    endpoint = endpoint.replace(':ID', id);
                 } else{
                     var session_id = $(this).data('session-id');
-                    $.ajax({
-                        method: 'POST',
-                        url: '{{ url('resource') }}' + '/' + session_id + '/save_alt',
-                        data: {'altval': $('#alt-value-' + session_id).val(),'session_id':true},
-                        success: function (data) {
-                            swal("Success!", "Alt value saved", "success");
-                        },
-                        error: function (jqXhr) {
-                        }
-                    });
+                    params.altvalue = $('#alt-value-' + session_id).val();
+                    params.msds = $('#msds-' + session_id).is(':checked') ? 1 : 0;
+                    params.session_id = true;
+
+                    endpoint = endpoint.replace(':ID', session_id);
                 }
+
+                $.post(endpoint, params, function (data) {
+                    swal("Success!", "Alt value saved", "success");
+                });
             });
 
             var croppers;

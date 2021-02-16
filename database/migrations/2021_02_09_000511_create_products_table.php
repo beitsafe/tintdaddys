@@ -31,7 +31,6 @@ class CreateProductsTable extends Migration
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
             $table->string('category_id');
-
         });
     }
 
