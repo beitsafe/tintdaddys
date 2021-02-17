@@ -84,6 +84,17 @@
                                         Contact
                                     </a>
                                 </li>
+                                @auth
+                                    <li>
+                                        <a href="{{ route('cart.index')}}">
+                                            Cart
+                                            <span class="badge badge-pill badge-primary">
+                                                <i class="cartcount"></i> -
+                                                <i class="cart-total"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endauth
                                 @role('admin')
                                 <li>
                                     <a class="btn btn-outline-light" href="{{url('admin/dashboard')}}"><i class="fa fa-dashboard"></i>C.M.S.</a>
@@ -95,13 +106,13 @@
                         <div class="bar__module">
                             @guest
                                 @if (Route::has('login'))
-                                    <a class="btn btn--sm btn--primary type--uppercase" href="{{url('login')}}">
+                                    <a class="btn btn--sm btn--primary" href="{{url('login')}}">
                                         <span class="btn__text">Account Login</span>
                                     </a>
                                 @endif
                             @else
                                 <li class="dropdown list-no-bullets">
-                                    <span class="dropdown__trigger btn btn--sm btn--primary text-white type--uppercase">
+                                    <span class="dropdown__trigger btn btn--sm btn--primary text-white">
                                         {{ Auth::user()->name }}
                                         <i class="icon icon-Arrow-Down text-white"></i>
                                     </span>
@@ -112,15 +123,6 @@
                                                     <ul class="menu-vertical">
                                                         <li>
                                                             <a href="{{asset('dashboard')}}">Dashboard</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="{{ route('cart.index')}}">
-                                                                Cart
-                                                                <span class="badge badge-pill badge-primary">
-                                                                    <i class="cartcount"></i> -
-                                                                    <i class="cart-total"></i>
-                                                                </span>
-                                                            </a>
                                                         </li>
                                                         <li>
                                                             <a class="dropdown-item" href="{{ route('logout') }}"

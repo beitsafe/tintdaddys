@@ -12,7 +12,7 @@
                     <h1 class="type--bold"> Oz Window Films </h1>
                     <p class="lead font-weight-bold"> OZ Window Films is committed to supplying exceptional quality window film to our
                         industry professionals who are experienced and dedicated to their customers. </p>
-                    <a class="btn btn--primary type--uppercase" href="#"> <span class="btn__text">
+                    <a class="btn btn--primary" href="{{url('/')}}"> <span class="btn__text">
                     View Products
                 </span> </a>
                 </div>
