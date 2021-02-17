@@ -43,9 +43,14 @@ class NewUser extends Notification
      */
     public function toMail($notifiable)
     {
+        /*return (new MailMessage)->view(
+            'emails.newUser', ['invoice' => $this->$notifiable]
+        );*/
+
         return (new MailMessage)
                     ->line('A new user application has been received.')
-                    ->action('Approve/Reject Application', url('/'))
+                    ->line('Name: ')
+                    ->action('Approve/Reject Application', url('/admin/users'))
                     ->line('Use the above link to manage new application');
     }
 

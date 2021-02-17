@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewUser;
+use App\Models\Client;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Notifications\NewUser;
+use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
@@ -45,11 +47,22 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]));
 
+        Client::create([
+            'user_id' => $user->id,
+            'firstName' => @$request['firstName'],
+            'lastName' => @$request['lastName'],
+            'businessName' => @$request['businessName'],
+            'address' => @$request['address'],
+            'city' => @$request['city'],
+            'state' => @$request['state'],
+            'postcode' => @$request['postcode'],
+            'phone' => @$request['phone'],
+            'abn' => @$request['abn'],
+        ]);
+
         event(new Registered($user));
 
-        $user = User::find(1);
-
-        $user->notify(new NewUser($user));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewUser($user));
 
         return redirect(RouteServiceProvider::HOME);
     }

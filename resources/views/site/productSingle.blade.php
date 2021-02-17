@@ -8,9 +8,12 @@
                 <div class="col-md-7 col-lg-6">
                     <div class="slider border--round boxed--border" data-paging="true" data-arrows="true">
                         <ul class="slides">
-                            <li><img alt="Image" src="{{asset('frontend/images/auto+window+tinting-4f884dff-640w.jpg')}}"></li>
-                            <li><img alt="Image" src="{{asset('frontend/images/male-worker-applying-car-tinting-film-PAXFS2Z.jpg')}}"></li>
-                            <li><img alt="Image" src="{{asset('frontend/images/window-tinting.jpg')}}"></li>
+                            @foreach($product->resources as $resource)
+                                <li>
+                                    <img src="{{ asset("storage/".$resource->filepath) }}"
+                                         alt="{{ $resource->altvalue }}">
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
