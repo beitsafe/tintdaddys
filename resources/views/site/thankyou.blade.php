@@ -1,23 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
-    <div role="main" class="main">
-        <section class="section section-skew bg-dark-3 mb-2">
-            <div class="section-skew-layer section-skew-layer-mobile-right bg-dark-4" data-skew-layer
-                 data-skew-layer-value="10%" data-skew-layer-from="left"></div>
-            <div class="section-skew-layer section-skew-layer-mobile-right bg-dark-5" data-skew-layer
-                 data-skew-layer-value="15%" data-skew-layer-from="left"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="font-weight-semibold text-light mb-0">Order Placed</h2>
-                    </div>
+    <section class="bg--dark py-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Order Placed</h1>
+                    <hr>
                 </div>
             </div>
-        </section>
-
-        <div class="container mb-3">
-            <div class="card bg-light-1">
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </section>
+    <section class="bg--dark">
+        <div class="container">
+            <div class="card bg--dark">
                 <div class="card-header"><h3>Order ID: #{{ $order->invoice }}</h3></div>
                 <div class="card-body">
                     <div class="row">
@@ -43,7 +41,7 @@
                         <div class="col">
                             <h4 class="font-weight-bold mb-3">Cart Items</h4>
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered bg--dark">
                                     <thead class="thead-light">
                                     <tr>
                                         <th width="10%"></th>
@@ -83,5 +81,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
