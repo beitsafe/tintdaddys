@@ -7,6 +7,7 @@
 <script src="{{asset('frontend/js/cart.js?v'.time())}}"></script>
 <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+@include('sweet::alert')
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {

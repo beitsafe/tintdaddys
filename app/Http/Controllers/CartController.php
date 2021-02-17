@@ -86,12 +86,13 @@ class CartController extends Controller
 
         try {
             $loggedUser->createOrGetStripeCustomer([
-                'description' => $data['client']['business']
+                'name' => $loggedUser->name,
+                'description' => $data['client']['businessName']
             ]);
             $loggedUser->addPaymentMethod($request->paymentMethodId);
 
             $stripeCharge = $loggedUser->charge(
-                $order->total, $request->paymentMethodId
+                ($order->total * 100), $request->paymentMethodId
             );
 
 
@@ -117,10 +118,11 @@ class CartController extends Controller
             }
 
             $request->session()->forget("cart");
-            return redirect()->route('cart.thankyou', $order->id)->with('success', 'Order Placed Successfully');
+            alert()->success('Order Placed Successfully');
+            return redirect()->route('cart.thankyou', $order->id);
         } catch (\Exception $e) {
-            dd($e->getMessage(), $e->getLine());
-            return redirect()->back()->with('error', $e->getMessage());
+            alert()->error($e->getMessage());
+            return redirect()->back();
         }
     }
 

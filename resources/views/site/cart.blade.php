@@ -74,7 +74,7 @@
                             <div class="form-group row">
                                 {{ Form::label('client_firstname', 'Name:', ['class' => 'col col-form-label']) }}
                                 <div class="col-sm-8">
-                                    {{ Form::text('client[firstname]', old('client.firstname', @$client->name), ['class' => 'form-control billing-field', "readonly" ]) }}
+                                    {{ Form::text('client[firstName]', old('client.firstName', @$client->name), ['class' => 'form-control billing-field', "readonly" ]) }}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -92,7 +92,7 @@
                             <div class="form-group row">
                                 {{ Form::label('client_business', 'Business:', ['class' => 'col col-form-label']) }}
                                 <div class="col-sm-8">
-                                    {{ Form::text('client[business]', old('client.business', @$client->businessName), ['class' => 'form-control billing-field', "readonly" ]) }}
+                                    {{ Form::text('client[businessName]', old('client.businessName', @$client->businessName), ['class' => 'form-control billing-field', "readonly" ]) }}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -146,10 +146,17 @@
                                         @php
                                             $card = $paymentMethod->card;
                                         @endphp
-                                    <li class="list-group-item bg--dark">
-{{--                                        <input type="checkbox" name="payid" value="{{ $paymentMethod->id }}">--}}
-                                        {{ $card->brand }} **** **** **** {{ $card->last4 }} at Expires: {{ $card->exp_month }}/{{ $card->exp_year }}
-                                    </li>
+                                        <li class="list-group-item bg--dark d-flex align-items-center border-0 p-0 mb-3">
+                                            <div class="input-radio mr-3">
+                                                {{--                                            <span class="input__label">Option 1</span>--}}
+                                                <input id="paymentMethod-{{ $loop->iteration }}" type="radio" name="paymentMethodId" value="{{ $paymentMethod->id }}"/>
+                                                <label for="paymentMethod-{{ $loop->iteration }}"></label>
+                                            </div>
+                                            <i class="fab fa-2x fa-cc-{{ $card->brand }} mr-3"></i>
+                                            <span class="h4 mb-0 mr-5">×××× ×××× ×××× {{ $card->last4 }}</span>
+                                            <span class="h5 mb-0">{{ str_pad($card->exp_month, 2, 0, STR_PAD_LEFT) }} / {{ $card->exp_year }}</span>
+                                            {{--                                         at Expires: --}}
+                                        </li>
                                     @endforeach
                                 </ul>
                                 <div id="card-element" style="height: 30px;"></div>
@@ -201,6 +208,10 @@
         $(document).ready(function () {
             $cardButton.on('click', async (e) => {
                 $cardButton.attr('disabled', 'disabled').html('<i class="fa fa-spin fa-spinner"></i> Processing...');
+                if($('[name="paymentMethodId"]').length > 0 && $('[name="paymentMethodId"]:checked').val()){
+                    $cardForm.submit();
+                    return;
+                }
                 const {paymentMethod, error} = await stripe.createPaymentMethod('card', cardElement);
 
                 if (error) {

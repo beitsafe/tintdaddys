@@ -25,7 +25,7 @@ class StoreOrderRequest extends FormRequest
         return [
 //            'billing.firstname' => 'required',
 //            'billing.lastname' => 'required',
-//            'billing.email' => 'required',
+            'client.email' => 'required',
 //            'billing.address' => 'required',
 //            'shipping.address' => 'required',
 //            'shipping.postalcode' => 'required',
@@ -36,13 +36,8 @@ class StoreOrderRequest extends FormRequest
     public function attributes()
     {
         return [
-          'billing.firstname' => 'Billing Firstname',
-          'billing.lastname' => 'Billing Lastname',
-          'billing.email' => 'Billing Email',
-          'billing.address' => 'Billing Address',
-          'shipping.address' => 'Shipping Address',
-          'shipping.postalcode' => 'Shipping Postal Code',
-          'payment.token' => 'Stripe Card Token',
+          'client.email' => 'Billing Email',
+          'paymentMethodId' => 'Credit/Debit Card',
         ];
     }
 
