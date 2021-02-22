@@ -4118,9 +4118,6 @@ span.h5:not(.inline-block),
 span.h6:not(.inline-block) {
   display: block;
 }
-b {
-  font-weight: 600;
-}
 hr {
   border-color: #ECECEC;
 }
