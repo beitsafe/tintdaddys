@@ -8,6 +8,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,7 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
             ->name('admin.enquiry.index');
         Route::resources([
             'faqs' => FaqController::class,
+            'users' => UserController::class,
             'products' => ProductController::class,
             'resources' => ResourceController::class,
             'categories' => CategoryController::class,

@@ -21,7 +21,11 @@ class AdminController extends Controller
 
     public function Dash()
     {
-        return view('admin.home');
+        $loggedUser = auth()->user();
+        $data['client'] = $loggedUser->client;
+        $data['paymentMethods'] = $loggedUser->paymentMethods()->filter(function ($i){ return $i->type == 'card'; });
+
+        return view('auth.dashboard.home', $data);
     }
 
     public function adminDash()

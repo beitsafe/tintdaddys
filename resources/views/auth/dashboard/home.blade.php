@@ -14,8 +14,8 @@
                             <span>
                                 <i class="icon icon-Checked-User icon--lg"></i>
                             </span>
-                            <span class="h5">Jax Terra</span>
-                            <span>Be IT Safe</span>
+                            <span class="h5">{{$client->name}}</span>
+                            <span>{{$client->businessName}}</span>
                             <span class="label">Approved</span>
                         </div>
                         <hr>
@@ -43,72 +43,37 @@
                 <div class="col-lg-8">
                     <div class="boxed boxed--lg boxed--border">
                         <div id="account-profile" class="account-tab">
-                            <h4>Profile</h4>
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Real Name:</label>
-                                        <input type="text" name="name" value="Lucas Banks" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Display Name:</label>
-                                        <input type="text" name="display-name" value="l_banks" />
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Email Address:</label>
-                                        <input type="email" name="email" value="l_banks@stack.net" />
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Location:</label>
-                                        <input type="text" name="location" value="Melbourne" />
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Website:</label>
-                                        <input type="text" name="website" value="http://mrare.co" />
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Bio:</label>
-                                        <textarea rows="4" name="bio"></textarea>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="input-checkbox input-checkbox--switch">
-                                            <input type="checkbox" name="public-profile" />
-                                            <label></label>
-                                        </div>
-                                        <span>Allow my profile to be viewable by guests</span>
-                                    </div>
-                                    <div class="col-lg-3 col-md-4">
-                                        <button type="submit" class="btn btn--primary type--uppercase">Save Profile</button>
-                                    </div>
-                                </div>
-                            </form>
+                            @include('auth.dashboard.partials.profileTab')
                         </div>
                         <div id="account-billing" class="hidden account-tab">
                             <h4>Billing Details</h4>
                             <div class="boxed boxed--border bg--secondary">
                                 <h5>Payment Methods</h5>
                                 <hr>
-                                <form>
-                                    <ul>
-                                        <li class="row">
-                                            <div class="col-md-6">
-                                                <p>
-                                                    <span>Card ending in
-                                                        <strong class="text-white">4722</strong>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                            <div class="col-md-3 text-right text-left-xs">
-                                                <button type="submit" class="btn bg--error">Remove</button>
-                                            </div>
-                                            <div class="col-md-3 text-right text-left-xs">
-                                                <button type="submit" class="btn text-white">Edit</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <hr>
-                                    <button type="submit" class="btn text-white">Add New Method</button>
-                                </form>
+                                <div class="row">
+                                    <div class="col">
+                                        <ul class="list-group bg--dark">
+                                            @foreach($paymentMethods as $paymentMethod)
+                                                @php
+                                                    $card = $paymentMethod->card;
+                                                @endphp
+                                                <li class="list-group-item bg--dark d-flex align-items-center border-0 p-0 mb-3">
+                                                    <div class="input-radio mr-3">
+                                                        {{--                                            <span class="input__label">Option 1</span>--}}
+                                                        <input id="paymentMethod-{{ $loop->iteration }}" type="radio" name="paymentMethodId" value="{{ $paymentMethod->id }}"/>
+                                                        <label for="paymentMethod-{{ $loop->iteration }}"></label>
+                                                    </div>
+                                                    <i class="fab fa-2x fa-cc-{{ $card->brand }} mr-3"></i>
+                                                    <span class="h4 mb-0 mr-5">×××× ×××× ×××× {{ $card->last4 }}</span>
+                                                    <span class="h5 mb-0">{{ str_pad($card->exp_month, 2, 0, STR_PAD_LEFT) }} / {{ $card->exp_year }}</span>
+                                                    {{--                                         at Expires: --}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <div id="card-element" style="height: 30px;"></div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div id="account-orders" class="hidden account-tab">

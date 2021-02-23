@@ -5,9 +5,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-dark">
                         <div class="row">
-                            <div class="col-auto mr-auto">
+                            <div class="col-auto mr-auto text-white">
                                 <h2>Enquiries</h2>
                             </div>
                         </div>

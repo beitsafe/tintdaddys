@@ -45,7 +45,6 @@
                             <img alt="{{ $item['name'] }}" src="{{ $item['thumb'] }}"/>
                             <div>
                                 <h5>{{ $item['name'] }}</h5>
-                                <span> 18MP DSLR Camera</span>
                             </div>
                             <div>
                                 <span class="h4 inline-block row-total">${{ $item['total'] }}</span>
@@ -86,7 +85,7 @@
                             <div class="form-group row">
                                 {{ Form::label('client_email', 'Email:', ['class' => 'col col-form-label']) }}
                                 <div class="col-sm-8">
-                                    {{ Form::text('client[email]', old('client.email', @$client->email), ['class' => 'form-control billing-field', "readonly" ]) }}
+                                    {{ Form::text('client[email]', old('client.email', @$client->user->email), ['class' => 'form-control billing-field', "readonly" ]) }}
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -8,12 +8,9 @@
                     <div class="card-header bg-dark">
                         <div class="row">
                             <div class="col-auto mr-auto text-white">
-                                <h2>FAQ's</h2>
+                                <h2>Users</h2>
                             </div>
                             <div class="col-auto ">
-                                <a href="{{route('admin.faqs.create')}}"
-                                   class="btn btn-outline-secondary"
-                                   target="_blank"><i class="fas fa-plus-circle"></i> Create New</a>
                             </div>
                         </div>
                     </div>
@@ -26,4 +23,6 @@
     </div>
 @endsection
 
-@include('layouts.backPartials._datatable_scripts')
+@push('scripts')
+    @include('layouts.backPartials._datatable_scripts')
+@endpush

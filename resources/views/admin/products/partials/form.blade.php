@@ -3,17 +3,17 @@
         <div class="">
             <div class="row">
                 <div class="form-group col-md-4">
-                    {{ Form::label('name', 'Name') }}
+                    {{ Form::label('name', 'Name *') }}
                     {{ Form::text('name', old('name'), ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group col-md-4">
-                    {{ Form::label('price', 'Price') }}
+                    {{ Form::label('price', 'Price *') }}
                     {{ Form::text('price', old('price'), ['class' => 'form-control']) }}
                 </div>
 
                 <div class="form-group col-md-4">
-                    {{ Form::label('category_id', 'Category') }}
+                    {{ Form::label('category_id', 'Category *') }}
                     {{ Form::select('category_id', $categories, @$model->category_id, ['class' => 'form-control','placeholder'=>'Select Category']) }}
                 </div>
 
@@ -25,7 +25,7 @@
 
 
                 <div class="form-group col-md-12">
-                    {{ Form::label('body', 'Body') }}
+                    {{ Form::label('body', 'Body *') }}
                     {{ Form::textarea('body', old('body'), ['class' => 'form-control summernote']) }}
                 </div>
 

@@ -6,5 +6,5 @@
 
 </div>
 
-{!! Form::submit( "Submit", ['class' => 'btn btn-success']) !!}
-{!! Html::link('/admin/categories', 'Back', ['class' => 'btn btn-secondary']) !!}
+{!! Form::submit( "Submit", ['class' => 'btn btn-dark']) !!}
+{!! Html::link('/admin/users', 'Back', ['class' => 'btn btn-secondary']) !!}
