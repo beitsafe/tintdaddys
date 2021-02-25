@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Enquiry;
+use App\Models\Warranty;
 use Yajra\DataTables\Services\DataTable;
 
-class EnquiryDataTable extends DataTable
+class WarrantyDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -16,10 +16,10 @@ class EnquiryDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', function ($enquiries) {
+            ->addColumn('action', function ($warranties) {
 
-                $action = '<a href="' . url('admin/enquiry/' . $enquiries->id . '/edit') . '" class="btn btn-sm btn-warning btn-edit" type="button"><i class="la la-edit"></i> Edit</a>';
-                $action .= ' <button class="btn btn-sm btn-danger btn-delete" type="button" data-id="' . $enquiries->id . '" data-model="enquiries" data-loading-text="<i class=\'fa fa-spin fa-spinner\'></i> Please Wait..."><i class="la la-trash"></i> Delete</a>';
+                $action = '<a href="' . url('admin/warranties/' . $warranties->id . '/edit') . '" class="btn btn-sm btn-warning btn-edit" type="button"><i class="la la-edit"></i> Edit</a>';
+                $action .= ' <button class="btn btn-sm btn-danger btn-delete" type="button" data-id="' . $warranties->id . '" data-model="warranties" data-loading-text="<i class=\'fa fa-spin fa-spinner\'></i> Please Wait..."><i class="la la-trash"></i> Delete</a>';
                 return $action;
             })
             ->rawColumns(['action']);
@@ -28,10 +28,10 @@ class EnquiryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Enquiry $model
+     * @param \App\Models\Warranty $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Enquiry $model)
+    public function query(Warranty $model)
     {
         return $model->newQuery();
     }
@@ -58,9 +58,7 @@ class EnquiryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'email',
-            'message'
+
         ];
     }
 
@@ -71,6 +69,6 @@ class EnquiryDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Enquirydatatable_' . time();
+        return 'Warrantydatatable_' . time();
     }
 }

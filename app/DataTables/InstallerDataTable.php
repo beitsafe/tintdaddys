@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Enquiry;
+use App\Models\Installer;
 use Yajra\DataTables\Services\DataTable;
 
-class EnquiryDataTable extends DataTable
+class InstallerDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -16,10 +16,10 @@ class EnquiryDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', function ($enquiries) {
+            ->addColumn('action', function ($installers) {
 
-                $action = '<a href="' . url('admin/enquiry/' . $enquiries->id . '/edit') . '" class="btn btn-sm btn-warning btn-edit" type="button"><i class="la la-edit"></i> Edit</a>';
-                $action .= ' <button class="btn btn-sm btn-danger btn-delete" type="button" data-id="' . $enquiries->id . '" data-model="enquiries" data-loading-text="<i class=\'fa fa-spin fa-spinner\'></i> Please Wait..."><i class="la la-trash"></i> Delete</a>';
+                $action = '<a href="' . url('admin/installers/' . $installers->id . '/edit') . '" class="btn btn-sm btn-warning btn-edit" type="button"><i class="la la-edit"></i> Edit</a>';
+                $action .= ' <button class="btn btn-sm btn-danger btn-delete" type="button" data-id="' . $installers->id . '" data-model="installers" data-loading-text="<i class=\'fa fa-spin fa-spinner\'></i> Please Wait..."><i class="la la-trash"></i> Delete</a>';
                 return $action;
             })
             ->rawColumns(['action']);
@@ -31,7 +31,7 @@ class EnquiryDataTable extends DataTable
      * @param \App\Models\Enquiry $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Enquiry $model)
+    public function query(Installer $model)
     {
         return $model->newQuery();
     }
@@ -58,9 +58,9 @@ class EnquiryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'email',
-            'message'
+            'longitude',
+            'latitude',
+            'name'
         ];
     }
 
@@ -71,6 +71,6 @@ class EnquiryDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Enquirydatatable_' . time();
+        return 'Installerdatatable_' . time();
     }
 }

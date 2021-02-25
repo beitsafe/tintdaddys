@@ -31,6 +31,9 @@
                                     <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-orders;hidden">My Orders</a>
                                 </li>
                                 <li>
+                                    <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-warranty;hidden">Warranties</a>
+                                </li>
+                                <li>
                                     <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-password;hidden">Password</a>
                                 </li>
                                 <li>
@@ -77,11 +80,10 @@
                             </div>
                         </div>
                         <div id="account-orders" class="hidden account-tab">
-                            <h4>Order Details</h4>
-                            <div class="boxed boxed--border bg--secondary">
-                                <h5>Coming Soon</h5>
-
-                            </div>
+                            @include('auth.dashboard.partials.orderTab')
+                        </div>
+                        <div id="account-warranty" class="hidden account-tab">
+                            @include('auth.dashboard.partials.warrantyTab')
                         </div>
                         <div id="account-password" class="hidden account-tab">
                             <h4>Password</h4>

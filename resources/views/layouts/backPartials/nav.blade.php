@@ -11,6 +11,9 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/dashboard') }}">Dash</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/enquiries') }}">Enquiries</a>
                 </li>
                 <li class="nav-item">
@@ -21,6 +24,15 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/categories') }}">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/orders') }}">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/warranties') }}">Warranties</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/installers') }}">Installers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/users') }}">Users</a>

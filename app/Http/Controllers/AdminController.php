@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -23,6 +24,7 @@ class AdminController extends Controller
     {
         $loggedUser = auth()->user();
         $data['client'] = $loggedUser->client;
+        $data['orders'] = Order::all();
         $data['paymentMethods'] = $loggedUser->paymentMethods()->filter(function ($i){ return $i->type == 'card'; });
 
         return view('auth.dashboard.home', $data);
@@ -30,7 +32,9 @@ class AdminController extends Controller
 
     public function adminDash()
     {
-        return view('admin.dashboard');
+        $data['orders'] = Order::where('dispatched', 0)->orderby('created_at', 'DESC')->get();
+
+        return view('admin.dashboard', $data);
     }
 
 }

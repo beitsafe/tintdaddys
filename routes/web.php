@@ -1,16 +1,20 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\EnquiryController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ResourceController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WarrantyController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\InstallerController;
+use romanzipp\QueueMonitor\Services\QueueMonitor;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +51,8 @@ Route::middleware(['auth'])
     ->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dash'])
             ->name('dashboard');
+        Route::post('/dashboard/warranties', [WarrantyController::class, 'store'])
+            ->name('profile.warranties.store');
     });
 
 Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
@@ -54,15 +60,24 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
     ->prefix('admin')
     ->group(function () {
         Route::get('/dashboard', [AdminController::class, 'adminDash'])
-            ->name('admin.dashboard');
+            ->name('dashboard');
         Route::get('/enquiries', [EnquiryController::class, 'index'])
-            ->name('admin.enquiry.index');
+            ->name('enquiry.index');
+        Route::post('/orders/dispatch', [OrderController::class, 'orderDispatch'])
+            ->name('order.dispatch');
+        Route::queueMonitor();
         Route::resources([
             'faqs' => FaqController::class,
             'users' => UserController::class,
+            'orders' => OrderController::class,
             'products' => ProductController::class,
             'resources' => ResourceController::class,
             'categories' => CategoryController::class,
+            'installers' => InstallerController::class,
+        ]);
+        Route::resource('warranties', WarrantyController::class)
+            ->except([
+            'store',
         ]);
     });
 
