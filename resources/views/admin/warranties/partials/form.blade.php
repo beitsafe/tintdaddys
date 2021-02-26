@@ -254,13 +254,13 @@
 </div>
 
 <div class="form-row" id="signature-pad">
-    <div class="form-group col-md-6">
+    <div class="form-group col-8">
         <div class="signature-pad">
             {{ Form::hidden('signature') }}
-            <canvas></canvas>
+            <canvas id="signature_canvas" style="width: 100%; height: 150px;"></canvas>
         </div>
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col">
         <div class="signature-pad--actions">
             <button type="button" class="btn btn--sm btn--secondary px-3 clear" data-action="clear">Clear</button>
             <button type="button" class="btn btn--sm btn--secondary px-3" data-action="undo">Undo</button>
