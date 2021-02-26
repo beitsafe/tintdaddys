@@ -1,4 +1,4 @@
-<h4>Order Details</h4>
+<h2>Order Details</h2>
 <div class="boxed boxed--border bg--secondary">
     <table class="table text-white">
         <thead>

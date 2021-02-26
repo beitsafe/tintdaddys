@@ -1,4 +1,4 @@
-<h4>Profile</h4>
+<h2>Profile</h2>
 <form method="POST" action="{{ route('register') }}">
     @csrf
     <div class="row">

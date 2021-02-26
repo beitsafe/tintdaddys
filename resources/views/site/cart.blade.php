@@ -110,6 +110,35 @@
                     <!--end of row-->
                 </div>
                 <div class="col-md-6">
+                    <div class="boxed boxed--border">
+                        <div class="row">
+                            <div class="col">
+                                <h3 class="mb-0">Payment Methods</h3>
+                                <p>Use stored card, or enter new card details below</p>
+                                <ul class="list-group bg--dark">
+                                    @foreach($paymentMethods as $paymentMethod)
+                                        @php
+                                            $card = $paymentMethod->card;
+                                        @endphp
+                                        <li class="list-group-item bg--dark d-flex align-items-center border-0 p-0 mb-3">
+                                            <div class="input-radio mr-3">
+                                                {{--                                            <span class="input__label">Option 1</span>--}}
+                                                <input id="paymentMethod-{{ $loop->iteration }}" type="radio" name="paymentMethodId" value="{{ $paymentMethod->id }}"/>
+                                                <label for="paymentMethod-{{ $loop->iteration }}"></label>
+                                            </div>
+                                            <i class="fab fa-2x fa-cc-{{ $card->brand }} mr-3"></i>
+                                            <span class="h4 mb-0 mr-5">×××× ×××× ×××× {{ $card->last4 }}</span>
+                                            <span class="h5 mb-0">{{ str_pad($card->exp_month, 2, 0, STR_PAD_LEFT) }} / {{ $card->exp_year }}</span>
+                                            {{--                                         at Expires: --}}
+                                        </li>
+                                        <hr>
+                                    @endforeach
+                                </ul>
+                                <div id="card-element" style="height: 30px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="boxed boxed--border cart-totals">
                         <div class="row">
                             <div class="col-6">
@@ -137,31 +166,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="boxed boxed--border">
-                        <div class="row">
-                            <div class="col">
-                                <ul class="list-group bg--dark">
-                                    @foreach($paymentMethods as $paymentMethod)
-                                        @php
-                                            $card = $paymentMethod->card;
-                                        @endphp
-                                        <li class="list-group-item bg--dark d-flex align-items-center border-0 p-0 mb-3">
-                                            <div class="input-radio mr-3">
-                                                {{--                                            <span class="input__label">Option 1</span>--}}
-                                                <input id="paymentMethod-{{ $loop->iteration }}" type="radio" name="paymentMethodId" value="{{ $paymentMethod->id }}"/>
-                                                <label for="paymentMethod-{{ $loop->iteration }}"></label>
-                                            </div>
-                                            <i class="fab fa-2x fa-cc-{{ $card->brand }} mr-3"></i>
-                                            <span class="h4 mb-0 mr-5">×××× ×××× ×××× {{ $card->last4 }}</span>
-                                            <span class="h5 mb-0">{{ str_pad($card->exp_month, 2, 0, STR_PAD_LEFT) }} / {{ $card->exp_year }}</span>
-                                            {{--                                         at Expires: --}}
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                <div id="card-element" style="height: 30px;"></div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row justify-content-end">
                         <div class="col text-right text-center-xs">
                             <button id="card-button" type="button" class="btn btn--primary type--uppercase w-100">Checkout</button>
