@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Web\StoreWarrantyRequest;
 use App\Models\Warranty;
 use Illuminate\Http\Request;
 use App\Mail\WarrantyApplication;
@@ -37,7 +38,7 @@ class WarrantyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Warranty $warranty)
+    public function store(StoreWarrantyRequest $request, Warranty $warranty)
     {
         $this->_save($request, $warranty);
 
@@ -111,8 +112,21 @@ class WarrantyController extends Controller
 
     protected function _save($request, $model)
     {
-        $model->fill($request->except(['_token']));
+        $model->fill($request->except(['_token','signature']));
         $model->save();
+
+        //process signature
+        if($image = $request['signature']) {
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = "signatures/{$model->id}.png";
+            Storage::disk('public')->put($imageName, base64_decode($image));
+
+            $model->signature()->updateOrCreate(
+                ['resourceable_id' => $model->id,'resourceable_type'=>'App\Models\Order'],
+                ["filepath"=>$imageName]
+            );
+        }
     }
 
 }

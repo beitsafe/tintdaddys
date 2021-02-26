@@ -253,27 +253,17 @@
     <h3>Signature</h3>
 </div>
 
-<div class="row">
-    <div id="signature-pad" class="signature-pad">
-        <div class="signature-pad--body">
+<div class="form-row" id="signature-pad">
+    <div class="form-group col-md-6">
+        <div class="signature-pad">
+            {{ Form::hidden('signature') }}
             <canvas></canvas>
         </div>
-        <div class="signature-pad--footer">
-            <div class="description">Sign above</div>
-
-            <div class="signature-pad--actions">
-                <div>
-                    <button type="button" class="button clear" data-action="clear">Clear</button>
-                    <button type="button" class="button" data-action="change-color">Change color</button>
-                    <button type="button" class="button" data-action="undo">Undo</button>
-
-                </div>
-                <div>
-                    <button type="button" class="button save" data-action="save-png">Save as PNG</button>
-                    <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
-                    <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
-                </div>
-            </div>
+    </div>
+    <div class="form-group col-md-6">
+        <div class="signature-pad--actions">
+            <button type="button" class="btn btn--sm btn--secondary px-3 clear" data-action="clear">Clear</button>
+            <button type="button" class="btn btn--sm btn--secondary px-3" data-action="undo">Undo</button>
         </div>
     </div>
 </div>

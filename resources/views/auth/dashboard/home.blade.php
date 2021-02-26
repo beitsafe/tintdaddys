@@ -14,8 +14,8 @@
                             <span>
                                 <i class="icon icon-Checked-User icon--lg"></i>
                             </span>
-                            <span class="h5">{{$client->name}}</span>
-                            <span>{{$client->businessName}}</span>
+                            <span class="h5">{{@$client->name}}</span>
+                            <span>{{@$client->businessName}}</span>
                             <span class="label">Approved</span>
                         </div>
                         <hr>
@@ -28,7 +28,7 @@
                                     <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-orders;hidden">My Orders</a>
                                 </li>
                                 <li>
-                                    <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-warranty;hidden">Warranties</a>
+                                    <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-warranty;hidden" class="warrenty-tab-link">Warranties</a>
                                 </li>
                                 <li>
                                     <a href="#" data-toggle-class=".account-tab:not(.hidden);hidden|#account-password;hidden">Password</a>
@@ -96,5 +96,22 @@
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
 <script src="{{asset('frontend/js/custom.js')}}"></script>
+<script type="text/javascript">
+    var $warrantyForm = $('#warranty-form');
+    $(document).ready(function (){
+       $('.warrenty-tab-link').on('click', function (){
+          setTimeout('initSignature();', 500);
+       });
 
+        $warrantyForm.on("submit", function (e) {
+            if (signaturePad.isEmpty()) {
+                alert("Please provide a signature first.");
+                return false;
+            }
+
+            $warrantyForm.find('[name="signature"]').val(signaturePad.toDataURL());
+            return true;
+        });
+    });
+</script>
 @endpush

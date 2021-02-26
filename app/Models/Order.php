@@ -39,6 +39,11 @@ class Order extends Model
         return$this->belongsTo(User::class);
     }
 
+    public function signature()
+    {
+        return$this->hasOne(Resource::class);
+    }
+
     public function getTotalAttribute()
     {
         return $this->subtotal;
