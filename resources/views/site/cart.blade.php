@@ -113,8 +113,16 @@
                     <div class="boxed boxed--border">
                         <div class="row">
                             <div class="col">
-                                <h3 class="mb-0">Payment Methods</h3>
+                                <div class="row">
+                                    <div class="col">
+                                        <h3 class="mb-0">Payment Methods</h3>
+                                    </div>
+                                    <div class="col text-right">
+                                        <img class="image--xxs mr-auto" alt="stripe logo" src="{{asset('frontend/branding/Powered by Stripe - white.png')}}">
+                                    </div>
+                                </div>
                                 <p>Use stored card, or enter new card details below</p>
+
                                 <ul class="list-group bg--dark">
                                     @foreach($paymentMethods as $paymentMethod)
                                         @php

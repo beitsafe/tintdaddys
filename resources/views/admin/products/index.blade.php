@@ -12,8 +12,8 @@
                             </div>
                             <div class="col-auto ">
                                 <a href="{{route('admin.products.create')}}"
-                                   class="btn btn-outline-secondary"
-                                   target="_blank"><i class="fas fa-plus-circle"></i> Create New</a>
+                                   class="btn btn-outline-secondary">
+                                    <i class="fas fa-plus-circle"></i> Create New</a>
                             </div>
                         </div>
                     </div>
