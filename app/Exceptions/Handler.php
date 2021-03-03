@@ -37,4 +37,16 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            return response()->json([
+                'responseMessage' => 'Your Account Awaits Approval',
+                'responseStatus'  => 403,
+            ]);
+        }
+
+        return parent::render($request, $exception);
+    }
 }

@@ -10,7 +10,8 @@
                         <ul class="slides">
                             @foreach($product->resources as $resource)
                                 <li>
-                                    <img src="{{ asset("storage/".$resource->filepath) }}"
+                                    <img class="bg-white"
+                                         src="{{ asset("storage/".$resource->filepath) }}"
                                          alt="{{ $resource->altvalue }}">
                                 </li>
                             @endforeach
