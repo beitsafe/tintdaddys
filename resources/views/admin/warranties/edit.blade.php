@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
 
-            {!! Form::model($model, array('route' => ['admin.warranties.update',$model->id],'method' =>'PUT', 'class' => 'form-horizontal', )) !!}
+            {!! Form::model($model, array('route' => ['admin.warranties.update',$model->id],'method' =>'PUT', 'class' => 'form-horizontal', 'id'=>'warranty-form')) !!}
             @include('admin.warranties.partials.form')
             {!! Form::close() !!}
 

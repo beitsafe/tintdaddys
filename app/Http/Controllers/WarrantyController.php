@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Mail\WarrantyApplication;
 use Illuminate\Support\Facades\Mail;
 use App\DataTables\WarrantyDataTable;
+use Illuminate\Support\Facades\Storage;
 
 class WarrantyController extends Controller
 {
@@ -42,9 +43,9 @@ class WarrantyController extends Controller
     {
         $this->_save($request, $warranty);
 
-        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new WarrantyApplication($warranty));
+        Mail::to(env('MAIL_FROM_ADDRESS','developers@beitsfe.com'))->send(new WarrantyApplication($warranty));
 
-        return redirect()->route('dashboard')->with();
+        return redirect()->route('dashboard')->with('success','Warranty submission successfully');
     }
 
     /**
@@ -80,8 +81,7 @@ class WarrantyController extends Controller
     public function update(Request $request, Warranty $warranty)
     {
         $this->_save($request, $warranty);
-        Alert::success('Warranty updated successfully', 'Success');
-        return redirect()->route('admin.warranties.index');
+        return redirect()->route('admin.warranties.index')->with('success','Warranty updated successfully');
     }
 
     /**

@@ -6,7 +6,7 @@
             <h2>Create Warranty</h2>
         </div>
         <div class="card-body">
-            {!! Form::open(array('route' => 'profile.warranties.store', 'class' => 'form-horizontal')) !!}
+            {!! Form::open(array('route' => 'profile.warranties.store', 'class' => 'form-horizontal','id'=>'warranty-form')) !!}
             @include('admin.warranties.partials.form')
             {!! Form::close() !!}
         </div>

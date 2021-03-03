@@ -114,7 +114,7 @@
     <div class="form-group col-md-6">
         {{ Form::label('vehicleInstallationDate', 'Installation Date') }}
         <div class="input-group mb-3">
-            {{ Form::text('vehicleInstallationDate', old('vehicleInstallationDate'), ['class' => 'form-control bs-datepicker']) }}
+            {{ Form::text('vehicleInstallationDate', @$model->vehicleInstallationDate ? $model->vehicleInstallationDate->format('d/m/Y') : old('vehicleInstallationDate'), ['class' => 'form-control bs-datepicker']) }}
             <div class="input-group-append">
                 <label class="input-group-text btn--primary" for="vehicleInstallationDate"><i class="fa fa-calendar"></i></label>
             </div>
@@ -280,3 +280,33 @@
 
 
 
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="{{asset('frontend/js/custom.js')}}"></script>
+    <script type="text/javascript">
+        $('.bs-datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+        var $warrantyForm = $('#warranty-form');
+        $(document).ready(function () {
+            if($('#signature-pad').is(':visible')) {
+                setTimeout('initSignature();', 500);
+            }
+            $('.warrenty-tab-link').on('click', function () {
+                setTimeout('initSignature();', 500);
+            });
+
+            $warrantyForm.on("submit", function (e) {
+                if (signaturePad.isEmpty()) {
+                    alert("Please provide a signature first.");
+                    return false;
+                }
+
+                $warrantyForm.find('[name="signature"]').val(signaturePad.toDataURL());
+                return true;
+            });
+        });
+    </script>
+@endpush
