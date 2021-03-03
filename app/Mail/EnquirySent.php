@@ -17,7 +17,7 @@ class EnquirySent extends Mailable
      *
      * @var \App\Models\Enquiry
      */
-    public $enquiry;
+    protected $enquiry;
 
     /**
      * Create a new message instance.
@@ -34,10 +34,11 @@ class EnquirySent extends Mailable
      *
      * @return $this
      */
-    public function build(Enquiry $enquiry)
+    public function build()
     {
         return $this->from(env('MAIL_FROM_ADDRESS'))
             ->subject('New Enquiry Mail')
-            ->markdown('emails.enquiry');
+            ->markdown('emails.enquiry')
+            ->with('enquiry', $this->enquiry);
     }
 }

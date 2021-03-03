@@ -17,7 +17,7 @@ class NewUser extends Mailable implements ShouldQueue
      *
      * @var \App\Models\User
      */
-    public $user;
+    protected $user;
 
     /**
      * Create a new message instance.
@@ -38,6 +38,7 @@ class NewUser extends Mailable implements ShouldQueue
     {
         return $this->from(env('MAIL_FROM_ADDRESS'))
             ->subject('New User Application')
-            ->markdown('emails.newUser');
+            ->markdown('emails.newUser')
+            ->with('user', $this->user);
     }
 }
