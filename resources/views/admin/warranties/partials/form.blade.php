@@ -113,7 +113,12 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         {{ Form::label('vehicleInstallationDate', 'Installation Date') }}
-        {{ Form::date('vehicleInstallationDate', old('vehicleInstallationDate'), ['class' => 'form-control datepicker']) }}
+        <div class="input-group mb-3">
+            {{ Form::text('vehicleInstallationDate', old('vehicleInstallationDate'), ['class' => 'form-control bs-datepicker']) }}
+            <div class="input-group-append">
+                <label class="input-group-text btn--primary" for="vehicleInstallationDate"><i class="fa fa-calendar"></i></label>
+            </div>
+        </div>
     </div>
 
     <div class="form-group col-md-6">

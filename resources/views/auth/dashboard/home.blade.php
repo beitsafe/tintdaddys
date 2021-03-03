@@ -107,8 +107,9 @@
 <script src="{{asset('frontend/js/custom.js')}}"></script>
 <script type="text/javascript">
 
-    $('.datepicker').datepicker({
+    $('.bs-datepicker').datepicker({
         format: 'dd/mm/yyyy',
+        autoclose: true
     });
 
     var $warrantyForm = $('#warranty-form');
