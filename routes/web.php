@@ -65,10 +65,8 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
             ->name('enquiry.index');
         Route::post('/orders/dispatch', [OrderController::class, 'orderDispatch'])
             ->name('order.dispatch');
-        Route::post('/user/approve', [UserController::class, 'approve'])
-            ->name('user.approve');
-        Route::post('/user/revoke', [UserController::class, 'revoke'])
-            ->name('user.revoke');
+        Route::get('/user/{user}/toggleapprove', [UserController::class, 'toggleApprove'])
+            ->name('user.toggleapprove');
         Route::queueMonitor();
         Route::resources([
             'faqs' => FaqController::class,

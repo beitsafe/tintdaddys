@@ -7,7 +7,7 @@ Name: {{@$user->clients->firstName}} {{@$user->clients->lastName}}\
 Email: {{@$user->email}}\
 Business: {{@$user->clients->businessName}}
 
-@component('mail::button', ['url' => '/admin/users'.@$user->id.'/edit'])
+@component('mail::button', ['url' => route('admin.users.edit',$user)])
     Approve/Reject Application
 @endcomponent
 

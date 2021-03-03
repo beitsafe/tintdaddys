@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\DataTables\UserDataTable;
 use App\Mail\UserApplicationApproved;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Yajra\DataTables\DataTables;
-use Alert;
 
 class UserController extends Controller
 {
@@ -25,14 +24,14 @@ class UserController extends Controller
      */
     public function create(Request $request, User $user)
     {
-       //
+        //
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, User $user)
@@ -43,7 +42,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -53,7 +52,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -67,8 +66,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -86,18 +85,18 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
     {
         $model = User::find($id);
-        if($model) {
+        if ($model) {
             $model->delete();
         }
-        if($request->ajax()){
+        if ($request->ajax()) {
             return response()->json(true);
-        }else{
+        } else {
             return redirect('admin/user');
         }
     }
@@ -109,11 +108,11 @@ class UserController extends Controller
             'email' => "required|email|unique:users,email,{$id},id,deleted_at,NULL",
         ];
 
-        if(!$id){
+        if (!$id) {
             $rules['password'] = 'required';
-            $rules['confirm_password'] =  ['required', 'same:password'];
-        }else{
-            $rules['confirm_password'] =  ['same:password'];
+            $rules['confirm_password'] = ['required', 'same:password'];
+        } else {
+            $rules['confirm_password'] = ['same:password'];
         }
 
         $this->validate($request, $rules);
@@ -122,27 +121,23 @@ class UserController extends Controller
     protected function _save($request, $model)
     {
         $model->fill($request->except(['_token', 'password', 'confirm_password', 'roles']));
-        if($password = $request->password){
+        if ($password = $request->password) {
             $model->password = bcrypt($password);
         }
         $model->save();
 
     }
 
-    public function approve(Request $request, $id)
+    public function toggleApprove(User $user)
     {
-        $model = User::find($id);
-        $model->assignRole('approved');
+        $role = User::ROLE_APPROVED;
+        if (!$user->hasRole($role)) {
+            $user->assignRole($role);
+            Mail::to($user->email)->queue(new UserApplicationApproved($user));
+        } else {
+            $user->removeRole($role);
+        }
 
-        Mail::to($model->email)->send(new UserApplicationApproved($model));
-
+        return redirect()->back();
     }
-
-    public function revoke(Request $request, $id)
-    {
-        $model = User::find($id);
-        $model->removeRole('approved');
-    }
-
-
 }
