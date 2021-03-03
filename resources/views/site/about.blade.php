@@ -163,8 +163,11 @@
                     <div class="map-container border--round"
                          data-zoom-controls="BOTTOM_RIGHT"
                          data-maps-api-key="AIzaSyBUFJONPML4woNBEInCsiHqhGkZ4rozUaA"
-                         data-address="[Australia [nomarker];123 Rathdowne street, Carlton Victoria; 71/28 Fortune St, Coomera Qld, 4209]"
-                         data-marker-title="Stack"
+                         data-address="[
+                         Australia [nomarker];
+                         123 Rathdowne street, Carlton Victoria;
+                         71/28 Fortune St, Coomera Qld, 4209]"
+                         data-marker-title="Installer"
                          data-map-zoom="4"
                          data-map-style="@include('layouts.frontPartials.mapStyle')"></div>
                 </div>
