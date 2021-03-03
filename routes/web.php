@@ -35,13 +35,6 @@ Route::get('privacy', [SiteController::class, 'privacy']);
 Route::get('products', [SiteController::class, 'products'])->name('product.list');
 Route::get('product/{product}', [SiteController::class, 'product'])->name('product.view');
 
-Route::prefix('cart')->name('cart.')->group(function () {
-    Route::get('/', [CartController::class, 'index'])->name('index');
-    Route::post('/store', [CartController::class, 'store'])->name('store');
-    Route::get('/thankyou/{id}', [CartController::class, 'thankyou'])->name('thankyou');
-    Route::post('/action/{process?}', [CartController::class, 'processCart'])->name('process');
-});
-
 Route::get('contact', [SiteController::class, 'contact']);
 Route::post('send-contact', [EnquiryController::class, 'store']);
 
@@ -53,6 +46,13 @@ Route::middleware(['auth', 'role:' . User::ROLE_APPROVED])
             ->name('dashboard');
         Route::post('/dashboard/warranties', [WarrantyController::class, 'store'])
             ->name('profile.warranties.store');
+
+        Route::prefix('cart')->name('cart.')->group(function () {
+            Route::get('/', [CartController::class, 'index'])->name('index');
+            Route::post('/store', [CartController::class, 'store'])->name('store');
+            Route::get('/thankyou/{id}', [CartController::class, 'thankyou'])->name('thankyou');
+            Route::post('/action/{process?}', [CartController::class, 'processCart'])->name('process');
+        });
     });
 
 Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
@@ -65,6 +65,10 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
             ->name('enquiry.index');
         Route::post('/orders/dispatch', [OrderController::class, 'orderDispatch'])
             ->name('order.dispatch');
+        Route::post('/user/approve', [UserController::class, 'approve'])
+            ->name('user.approve');
+        Route::post('/user/revoke', [UserController::class, 'revoke'])
+            ->name('user.revoke');
         Route::queueMonitor();
         Route::resources([
             'faqs' => FaqController::class,

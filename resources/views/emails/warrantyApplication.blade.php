@@ -3,7 +3,9 @@
 
 You Have Received A New Warranty Application.
 
-Details
+@component('mail::button', ['url' => env('APP_URL').'/admin/warranties/'.@$warranty->id.'/edit'])
+    View Warranty
+@endcomponent
 
 Thanks,<br>
 {{ config('app.name') }}

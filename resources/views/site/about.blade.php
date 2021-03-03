@@ -154,56 +154,30 @@
             </div>
         </div>
     </section>
+
+    <section class="unpad ">
+        <div class="map-container border--round"
+             data-maps-api-key="AIzaSyBUFJONPML4woNBEInCsiHqhGkZ4rozUaA"
+             data-address="123 Rathdowne street, Carlton Victoria"
+             data-marker-title="Stack"
+             data-map-style="[{&quot;featureType&quot;:&quot;landscape&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFBB00&quot;},{&quot;saturation&quot;:43.400000000000006},{&quot;lightness&quot;:37.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFC200&quot;},{&quot;saturation&quot;:-61.8},{&quot;lightness&quot;:45.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.arterial&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:51.19999999999999},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.local&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:52},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#0078FF&quot;},{&quot;saturation&quot;:-13.200000000000003},{&quot;lightness&quot;:2.4000000000000057},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#00FF6A&quot;},{&quot;saturation&quot;:-1.0989010989011234},{&quot;lightness&quot;:11.200000000000017},{&quot;gamma&quot;:1}]}]" data-map-zoom="15"></div>
+    </section>
+
     <section class="text-center bg--dark">
         <div class="container">
             <div class="row justify-content-center">
-                <h2>Our Work</h2>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="slider" data-paging="true">
-                        <ul class="slides">
-                            <li class="col-md-6 col-12">
-                                <div class="project-thumb">
-                                    <a href="#">
-                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/82379557_2497935026982956_2603389641876832256_o.jpg')}}">
-                                    </a>
-                                    <h4>Date Here</h4>
-                                    <span>Product Here</span>
-                                </div>
-                            </li>
-                            <li class="col-md-6 col-12">
-                                <div class="project-thumb">
-                                    <a href="#">
-                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/119707829_3108691262573993_819842247806930449_n.jpg')}}">
-                                    </a>
-                                    <h4>Date Here</h4>
-                                    <span>Product Here</span>
-                                </div>
-                            </li>
-                            <li class="col-md-6 col-12">
-                                <div class="project-thumb">
-                                    <a href="#">
-                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/120818188_1461701384031042_6945197032842348310_o.jpg')}}">
-                                    </a>
-                                    <h4>Date Here</h4>
-                                    <span>Product Here</span>
-                                </div>
-                            </li>
-                            <li class="col-md-6 col-12">
-                                <div class="project-thumb">
-                                    <a href="#">
-                                        <img alt="Image" class="border--round" src="{{asset('frontend/images/ourwork/141371367_3573446906077318_5881571861096716927_o.jpg')}}">
-                                    </a>
-                                    <h4>Date Here</h4>
-                                    <span>Product Here</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="col-md-12 col-12 mb-5">
+                    <div class="map-container border--round"
+                         data-zoom-controls="BOTTOM_RIGHT"
+                         data-maps-api-key=""
+                         data-address="['123 Rathdowne street, Carlton Victoria', '71/28 Fortune St, Coomera Qld, 4209']"
+                         data-marker-title="Stack"
+                         data-map-style="[{&quot;featureType&quot;:&quot;landscape&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFBB00&quot;},{&quot;saturation&quot;:43.400000000000006},{&quot;lightness&quot;:37.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.highway&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FFC200&quot;},{&quot;saturation&quot;:-61.8},{&quot;lightness&quot;:45.599999999999994},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.arterial&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:51.19999999999999},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;road.local&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#FF0300&quot;},{&quot;saturation&quot;:-100},{&quot;lightness&quot;:52},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;water&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#0078FF&quot;},{&quot;saturation&quot;:-13.200000000000003},{&quot;lightness&quot;:2.4000000000000057},{&quot;gamma&quot;:1}]},{&quot;featureType&quot;:&quot;poi&quot;,&quot;stylers&quot;:[{&quot;hue&quot;:&quot;#00FF6A&quot;},{&quot;saturation&quot;:-1.0989010989011234},{&quot;lightness&quot;:11.200000000000017},{&quot;gamma&quot;:1}]}]" data-map-zoom="15"></div>
                 </div>
             </div>
+            <!--end of row-->
         </div>
+        <!--end of container-->
     </section>
 
 @stop

@@ -1,7 +1,7 @@
 @component('mail::message')
-# Hi
+# Hi {{@$order->user->client->firstName}}
 
-Your Order Has Been Dispatched.
+Your Order, {{@$order->invoiceno}}, Has Been Dispatched.
 
 Details
 

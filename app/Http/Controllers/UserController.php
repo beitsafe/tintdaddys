@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
+use App\Mail\UserApplicationApproved;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\DataTables;
 use Alert;
 
@@ -125,6 +127,21 @@ class UserController extends Controller
         }
         $model->save();
 
+    }
+
+    public function approve(Request $request, $id)
+    {
+        $model = User::find($id);
+        $model->assignRole('approved');
+
+        Mail::to($model->email)->send(new UserApplicationApproved($model));
+
+    }
+
+    public function revoke(Request $request, $id)
+    {
+        $model = User::find($id);
+        $model->removeRole('approved');
     }
 
 
