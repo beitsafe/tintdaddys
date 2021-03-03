@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
             {!! Form::model($model, array('route' => ['admin.users.update',$model->id],'method' =>'PUT', 'class' => 'form-horizontal')) !!}
-            @include('admin.categories.partials.form')
+            @include('admin.users.partials.form')
             {!! Form::close() !!}
         </div>
 

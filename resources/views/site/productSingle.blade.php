@@ -20,9 +20,9 @@
                 <div class="col-md-5 col-lg-4">
                     <h2>{{$product->name}}</h2>
                     <div class="text-block">
-                        @auth()
+                        @can('approved')
                             <span class="h4 inline-block">${{$product->price}}</span>
-                        @endauth
+                        @endcan
                     </div>
                     <p>{!! $product->shortDescription !!}</p>
                     <ul class="accordion accordion-2 accordion--oneopen">
@@ -55,14 +55,16 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="row">
-                        <div class="col-4">
-                            <input type="number" name="quantity" placeholder="QTY" min="1" max="100" required>
+                    @role('approved')
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" name="quantity" placeholder="QTY" min="1" max="100" required>
+                            </div>
+                            <div class="col-8">
+                                <button type="button" class="btn w-100 btn--primary add-to-cart" data-id="{{ $product->id }}" data-name="{{ $product->name }}">Add To Cart</button>
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <button type="button" class="btn w-100 btn--primary add-to-cart" data-id="{{ $product->id }}" data-name="{{ $product->name }}">Add To Cart</button>
-                        </div>
-                    </div>
+                    @endrole
                 </div>
             </div>
         </div>

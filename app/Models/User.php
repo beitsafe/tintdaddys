@@ -15,6 +15,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles, Billable, SoftDeletes;
 
     const ROLE_ADMIN = 'admin';
+    const ROLE_APPROVED = 'approved';
     /**
      * The attributes that are mass assignable.
      *

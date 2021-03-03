@@ -113,7 +113,7 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         {{ Form::label('vehicleInstallationDate', 'Installation Date') }}
-        {{ Form::text('vehicleInstallationDate', old('vehicleInstallationDate'), ['class' => 'form-control']) }}
+        {{ Form::date('vehicleInstallationDate', old('vehicleInstallationDate'), ['class' => 'form-control datepicker']) }}
     </div>
 
     <div class="form-group col-md-6">
@@ -272,5 +272,6 @@
 <div class="col-lg-3 col-md-4 px-0">
     <button type="submit" class="btn btn--primary type--uppercase">Submit Warranty</button>
 </div>
+
 
 

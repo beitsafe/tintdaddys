@@ -47,7 +47,7 @@ Route::post('send-contact', [EnquiryController::class, 'store']);
 
 Route::get('redirects', [AdminController::class, 'redirectAfterLogin']);
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'role:' . User::ROLE_APPROVED])
     ->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dash'])
             ->name('dashboard');

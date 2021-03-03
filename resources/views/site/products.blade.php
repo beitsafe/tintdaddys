@@ -38,9 +38,11 @@
                                                 <span>{!! $product->shortDescription !!}</span>
                                             </div>
                                             <div>
-                                                @auth()
+                                                @role('approved')
                                                     <span class="h4 inline-block">${{$product->price}}</span>
-                                                @endauth
+                                                @else
+
+                                                @endrole
                                             </div>
                                         </a>
                                     </div>

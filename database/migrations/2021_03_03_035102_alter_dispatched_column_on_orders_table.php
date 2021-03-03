@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToInstallersTable extends Migration
+class AlterDispatchedColumnOnOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddColumnsToInstallersTable extends Migration
      */
     public function up()
     {
-        Schema::table('installers', function (Blueprint $table) {
-            $table->text('person')->nullable();
-            $table->text('phone')->nullable();
-            $table->text('email')->nullable();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->boolean('dispatched')->nullable(0)->change();
         });
     }
 
@@ -27,7 +25,7 @@ class AddColumnsToInstallersTable extends Migration
      */
     public function down()
     {
-        Schema::table('installers', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
         });
     }

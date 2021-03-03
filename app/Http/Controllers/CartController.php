@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewOrderPlaced;
 use App\Http\Helpers\PaymentHelper;
 use App\Http\Requests\Web\StoreOrderRequest;
+use App\Mail\OrderReceived;
 use App\Models\Client;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -14,6 +15,7 @@ use Calendar;
 use Fontis\Auspost\Api\Postage\Domestic\Parcel\Cost\CalculationParams;
 use Fontis\Auspost\Model\Postage\Enum\ServiceCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -117,6 +119,7 @@ class CartController extends Controller
                 Client::create($client);
             }
 
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new OrderReceived($order));
             $request->session()->forget("cart");
             alert()->success('Order Placed Successfully');
             return redirect()->route('cart.thankyou', $order->id);
