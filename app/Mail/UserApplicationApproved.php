@@ -2,26 +2,23 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserApplicationApproved extends Mailable implements ShouldQueue
+class UserApplicationApproved extends Mailable
 {
     use Queueable, SerializesModels;
-
-    protected $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -31,9 +28,6 @@ class UserApplicationApproved extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS'))
-            ->subject('New User Application')
-            ->markdown('emails.userApplicationApproved')
-            ->with('user', $this->user);
+        return $this->view('view.name');
     }
 }
