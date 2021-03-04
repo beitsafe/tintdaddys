@@ -28,31 +28,26 @@
                     <p>{!! $product->shortDescription !!}</p>
                     <ul class="accordion accordion-2 accordion--oneopen">
                         <li>
-                            <div class="accordion__title"><span class="h5">Specifications</span></div>
+                            <div class="accordion__title"><span class="h5">Extra Info</span></div>
                             <div class="accordion__content">
-                                <ul class="bullets">
-                                    <li><span>Frequence Response: 25KHz — 24,000KHz</span></li>
-                                    <li><span>DAB+ / FM / AM</span></li>
-                                    <li><span>16,000 mAh Internal Rehcargable Battery</span></li>
-                                    <li><span>10 Watts</span></li>
-                                </ul>
+                                <p>{{$product->body}}</p>
                             </div>
                         </li>
                         <li class="active">
                             <div class="accordion__title"><span class="h5">Dimensions</span></div>
                             <div class="accordion__content">
                                 <ul>
-                                    <li><span>Product: 3.5”W X 3.0”H X 3.0”D</span></li>
-                                    <li><span>Packaging: 7”W X 6”H X 5”D </span></li>
+                                    <li><span>Length: {{$product->length}}</span></li>
+                                    <li><span>Width: {{$product->width}}</span></li>
+                                    <li><span>Height: {{$product->height}}</span></li>
+                                    <li><span>Weight: {{$product->weight}}</span></li>
                                 </ul>
                             </div>
                         </li>
                         <li>
                             <div class="accordion__title"><span class="h5">Shipping Info</span></div>
                             <div class="accordion__content">
-                                <p> Generally ships between 2 - 4 working days from order confirmation. Orders only
-                                    confirmed once payment has successfully processed. NOTE: When using services such as
-                                    Skrill, payments can take longer to process (approx. 4 days). </p>
+                                <p>Shipping info here</p>
                             </div>
                         </li>
                     </ul>

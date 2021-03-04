@@ -27,10 +27,11 @@
                         </div>
                         <div class="masonry__container row">
                             @foreach($products as $product)
-                                <div class="masonry__item col-md-4" data-masonry-filter="Computing">
+                                <div class="masonry__item col-md-4" data-masonry-filter="{{$product->category->name}}">
                                     <div class="product product--tile bg--secondary text-center">
                                         <a href="{{url('product/'.$product->slug)}}">
-                                            <img class="bg-white" alt="Image" src="storage/{{@$product->resources->first()->filepath}}" />
+                                            <img class="bg-white" alt="Image"
+                                                 src="storage/{{@$product->resources->first()->filepath}}" />
                                         </a>
                                         <a class="block" href="{{route('product.view',$product)}}">
                                             <div>

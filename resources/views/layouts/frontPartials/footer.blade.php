@@ -4,35 +4,36 @@
             <div class="col-sm-6 col-md-3 col-xs-6">
                 <h6 class="type--uppercase mb--0">Oz Window Films</h6>
                 <ul class="list--hover">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Faqs</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{url('/')}}">Home</a></li>
+                    <li><a href="{{url('about')}}">About</a></li>
+                    <li><a href="{{url('faqs')}}">Faqs</a></li>
+                    <li><a href="{{url('products')}}">Products</a></li>
+                    <li><a href="{{url('contact')}}">Contact</a></li>
                 </ul>
             </div>
             <div class="col-sm-6 col-md-3 col-xs-6">
                 <h6 class="type--uppercase">Global Film</h6>
                 <ul class="list--hover">
-                    <li><a href="#">Quick Dry Plus</a></li>
-                    <li><a href="#">HP Charcoal Premium</a></li>
-                    <li><a href="#">QDP Ceramic Charcoal</a></li>
+                    <li><a href="{{url('product/quick-dry-plus')}}">Quick Dry Plus</a></li>
+                    <li><a href="{{url('product/hp-charcoal-premium')}}">HP Charcoal Premium</a></li>
+                    <li><a href="{{url('product/qdp-ceramic-charcoal')}}">QDP Ceramic Charcoal</a></li>
                 </ul>
             </div>
             <div class="col-sm-6 col-md-3 col-xs-6">
-                <h6 class="type--uppercase">IR Xtreme</h6>
+                <h6 class="type--uppercase">Oz Window Films</h6>
                 <ul class="list--hover">
-                    <li><a href="#">Cs Xtreme</a></li>
-                    <li><a href="#">Hp Xtreme</a></li>
-                    <li><a href="#">Cc Xtreme</a></li>
+                    <li><a href="{{url('product/cs-xtreme')}}">Cs Xtreme</a></li>
+                    <li><a href="{{url('product/hp-xtreme')}}">Hp Xtreme</a></li>
+                    <li><a href="{{url('product/ir-xtreme')}}">Ir Xtreme</a></li>
+                    <li><a href="{{url('product/cc-xtreme')}}">Cc Xtreme</a></li>
                 </ul>
             </div>
             <div class="col-sm-6 col-md-3 col-xs-6">
                 <h6 class="type--uppercase">Luxe Lightwrap</h6>
                 <ul class="list--hover">
-                    <li><a href="#">Dark Smoke</a></li>
-                    <li><a href="#">Mid Smoke</a></li>
-                    <li><a href="#">Light Smoke</a></li>
+                    <li><a href="{{url('product/luxe-lightwrap')}}">Luxe Lightwrap</a></li>
+                    <li><a href="{{url('product/luxe-fx-series-honeycomb-1m-length')}}">Lux Fx Honeycomb</a></li>
+                    <li><a href="{{url('product/luxe-fx-series-carbon-fiber-1m-length')}}">Lux Fx Carbon Fibre</a></li>
                 </ul>
             </div>
         </div>

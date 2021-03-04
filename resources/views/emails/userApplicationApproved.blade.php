@@ -1,17 +1,12 @@
 @component('mail::message')
-# Hi
+# Hi {{@$user->clients->firstName}} {{@$user->clients->lastName}}
 
-A new user application has been received.
+Your account application has been approved. Use the below button to login to your account.
 
-Name: {{@$user->clients->firstName}} {{@$user->clients->lastName}}\
-Email: {{@$user->email}}\
-Business: {{@$user->clients->businessName}}
-
-@component('mail::button', ['url' => route('admin.users.edit',$user)])
-    Approve/Reject Application
+@component('mail::button', ['url' => env('APP_URL_LOGIN')])
+    Login
 @endcomponent
 
-Use the above link to manage new application
 
 Thanks,<br>
 {{ config('app.name') }}

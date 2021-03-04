@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('seo')
+    @include('site.seo.about')
+@stop
+
 @section('content')
 
     <section class="text-center bg--dark">
@@ -154,11 +158,10 @@
             </div>
         </div>
     </section>
-
-
     <section class="text-center bg--dark">
         <div class="container">
             <div class="row justify-content-center">
+                <h2>Our Installers</h2>
                 <div class="col-md-12 col-12 mb-5">
                     <div class="map-container border--round"
                          data-zoom-controls="BOTTOM_RIGHT"
