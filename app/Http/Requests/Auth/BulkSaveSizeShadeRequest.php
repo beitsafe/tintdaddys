@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-class SaveProductRequest extends FormRequest
+class BulkSaveSizeShadeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,11 +29,7 @@ class SaveProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'category_id' => 'required',
-            'body' => 'required',
-            'inStock' => 'required',
-            'price' => 'required',
+            'rows' => 'required',
         ];
     }
 }

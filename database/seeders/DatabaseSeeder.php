@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(RoleApprovedSeeder::class);
+        $this->call(SizeShadeSeeder::class);
     }
 }

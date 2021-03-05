@@ -37,6 +37,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/users') }}">Users</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a id="setupNavDD" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        Setup
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ route('admin.sizeshades.index') }}">Sizes & Shades</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

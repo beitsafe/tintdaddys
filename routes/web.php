@@ -14,6 +14,7 @@ use App\Http\Controllers\WarrantyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\InstallerController;
+use App\Http\Controllers\SizeShadeController;
 use romanzipp\QueueMonitor\Services\QueueMonitor;
 
 /*
@@ -76,7 +77,9 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
             'resources' => ResourceController::class,
             'categories' => CategoryController::class,
             'installers' => InstallerController::class,
+            'sizeshades' => SizeShadeController::class,
         ]);
+        Route::post('/sizeshades/bulksave', [SizeShadeController::class, 'bulkSave'])->name('sizeshades.bulksave');
         Route::resource('warranties', WarrantyController::class)
             ->except([
             'store',
