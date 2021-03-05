@@ -14,32 +14,22 @@
             </div>
         </div>
     </section>
+
     <section class="switchable bg--dark switchable--switch">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="switchable__text col-md-12">
                     <ul class="accordion accordion-2 accordion--oneopen">
-                        <li class="active">
-                            <div class="accordion__title"> <span class="h5">Question 1</span> </div>
-                            <div class="accordion__content">
-                                <p class="lead"> Answer </p> <br>
-                                <p class="lead"> Continued Here </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="accordion__title"> <span class="h5">Question 2</span> </div>
-                            <div class="accordion__content">
-                                <p class="lead"> Answer </p> <br>
-                                <p class="lead"> Continued Here </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="accordion__title"> <span class="h5">Question 3</span> </div>
-                            <div class="accordion__content">
-                                <p class="lead"> Answer </p> <br>
-                                <p class="lead"> Continued Here </p>
-                            </div>
-                        </li>
+                        @foreach($faqs as $faq)
+                            <li class="">
+                                <div class="accordion__title">
+                                    <span class="h5">{{$faq->question}}</span>
+                                </div>
+                                <div class="accordion__content">
+                                    <p> {!! $faq->answer !!} </p> <br>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

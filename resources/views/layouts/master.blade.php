@@ -4,6 +4,8 @@
 
     @include('layouts.frontPartials.head')
 
+    @yield('seo')
+
     @include('layouts.frontPartials.css')
 
 </head>

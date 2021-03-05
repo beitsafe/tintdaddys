@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,13 +13,20 @@ class UserApplicationApproved extends Mailable
     use Queueable, SerializesModels;
 
     /**
+     * The order instance.
+     *
+     * @var \App\Models\User
+     */
+    protected $user;
+
+    /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -26,8 +34,11 @@ class UserApplicationApproved extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(User $user)
     {
-        return $this->view('view.name');
+        return $this->from(env('MAIL_FROM_ADDRESS'))
+            ->subject('Your Account Application Has Been Approved')
+            ->markdown('emails.userApplicationApproved')
+            ->with('user', $this->user);
     }
 }

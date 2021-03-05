@@ -20,7 +20,7 @@
             <div class="row ">
                 <div class="col-md-4 mh-85 d-none d-sm-block">
                     <div class="feature feature-2 boxed boxed--border bg--white">
-                        <img class="mw-50 p-0" alt="logo" src="{{asset('frontend/branding/global_crop.jpg')}}">
+                        <img class="mw-50 p-0" alt="Global logo" src="{{asset('frontend/branding/global_crop.jpg')}}">
                         <div class="feature__body">
                             <h4> Global Window Films </h4>
                         </div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-4 mh-85 d-none d-sm-block">
                     <div class="feature feature-2 boxed boxed--border bg--white">
-                        <img class="mw-50" alt="logo" src="{{asset('frontend/branding/ixrtreme_1.png')}}">
+                        <img class="mw-33" alt="Oz Windowfilms logo" src="{{asset('frontend/branding/oz-window-logo.png')}}">
                         <div class="feature__body">
                             <h4> OZ Window Films </h4>
                         </div>

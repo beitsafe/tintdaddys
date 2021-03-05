@@ -39,24 +39,28 @@
                                             <div class="row">
                                                 <div class="dropdown__content row w-100">
                                                     <div class="col-lg-3">
-                                                        <h5 class="xs-menu-text">Brand 1</h5>
-                                                        <ul class="menu-vertical">
-                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 1</a> </li>
-                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 2</a> </li>
-                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 3</a> </li>
+                                                        <h6 class="type--uppercase">Global Film</h6>
+                                                        <ul class="list--hover">
+                                                            <li><a href="{{url('product/quick-dry-plus')}}">Quick Dry Plus</a></li>
+                                                            <li><a href="{{url('product/hp-charcoal-premium')}}">HP Charcoal Premium</a></li>
+                                                            <li><a href="{{url('product/qdp-ceramic-charcoal')}}">QDP Ceramic Charcoal</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        <h5 class="xs-menu-text">Brand 2</h5>
-                                                        <ul class="menu-vertical">
-                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 1</a> </li>
+                                                        <h6 class="type--uppercase">Oz Window Films</h6>
+                                                        <ul class="list--hover">
+                                                            <li><a href="{{url('product/cs-xtreme')}}">Cs Xtreme</a></li>
+                                                            <li><a href="{{url('product/hp-xtreme')}}">Hp Xtreme</a></li>
+                                                            <li><a href="{{url('product/ir-xtreme')}}">Ir Xtreme</a></li>
+                                                            <li><a href="{{url('product/cc-xtreme')}}">Cc Xtreme</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">
-                                                        <h5 class="xs-menu-text">Brand 3</h5>
-                                                        <ul class="menu-vertical">
-                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 1</a> </li>
-                                                            <li> <a class="xs-menu-text" href="{{url('product')}}">Product 2</a> </li>
+                                                        <h6 class="type--uppercase">Luxe Lightwrap</h6>
+                                                        <ul class="list--hover">
+                                                            <li><a href="{{url('product/luxe-lightwrap')}}">Luxe Lightwrap</a></li>
+                                                            <li><a href="{{url('product/luxe-fx-series-honeycomb-1m-length')}}">Lux Fx Honeycomb</a></li>
+                                                            <li><a href="{{url('product/luxe-fx-series-carbon-fiber-1m-length')}}">Lux Fx Carbon Fibre</a></li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-lg-3">

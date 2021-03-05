@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class SiteController extends Controller
 
     public function faqs()
     {
-        return view('site.faqs');
+        $faqs = Faq::all();
+        return view('site.faqs',compact('faqs'));
     }
 
     public function product(Product $product)
