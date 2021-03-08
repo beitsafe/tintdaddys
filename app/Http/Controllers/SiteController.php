@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faq;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Models\SizeShade;
 
 class SiteController extends Controller
 {
@@ -21,12 +21,14 @@ class SiteController extends Controller
     public function faqs()
     {
         $faqs = Faq::all();
-        return view('site.faqs',compact('faqs'));
+        return view('site.faqs', compact('faqs'));
     }
 
     public function product(Product $product)
     {
-        return view('site.productSingle', compact('product'));
+        $productSizeShades = $product->sizeshades()->get()->pluck('name','pivot.id');
+
+        return view('site.productSingle', compact('product', 'productSizeShades'));
     }
 
     public function products()

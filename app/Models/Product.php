@@ -15,8 +15,6 @@ class Product extends Model
 
     use SoftDeletes, HasSlug;
 
-    protected $casts = ['avail_sizeshades' => 'array'];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +22,7 @@ class Product extends Model
      */
     protected $fillable = [
         'name', 'slug', 'shortDescription', 'body', 'shipping', 'inStock', 'metaDescription', 'metaKeywords', 'price', 'extraDescription',
-        'length', 'width', 'height', 'weight', 'avail_sizeshades', 'category_id'
+        'length', 'width', 'height', 'weight', 'category_id'
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -48,6 +46,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function sizeshades()
+    {
+        return $this->belongsToMany(SizeShade::class, 'product_variants', 'product_id', 'size_shade_id')->withPivot('id');
     }
 
     public function getDefaultImageAttribute()

@@ -74,8 +74,8 @@
                 </div>
 
                 <div class=" form-group col-md-12">
-                    {{ Form::label('avail_sizeshades', 'Available Size & Shade(s)') }}
-                    {{ Form::select('avail_sizeshades[]', $availSizeShades, old('avail_sizeshades'), ['class' => 'form-control select2','multiple']) }}
+                    {{ Form::label('sizeshades', 'Available Size & Shade(s)') }}
+                    {{ Form::select('sizeshades[]', $availSizeShades, old('sizeshades'), ['class' => 'form-control select2','multiple']) }}
                 </div>
 
                 <div class=" form-group col-md-6">

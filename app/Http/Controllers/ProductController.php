@@ -25,10 +25,7 @@ class ProductController extends Controller
     protected function _initForm()
     {
         $data['categories'] = Category::all()->pluck('name', 'id');
-        $data['availSizes'] = $data['availShades'] = [];
-        $data['availSizeShades'] = SizeShade::all()->mapWithKeys(function ($i) {
-            return [$i->id => $i->size . 'x' . $i->shade];
-        })->sort();
+        $data['availSizeShades'] = SizeShade::getVariants(SizeShade::all());
 
         return $data;
     }
@@ -115,8 +112,10 @@ class ProductController extends Controller
 
     protected function _save($request, $model)
     {
-        $model->fill($request->except(['_token']));
+        $model->fill($request->except(['_token', 'sizeshades']));
         $model->save();
+
+        $model->sizeshades()->sync($request->get('sizeshades', []));
 
         if ($session_files = session()->get('filepath')) {
             $crop_path = session()->get('crop_path');

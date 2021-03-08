@@ -54,14 +54,15 @@
                                     <tbody>
                                     @foreach($order->items as $item)
                                         @php
-                                            $product = $item->product;
+                                            $variant = $item->variant;
+                                            $product = $variant->product;
                                         @endphp
                                         <tr class="cart-item">
                                             <td class="text-center">
                                                 <img src="{{ @$product->default_thumb }}" class="img-fluid"
-                                                     width="67" alt="{{ $product->name }}"/>
+                                                     width="67" alt="{{ $variant->name }}"/>
                                             </td>
-                                            <td>{{ $product->name }}</td>
+                                            <td>{{ $variant->name }}</td>
                                             <td>${{ $item->unitprice }}</td>
                                             <td class="text-center">{{ $item->quantity }}</td>
                                             <td class="text-center">${{ $item->total }}</td>

@@ -52,14 +52,20 @@
                         </li>
                     </ul>
                     @role('approved')
-                        <div class="row">
-                            <div class="col-4">
-                                <input type="number" name="quantity" placeholder="QTY" min="1" max="100" required>
-                            </div>
-                            <div class="col-8">
-                                <button type="button" class="btn w-100 btn--primary add-to-cart" data-id="{{ $product->id }}" data-name="{{ $product->name }}">Add To Cart</button>
+                    <div class="row">
+                        <div class="col-12 mb-2">
+                            <label>Available Size & Shade(s):</label>
+                            <div class="input-select">
+                                {{ Form::select('variant', $productSizeShades, null, ['placeholder'=>'Select Size & Shade']) }}
                             </div>
                         </div>
+                        <div class="col-4">
+                            <input type="number" name="quantity" placeholder="QTY" min="1" max="100" required>
+                        </div>
+                        <div class="col-8">
+                            <button type="button" class="btn w-100 btn--primary add-to-cart" data-id="{{ $product->id }}" data-name="{{ $product->name }}">Add To Cart</button>
+                        </div>
+                    </div>
                     @endrole
                 </div>
             </div>
@@ -67,3 +73,7 @@
     </section>
 
 @stop
+
+@push('scripts')
+    @include('layouts.backPartials.select2_scripts')
+@endpush

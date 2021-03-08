@@ -27,7 +27,7 @@
                         </div>
                         <div class="masonry__container row">
                             @foreach($products as $product)
-                                <div class="masonry__item col-md-4" data-masonry-filter="{{$product->category->name}}">
+                                <div class="masonry__item col-md-4" data-masonry-filter="{{@$product->category->name}}">
                                     <div class="product product--tile bg--secondary text-center">
                                         <a href="{{url('product/'.$product->slug)}}">
                                             <img class="bg-white" alt="Image"

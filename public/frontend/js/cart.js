@@ -33,14 +33,14 @@ function refreshCart(response) {
     }
 }
 
-function addToCart(pid, qty) {
-    $.post('/cart/action/add', {id: pid, qty: qty, postcode: $('#shipping_postalcode').val()}, function (response) {
+function addToCart(pid, qty, variant) {
+    $.post('/cart/action/add', {id: pid, qty: qty, variant: variant, postcode: $('#shipping_postalcode').val()}, function (response) {
         refreshCart(response);
     }, "json");
 }
 
-function removeFromCart(pid) {
-    $.post('/cart/action/remove', {id: pid, postcode: $('#shipping_postalcode').val()}, function (response) {
+function removeFromCart(pid, variant) {
+    $.post('/cart/action/remove', {id: pid, variant: variant, postcode: $('#shipping_postalcode').val()}, function (response) {
         refreshCart(response);
     }, "json");
 }
@@ -101,7 +101,7 @@ $(document).ready(function () {
     $('body').on('click', '.remove-cart', function (e) {
         e.preventDefault();
         let _row = $(this).closest('.cart-item');
-        removeFromCart(_row.data('pid'));
+        removeFromCart(_row.data('pid'), _row.data('variant'));
         _row.remove();
         return false;
     });
@@ -109,7 +109,7 @@ $(document).ready(function () {
 
     $('body').on('click', '[data-trigger="change-qty"]', function () {
         _that = $(this).closest('.cart-item');
-        addToCart(_that.data('pid'), _that.find("[name='quantity']").val());
+        addToCart(_that.data('pid'), _that.find("[name='quantity']").val(),_that.data('variant'));
     });
 
     $('body').on('change', '#shipping_postalcode', function () {
@@ -123,8 +123,15 @@ $(document).ready(function () {
 
     $('body').on('click', '.add-to-cart', function () {
         _that = $(this);
-        var qty = $('input[name="quantity"]').val();
-        addToCart(_that.data('id'), (qty)?qty:1);
+        if($('select[name="variant"]').val() == ''){
+            toastr.error('Please select Size & Shade');
+            return false;
+        }
+
+        var qty = $('input[name="quantity"]').val(),
+            variant= $('select[name="variant"]').val();
+
+        addToCart(_that.data('id'), (qty)?qty:1, variant);
         _that.addClass('added-cart');
         flashNotify(`${_that.data('name')} added to the cart`);
     });

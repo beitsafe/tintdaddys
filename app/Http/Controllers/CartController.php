@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Auspost;
 use Calendar;
 use Fontis\Auspost\Api\Postage\Domestic\Parcel\Cost\CalculationParams;
@@ -23,7 +24,9 @@ class CartController extends Controller
     {
         $data = $this->_get_cart_items();
         $loggedUser = auth()->user();
-        $data['paymentMethods'] = $loggedUser->paymentMethods()->filter(function ($i){ return $i->type == 'card'; });
+        $data['paymentMethods'] = $loggedUser->paymentMethods()->filter(function ($i) {
+            return $i->type == 'card';
+        });
         $data['client'] = $loggedUser->client;
 
         return view('site.cart', $data);
@@ -35,10 +38,12 @@ class CartController extends Controller
             $pid = $request->id;
             $qty = @$request->qty ?: 1;
 
-            if ($process == 'add') {
-                $request->session()->put("cart.{$pid}", $qty);
-            } else if ($process == 'remove') {
-                $request->session()->forget("cart.{$pid}");
+            if ($variant = @$request->variant) {
+                if ($process == 'add') {
+                    $request->session()->put("cart.{$pid}.{$variant}", $qty);
+                } else if ($process == 'remove') {
+                    $request->session()->forget("cart.{$pid}.{$variant}");
+                }
             }
         }
 
@@ -58,17 +63,22 @@ class CartController extends Controller
 
         $data['cart_total'] = 0;
         $data['items'] = [];
-        foreach ($items as $k => $qty) {
-            $product = Product::find($k);
-            if ($product) {
-                $data['cart_total'] += $total = ($qty * $product->price);
+        foreach ($items as $k => $variants) {
+            foreach ($variants as $variant_id => $qty) {
+                $product = Product::find($k);
+                $variant = ProductVariant::with('sizeshade')->find($variant_id);
+                if ($product) {
+                    $data['cart_total'] += $total = ($qty * $variant->sizeshade->price);
 
-                $data['items'][$k]['name'] = $product->name;
-                $data['items'][$k]['thumb'] = $product->default_thumb;
-                $data['items'][$k]['slug'] = $product->slug;
-                $data['items'][$k]['qty'] = $qty;
-                $data['items'][$k]['unitprice'] = $product->price;
-                $data['items'][$k]['total'] = $total;
+                    $data['items'][$k][$variant_id] = [
+                        'name' => $variant->name,
+                        'thumb' => $product->default_thumb,
+                        'slug' => $product->slug,
+                        'qty' => $qty,
+                        'unitprice' => $variant->sizeshade->price,
+                        'total' => $total,
+                    ];
+                }
             }
         }
 
@@ -103,20 +113,21 @@ class CartController extends Controller
             $order->user_id = $loggedUser->id;
             $order->save();
 
-            foreach ($cartSession['items'] as $pid => $item) {
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $pid,
-                    'quantity' => $item['qty'],
-                    'unitprice' => $item['unitprice'],
-                ]);
+            foreach ($cartSession['items'] as $pid => $product) {
+                foreach ($product as $variant => $item) {
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'product_variant_id' => $variant,
+                        'quantity' => $item['qty'],
+                        'unitprice' => $item['unitprice'],
+                    ]);
+                }
             }
 
             if (!$loggedUser->client) {
                 $client = $order->billing;
-                $client['user_id'] = $loggedUser->id;
 
-                Client::create($client);
+                Client::updateOrCreate(['user_id' => $loggedUser->id], $client);
             }
 
             Mail::to(env('MAIL_FROM_ADDRESS'))->send(new OrderReceived($order));

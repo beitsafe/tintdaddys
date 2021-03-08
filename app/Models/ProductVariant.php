@@ -17,4 +17,14 @@ class ProductVariant extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function sizeshade()
+    {
+        return $this->belongsTo(SizeShade::class,'size_shade_id');
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->product->name . ' - ' . $this->sizeshade->name;
+    }
 }

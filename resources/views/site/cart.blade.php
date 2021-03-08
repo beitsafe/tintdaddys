@@ -22,8 +22,9 @@
             </div>
             {{ Form::open(['route' => 'cart.store','id'=>'cart-form']) }}
             <div class="row">
-                @foreach($items as $id => $item)
-                    <div class="col-md-4 cart-item" data-pid="{{$id}}" data-unitprice="{{ $item['unitprice'] }}">
+                @foreach($items as $id => $product)
+                    @foreach($product as $variant => $item)
+                        <div class="col-md-4 cart-item" data-pid="{{$id}}" data-variant="{{$variant}}" data-unitprice="{{ $item['unitprice'] }}">
                         <div class="product">
                             <div class="product__controls row">
                                 <div class="col-3">
@@ -51,6 +52,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 @endforeach
             </div>
 
