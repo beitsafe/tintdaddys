@@ -32,8 +32,12 @@
                                     </thead>
                                     <tbody>
                                     @foreach($order->items as $item)
+                                        @php
+                                            $variant = $item->variant;
+                                            $product = $variant->product;
+                                        @endphp
                                         <tr>
-                                            <td>{{ $item->product->name }}</td>
+                                            <td>{{ @$variant->name }}</td>
                                             <td>{{ $item->quantity }}</td>
                                             <td>{{ $item->unitprice }}</td>
                                         </tr>

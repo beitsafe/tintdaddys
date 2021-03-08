@@ -11,7 +11,7 @@ function sum(obj) {
 
 function refreshCart(response) {
     let count = 0;
-    if(response.items!=null){
+    if (response.items != null) {
         count = Object.keys(response.items).length;
     }
 
@@ -20,7 +20,7 @@ function refreshCart(response) {
             $('#empty-cart').removeClass('d-none');
             $('#cart-form').addClass('d-none');
         }
-    }else{
+    } else {
         if ($('.cartcount').length > 0) {
             $('.cartcount').html(count);
             var totalfee = parseFloat(response.cart_total);
@@ -51,8 +51,8 @@ function fetchCart() {
     }, "json");
 }
 
-function updateShipping(postcode) {
-    $.post('/cart/action/shipping',{postcode: postcode}, function (response) {
+function updateShipping(suburb, postcode, address) {
+    $.post('/cart/action/shipping', {suburb: suburb, postcode: postcode, address: address}, function (response) {
         refreshCart(response);
     }, "json");
 }
@@ -70,10 +70,10 @@ function cartSummaryRefresh(response) {
     const summaryTbl = $('.cart-totals'),
         subTotal = parseFloat(response.cart_total).toFixed(2),
         taxFee = 0;
-        // taxFee = parseFloat(subTotal/10).toFixed(2);
+    // taxFee = parseFloat(subTotal/10).toFixed(2);
 
-    if(response.error){
-        Swal.fire('',response.error,'error');
+    if (response.error) {
+        Swal.fire('', response.error, 'error');
     }
 
     summaryTbl.find('#cart-tax').html(`$${taxFee}`);
@@ -109,11 +109,17 @@ $(document).ready(function () {
 
     $('body').on('click', '[data-trigger="change-qty"]', function () {
         _that = $(this).closest('.cart-item');
-        addToCart(_that.data('pid'), _that.find("[name='quantity']").val(),_that.data('variant'));
+        addToCart(_that.data('pid'), _that.find("[name='quantity']").val(), _that.data('variant'));
     });
 
-    $('body').on('change', '#shipping_postalcode', function () {
-        updateShipping($(this).val());
+    $('body').on('blur', '#shipping-suburb, #shipping-postcode', function () {
+        let suburb = $('#shipping-suburb').val(),
+            postcode = $('#shipping-postcode').val(),
+            address = $('#shipping-address').val();
+
+        if(suburb && postcode) {
+            updateShipping(suburb, postcode, address);
+        }
     });
 
     $('body').on('change', '.prod-qty', function () {
@@ -123,15 +129,15 @@ $(document).ready(function () {
 
     $('body').on('click', '.add-to-cart', function () {
         _that = $(this);
-        if($('select[name="variant"]').val() == ''){
+        if ($('select[name="variant"]').val() == '') {
             toastr.error('Please select Size & Shade');
             return false;
         }
 
         var qty = $('input[name="quantity"]').val(),
-            variant= $('select[name="variant"]').val();
+            variant = $('select[name="variant"]').val();
 
-        addToCart(_that.data('id'), (qty)?qty:1, variant);
+        addToCart(_that.data('id'), (qty) ? qty : 1, variant);
         _that.addClass('added-cart');
         flashNotify(`${_that.data('name')} added to the cart`);
     });

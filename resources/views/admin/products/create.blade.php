@@ -6,7 +6,9 @@
             <h2>Create Product</h2>
         </div>
         <div class="card-body">
-    {!! Form::open(array('route' => 'admin.products.store', 'class' => 'form-horizontal')) !!}
-    @include('admin.products.partials.form')
-    {!! Form::close() !!}
+            {!! Form::open(array('route' => 'admin.products.store', 'class' => 'form-horizontal')) !!}
+            @include('admin.products.partials.form')
+            {!! Form::close() !!}
+        </div>
+    </div>
 @endsection

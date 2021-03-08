@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NewOrderPlaced;
+use App\Http\Helpers\FastwayHelper;
 use App\Http\Helpers\PaymentHelper;
 use App\Http\Requests\Web\StoreOrderRequest;
 use App\Mail\OrderReceived;
@@ -45,6 +46,18 @@ class CartController extends Controller
                     $request->session()->forget("cart.{$pid}.{$variant}");
                 }
             }
+
+            if ($process == 'shipping') {
+                if ($suburb = $request->get('suburb')) {
+                    $request->session()->put("shipping.suburb", $suburb);
+                }
+                if ($postcode = $request->get('postcode')) {
+                    $request->session()->put("shipping.postcode", $postcode);
+                }
+                if ($address = $request->get('address')) {
+                    $request->session()->put("shipping.address", $address);
+                }
+            }
         }
 
         $items = $this->_get_cart_items();
@@ -61,14 +74,22 @@ class CartController extends Controller
     {
         $items = \request()->session()->get('cart') ?: [];
 
-        $data['cart_total'] = 0;
+        $data['cart_total'] = $data['cart_shipping'] = 0;
+        $shipping['weight'] = $shipping['length'] = $shipping['width'] = $shipping['height'] = 0;
         $data['items'] = [];
+
         foreach ($items as $k => $variants) {
             foreach ($variants as $variant_id => $qty) {
                 $product = Product::find($k);
                 $variant = ProductVariant::with('sizeshade')->find($variant_id);
                 if ($product) {
                     $data['cart_total'] += $total = ($qty * $variant->sizeshade->price);
+
+//                    Shipping Parcel Measures
+                    $shipping['weight'] += $product->weight;
+                    $shipping['length'] += $product->length;
+                    $shipping['width'] += $product->width;
+                    $shipping['height'] += $product->height;
 
                     $data['items'][$k][$variant_id] = [
                         'name' => $variant->name,
@@ -81,6 +102,22 @@ class CartController extends Controller
                 }
             }
         }
+
+        $fastWay = new FastwayHelper();
+        if ($fastWay->isEnabled && $shippingSession = \request()->session()->get('shipping', false)) {
+            $pickupFrom = env('FASTWAY_PICKUP_SUBURB');
+            $shippingPrice = $fastWay->get("/psc/lookup/{$pickupFrom}/{$shippingSession['suburb']}/{$shippingSession['postcode']}", [
+                'WeightInKg' => $shipping['weight'],
+                'LengthInCm' => $shipping['length'],
+                'WidthInCm' => $shipping['width'],
+                'HeightInCm' => $shipping['height'],
+                'FullAddress' => $shippingSession['address'],
+            ]);
+            try {
+                $data['cart_shipping'] = @$shippingPrice->cheapest_service->totalprice_normal;
+            }catch(\Exception $e){}
+        }
+
 
         return $data;
     }

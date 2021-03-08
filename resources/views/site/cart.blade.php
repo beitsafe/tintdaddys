@@ -25,33 +25,33 @@
                 @foreach($items as $id => $product)
                     @foreach($product as $variant => $item)
                         <div class="col-md-4 cart-item" data-pid="{{$id}}" data-variant="{{$variant}}" data-unitprice="{{ $item['unitprice'] }}">
-                        <div class="product">
-                            <div class="product__controls row">
-                                <div class="col-3">
-                                    <span class="label top-0 ml-auto">QTY:</span>
-                                </div>
-                                <div class="col-6">
-                                    <div class="input-number">
-                                        <input class="h-2em" type="number" name="quantity" placeholder="Quantity" value="{{ $item['qty'] }}" min="1" max="100"/>
-                                        <div class="input-number__controls">
-                                            <span class="input-number__increase" data-trigger="change-qty" data-value="+"><i class="stack-up-open"></i></span>
-                                            <span class="input-number__decrease" data-trigger="change-qty" data-value="-"><i class="stack-down-open"></i></span>
+                            <div class="product">
+                                <div class="product__controls row">
+                                    <div class="col-3">
+                                        <span class="label top-0 ml-auto">QTY:</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="input-number">
+                                            <input class="h-2em" type="number" name="quantity" placeholder="Quantity" value="{{ $item['qty'] }}" min="1" max="100"/>
+                                            <div class="input-number__controls">
+                                                <span class="input-number__increase" data-trigger="change-qty" data-value="+"><i class="stack-up-open"></i></span>
+                                                <span class="input-number__decrease" data-trigger="change-qty" data-value="-"><i class="stack-down-open"></i></span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-3 text-right">
+                                        <button class="checkmark checkmark--cross bg--error top-0 remove-cart"></button>
+                                    </div>
                                 </div>
-                                <div class="col-3 text-right">
-                                    <button class="checkmark checkmark--cross bg--error top-0 remove-cart"></button>
+                                <img alt="{{ $item['name'] }}" src="{{ $item['thumb'] }}"/>
+                                <div>
+                                    <h5>{{ $item['name'] }}</h5>
                                 </div>
-                            </div>
-                            <img alt="{{ $item['name'] }}" src="{{ $item['thumb'] }}"/>
-                            <div>
-                                <h5>{{ $item['name'] }}</h5>
-                            </div>
-                            <div>
-                                <span class="h4 inline-block row-total">${{ $item['total'] }}</span>
+                                <div>
+                                    <span class="h4 inline-block row-total">${{ $item['total'] }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 @endforeach
             </div>
@@ -99,7 +99,9 @@
                             <div class="form-group row">
                                 {{ Form::label('client_address', 'Delivery Address:', ['class' => 'col col-form-label']) }}
                                 <div class="col-sm-8">
-                                    {{ Form::text('client[address]', old('client.address', @$client->address), ['class' => 'form-control billing-field', "readonly" ]) }}
+                                    {{ Form::text('client[address]', old('client.address', @$client->address), ['class' => 'form-control billing-field','id'=>'shipping-address','placeholder'=>'Address', "readonly" ]) }}
+                                    {{ Form::text('client[suburb]', old('client.suburb', @$client->suburb), ['class' => 'form-control billing-field','id'=>'shipping-suburb','placeholder'=>'Suburb', "readonly" ]) }}
+                                    {{ Form::text('client[postcode]', old('client.postcode', @$client->postcode), ['class' => 'form-control billing-field','id'=>'shipping-postcode','placeholder'=>'Postcode', "readonly" ]) }}
                                 </div>
                             </div>
                         </div>
@@ -222,7 +224,7 @@
         $(document).ready(function () {
             $cardButton.on('click', async (e) => {
                 $cardButton.attr('disabled', 'disabled').html('<i class="fa fa-spin fa-spinner"></i> Processing...');
-                if($('[name="paymentMethodId"]').length > 0 && $('[name="paymentMethodId"]:checked').val()){
+                if ($('[name="paymentMethodId"]').length > 0 && $('[name="paymentMethodId"]:checked').val()) {
                     $cardForm.submit();
                     return;
                 }

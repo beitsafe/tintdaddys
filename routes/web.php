@@ -15,7 +15,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\InstallerController;
 use App\Http\Controllers\SizeShadeController;
-use romanzipp\QueueMonitor\Services\QueueMonitor;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
