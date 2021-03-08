@@ -73,6 +73,11 @@
                     </div>
                 </div>
 
+                <div class=" form-group col-md-12">
+                    {{ Form::label('avail_sizeshades', 'Available Size & Shade(s)') }}
+                    {{ Form::select('avail_sizeshades[]', $availSizeShades, old('avail_sizeshades'), ['class' => 'form-control select2','multiple']) }}
+                </div>
+
                 <div class=" form-group col-md-6">
                     {{ Form::label('metaKeywords', 'SEO Keywords (comma separate)') }}
                     {{ Form::textarea('metaKeywords', old('metaKeywords'), ['class' => 'form-control', 'rows'=>"5"]) }}
@@ -122,9 +127,9 @@
             url: "/upload_dropzone_file",
             // previewTemplate: drop,
             // previewsContainer: "#template-preview",
-            maxFilesize         :       6,
+            maxFilesize: 6,
             acceptedFiles: "image/*,application/pdf",
-            params: {'resourceable_id':id,'resourceable_type':'\App\\Models\\Product' },
+            params: {'resourceable_id': id, 'resourceable_type': '\App\\Models\\Product'},
             paramName: "file",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             init: function () {
@@ -177,33 +182,33 @@
                 }).then((value) => {
                     switch (value) {
                         case "delete":
-                        if($this.data('id')) {
-                            $.ajax({
-                                method: 'DELETE',
-                                url: '{{ url('admin/resources') }}/' + $this.data('id'),
-                                success: function () {
-                                    $this.closest('.resource-uploads').remove();
-                                    swal("Deleted!", "Your upload has been deleted.", "success");
-                                },
-                                error: function (jqXhr) {
-                                    swal_error(jqXhr);
-                                }
-                            });
-                        } else{
-                            $this.closest('.card').remove();
-                            $.ajax({
-                                method: 'DELETE',
-                                url: '{{ url('delete_image') }}/' + $this.data('session-id'),
-                                success: function () {
-                                    $this.closest('.resource-uploads').remove();
-                                    swal("Deleted!", "Your upload has been deleted.", "success");
-                                },
-                                error: function (jqXhr) {
-                                    swal_error(jqXhr);
-                                }
-                            });
+                            if ($this.data('id')) {
+                                $.ajax({
+                                    method: 'DELETE',
+                                    url: '{{ url('admin/resources') }}/' + $this.data('id'),
+                                    success: function () {
+                                        $this.closest('.resource-uploads').remove();
+                                        swal("Deleted!", "Your upload has been deleted.", "success");
+                                    },
+                                    error: function (jqXhr) {
+                                        swal_error(jqXhr);
+                                    }
+                                });
+                            } else {
+                                $this.closest('.card').remove();
+                                $.ajax({
+                                    method: 'DELETE',
+                                    url: '{{ url('delete_image') }}/' + $this.data('session-id'),
+                                    success: function () {
+                                        $this.closest('.resource-uploads').remove();
+                                        swal("Deleted!", "Your upload has been deleted.", "success");
+                                    },
+                                    error: function (jqXhr) {
+                                        swal_error(jqXhr);
+                                    }
+                                });
 
-                        }
+                            }
                             break;
                     }
                 });
@@ -215,11 +220,11 @@
                 var id = $(this).data('id');
                 let params = {},
                     endpoint = '{{ route('resources.savealt',':ID') }}';
-                if(id) {
+                if (id) {
                     params.altvalue = $('#alt-value-' + id).val();
                     params.msds = $('#msds-' + id).is(':checked') ? 1 : 0;
                     endpoint = endpoint.replace(':ID', id);
-                } else{
+                } else {
                     var session_id = $(this).data('session-id');
                     params.altvalue = $('#alt-value-' + session_id).val();
                     params.msds = $('#msds-' + session_id).is(':checked') ? 1 : 0;
@@ -249,9 +254,9 @@
                 croppers = new Slim(document.getElementById('myCropper'), {
                     service: '/slim_upload_image',
                     push: true,
-                    meta: {'resource-id': resource_id,'session-id':session_id},
+                    meta: {'resource-id': resource_id, 'session-id': session_id},
                     didUpload: function (error, data, response) {
-                        if(response.status == "success"){
+                        if (response.status == "success") {
                             setTimeout(function () {
                                 $this.modal('hide');
                             }, 3000);
@@ -266,10 +271,9 @@
         });
 
 
-        function load_uploaded_images()
-        {
+        function load_uploaded_images() {
 
-            var url = (id) ?  '/load_uploaded_files/' + id+'/product' : '/load_uploaded_files/';
+            var url = (id) ? '/load_uploaded_files/' + id + '/product' : '/load_uploaded_files/';
 
             $.ajax({
                 method: 'GET',

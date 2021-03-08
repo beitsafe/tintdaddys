@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProductDataTable;
 use App\Http\Requests\Auth\SaveProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SizeShade;
 use Illuminate\Http\Request;
-use App\DataTables\ProductDataTable;
 
 class ProductController extends Controller
 {
@@ -24,6 +25,10 @@ class ProductController extends Controller
     protected function _initForm()
     {
         $data['categories'] = Category::all()->pluck('name', 'id');
+        $data['availSizes'] = $data['availShades'] = [];
+        $data['availSizeShades'] = SizeShade::all()->mapWithKeys(function ($i) {
+            return [$i->id => $i->size . 'x' . $i->shade];
+        })->sort();
 
         return $data;
     }
@@ -113,14 +118,14 @@ class ProductController extends Controller
         $model->fill($request->except(['_token']));
         $model->save();
 
-        if($session_files =  session()->get('filepath')){
+        if ($session_files = session()->get('filepath')) {
             $crop_path = session()->get('crop_path');
-            $i=0;
+            $i = 0;
             foreach ($session_files as $session_file) {
-                if(@$crop_path[$i]){
+                if (@$crop_path[$i]) {
                     $session_file = @$crop_path[$i];
                 }
-                $model->resources()->create(["filepath"=>$session_file,"resourceable_type"=>"App\Models\Product"]);
+                $model->resources()->create(["filepath" => $session_file, "resourceable_type" => "App\Models\Product"]);
                 $i++;
             }
             session()->forget('filepath');

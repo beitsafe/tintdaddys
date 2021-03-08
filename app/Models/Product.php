@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -16,17 +15,19 @@ class Product extends Model
 
     use SoftDeletes, HasSlug;
 
+    protected $casts = ['avail_sizeshades' => 'array'];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'shortDescription', 'body', 'shipping', 'inStock', 'metaDescription', 'metaKeywords','price','extraDescription',
-        'length','width','height','weight', 'category_id'
+        'name', 'slug', 'shortDescription', 'body', 'shipping', 'inStock', 'metaDescription', 'metaKeywords', 'price', 'extraDescription',
+        'length', 'width', 'height', 'weight', 'avail_sizeshades', 'category_id'
     ];
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
@@ -51,7 +52,7 @@ class Product extends Model
 
     public function getDefaultImageAttribute()
     {
-        if($resource = $this->resources()->first()){
+        if ($resource = $this->resources()->first()) {
             return $resource->url;
         }
 
@@ -60,7 +61,7 @@ class Product extends Model
 
     public function getDefaultThumbAttribute()
     {
-        if($resource = $this->resources()->first()){
+        if ($resource = $this->resources()->first()) {
             return $resource->thumb_url;
         }
 
