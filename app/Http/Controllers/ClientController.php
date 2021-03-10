@@ -136,7 +136,7 @@ class ClientController extends Controller
             'organisation' => "required",
             'address' => "required",
             'city' => "required",
-            'state' => "required",
+            'suburb' => "required",
             'postcode' => "required"
         ]);
     }

@@ -45,6 +45,9 @@ Route::middleware(['auth', 'role:' . User::ROLE_APPROVED])
     ->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dash'])
             ->name('dashboard');
+        Route::post('/dashboard/profile', [AdminController::class, 'updateProfile'])
+            ->name('profile.store');
+
         Route::post('/dashboard/warranties', [WarrantyController::class, 'store'])
             ->name('profile.warranties.store');
 

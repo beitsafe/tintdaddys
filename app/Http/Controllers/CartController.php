@@ -21,14 +21,30 @@ use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = $this->_get_cart_items();
         $loggedUser = auth()->user();
         $data['paymentMethods'] = $loggedUser->paymentMethods()->filter(function ($i) {
             return $i->type == 'card';
         });
-        $data['client'] = $loggedUser->client;
+        $data['client'] = $client = $loggedUser->client;
+
+        if ($client && !$request->session()->get("shippingTo")) {
+            $shippingTo = [
+                'ContactName' => $client->name,
+                'PhoneNumber' => $client->phone,
+                'Email' => $client->email,
+                'Address' => [
+                    'StreetAddress' => $client->address,
+                    'Locality' => $client->city,
+                    'StateOrProvince' => $client->suburb,
+                    'PostalCode' => $client->postcode,
+                    'Country' => $client->country,
+                ],
+            ];
+            $request->session()->put("shippingTo", $shippingTo);
+        }
 
         return view('site.cart', $data);
     }
@@ -48,15 +64,7 @@ class CartController extends Controller
             }
 
             if ($process == 'shipping') {
-                if ($suburb = $request->get('suburb')) {
-                    $request->session()->put("shipping.suburb", $suburb);
-                }
-                if ($postcode = $request->get('postcode')) {
-                    $request->session()->put("shipping.postcode", $postcode);
-                }
-                if ($address = $request->get('address')) {
-                    $request->session()->put("shipping.address", $address);
-                }
+                $request->session()->put("shippingTo.{$request->get('field')}", $request->get('value'));
             }
         }
 
@@ -64,7 +72,9 @@ class CartController extends Controller
 
         $result = [
             'items' => $request->session()->get('cart'),
-            'cart_total' => $items['cart_total']
+            'cart_total' => $items['cart_total'],
+            'shippingfee' => $items['shippingfee'],
+            'shippingerror' => $items['shippingerror']
         ];
 
         return response()->json($result);
@@ -73,10 +83,12 @@ class CartController extends Controller
     protected function _get_cart_items($postcode = null)
     {
         $items = \request()->session()->get('cart') ?: [];
+        $shippingParams['To'] = \request()->session()->get('shippingTo') ?: [];
 
-        $data['cart_total'] = $data['cart_shipping'] = 0;
-        $shipping['weight'] = $shipping['length'] = $shipping['width'] = $shipping['height'] = 0;
+        $data['shippingerror'] = '';
+        $data['cart_total'] = $data['shippingfee'] = 0;
         $data['items'] = [];
+        $fastWay = new FastwayHelper();
 
         foreach ($items as $k => $variants) {
             foreach ($variants as $variant_id => $qty) {
@@ -84,12 +96,6 @@ class CartController extends Controller
                 $variant = ProductVariant::with('sizeshade')->find($variant_id);
                 if ($product) {
                     $data['cart_total'] += $total = ($qty * $variant->sizeshade->price);
-
-//                    Shipping Parcel Measures
-                    $shipping['weight'] += $product->weight;
-                    $shipping['length'] += $product->length;
-                    $shipping['width'] += $product->width;
-                    $shipping['height'] += $product->height;
 
                     $data['items'][$k][$variant_id] = [
                         'name' => $variant->name,
@@ -99,25 +105,26 @@ class CartController extends Controller
                         'unitprice' => $variant->sizeshade->price,
                         'total' => $total,
                     ];
+
+                    $shippingParams['Items'][] = [
+                        'Quantity' => $qty,
+                        'PackageType' => 'P',
+                        'WeightDead' => $product->weight,
+                        'Length' => $product->length,
+                        'Width' => $product->width,
+                        'Height' => $product->height,
+                    ];
                 }
             }
         }
 
-        $fastWay = new FastwayHelper();
-        if ($fastWay->isEnabled && $shippingSession = \request()->session()->get('shipping', false)) {
-            $pickupFrom = env('FASTWAY_PICKUP_SUBURB');
-            $shippingPrice = $fastWay->get("/psc/lookup/{$pickupFrom}/{$shippingSession['suburb']}/{$shippingSession['postcode']}", [
-                'WeightInKg' => $shipping['weight'],
-                'LengthInCm' => $shipping['length'],
-                'WidthInCm' => $shipping['width'],
-                'HeightInCm' => $shipping['height'],
-                'FullAddress' => $shippingSession['address'],
-            ]);
-            try {
-                $data['cart_shipping'] = @$shippingPrice->cheapest_service->totalprice_normal;
-            }catch(\Exception $e){}
-        }
+        if ($fastWay->isEnabled) {
+            $shippingPrice = $fastWay->getQuote($shippingParams);
 
+            if ($shippingPrice) {
+                $data['shippingfee'] = number_format($shippingPrice->total,2);
+            }
+        }
 
         return $data;
     }
@@ -130,6 +137,7 @@ class CartController extends Controller
         $order = new Order();
         $order->billing = $data['client'];
         $order->subtotal = $cartSession['cart_total'];
+        $order->shippingfee = $cartSession['shippingfee'];
         $order->instructions = $data['instructions'];
         $loggedUser = auth()->user();
 
@@ -143,7 +151,6 @@ class CartController extends Controller
             $stripeCharge = $loggedUser->charge(
                 ($order->total * 100), $request->paymentMethodId
             );
-
 
             $order->paymentid = $stripeCharge->id;
             $order->responseinfos = $stripeCharge;
@@ -169,6 +176,7 @@ class CartController extends Controller
 
             Mail::to(env('MAIL_FROM_ADDRESS'))->send(new OrderReceived($order));
             $request->session()->forget("cart");
+            $request->session()->forget("shippingTo");
             alert()->success('Order Placed Successfully');
             return redirect()->route('cart.thankyou', $order->id);
         } catch (\Exception $e) {

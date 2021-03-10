@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Faq;
 use App\Models\Product;
-use App\Models\SizeShade;
 
 class SiteController extends Controller
 {
@@ -26,7 +25,7 @@ class SiteController extends Controller
 
     public function product(Product $product)
     {
-        $productSizeShades = $product->sizeshades()->get()->pluck('name','pivot.id');
+        $productSizeShades = $product->sizeshades()->get()->pluck('name', 'pivot.id');
 
         return view('site.productSingle', compact('product', 'productSizeShades'));
     }

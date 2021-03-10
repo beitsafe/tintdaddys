@@ -55,14 +55,19 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         {{ Form::label('client[businessName]', 'State') }}
-        {{ Form::text('client[state]', old('client.state', @$client->state), ['class' => 'form-control' ]) }}
+        {{ Form::text('client[suburb]', old('client.suburb', @$client->suburb), ['class' => 'form-control' ]) }}
     </div>
 
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         {{ Form::label('client[postcode]', 'Post Code') }}
         {{ Form::text('client[postcode]', old('client.postcode', @$client->postcode), ['class' => 'form-control' ]) }}
+    </div>
+
+    <div class="form-group col-md-4">
+        {{ Form::label('client[country]', 'Country') }}
+        {{ Form::select('client[country]', \App\Models\Client::COUNTRIES, old('client.country', @$client->country), ['class' => 'form-control' ]) }}
     </div>
 </div>
 

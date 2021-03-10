@@ -1,5 +1,5 @@
 <h2>Profile</h2>
-<form method="POST" action="{{ route('register') }}">
+<form method="POST" action="{{ route('profile.store') }}">
     @csrf
     <div class="row">
         <div class="col-md-6">
@@ -36,13 +36,17 @@
         </div>
         <div class="col-md-12">
             <label>State:</label>
-            {{ Form::text('client[state]', old('client.state', @$client->state), ['class' => 'form-control' ]) }}
+            {{ Form::text('client[suburb]', old('client.suburb', @$client->suburb), ['class' => 'form-control' ]) }}
 
         </div>
         <div class="col-md-12">
             <label>Postcode:</label>
             {{ Form::text('client[postcode]', old('client.postcode', @$client->postcode), ['class' => 'form-control' ]) }}
 
+        </div>
+        <div class="col-md-12">
+            <label>Country:</label>
+            {{ Form::select('client[country]', \App\Models\Client::COUNTRIES, old('client.country', @$client->country), ['class' => 'form-control' ]) }}
         </div>
         <div class="col-lg-3 col-md-4">
             <button type="submit" class="btn btn--primary type--uppercase">Save Profile</button>

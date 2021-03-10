@@ -23,7 +23,7 @@ function refreshCart(response) {
     } else {
         if ($('.cartcount').length > 0) {
             $('.cartcount').html(count);
-            var totalfee = parseFloat(response.cart_total);
+            var totalfee = parseFloat(response.cart_total) + parseFloat(response.shippingfee);
             $('.cart-total').html('$ ' + totalfee.toFixed(2));
         }
 
@@ -51,8 +51,9 @@ function fetchCart() {
     }, "json");
 }
 
-function updateShipping(suburb, postcode, address) {
-    $.post('/cart/action/shipping', {suburb: suburb, postcode: postcode, address: address}, function (response) {
+function updateShipping(params) {
+    $('.cart-totals .spinner').addClass('spinning');
+    $.post('/cart/action/shipping', params, function (response) {
         refreshCart(response);
     }, "json");
 }
@@ -69,16 +70,23 @@ function cartSummaryRefresh(response) {
 
     const summaryTbl = $('.cart-totals'),
         subTotal = parseFloat(response.cart_total).toFixed(2),
-        taxFee = 0;
-    // taxFee = parseFloat(subTotal/10).toFixed(2);
+        taxFee = 0,
+        shippingFee = parseFloat(response.shippingfee).toFixed(2);
 
     if (response.error) {
         Swal.fire('', response.error, 'error');
     }
 
+    let shippingOption = `$${shippingFee}`;
+    if (response.shippingerror) {
+        shippingOption = response.shippingerror;
+    }
+
     summaryTbl.find('#cart-tax').html(`$${taxFee}`);
+    summaryTbl.find('#cart-shippingfee').html(shippingOption);
     summaryTbl.find('#cart-subtotal').html('$' + parseFloat(parseFloat(subTotal)).toFixed(2));
-    summaryTbl.find('#cart-total').html('$' + parseFloat(parseFloat(subTotal) + parseFloat(taxFee)).toFixed(2));
+    summaryTbl.find('#cart-total').html('$' + parseFloat(parseFloat(subTotal) + parseFloat(taxFee) + parseFloat(shippingFee)).toFixed(2));
+    summaryTbl.find('.spinner').removeClass('spinning');
 }
 
 function flashNotify(message) {
@@ -112,13 +120,13 @@ $(document).ready(function () {
         addToCart(_that.data('pid'), _that.find("[name='quantity']").val(), _that.data('variant'));
     });
 
-    $('body').on('blur', '#shipping-suburb, #shipping-postcode', function () {
-        let suburb = $('#shipping-suburb').val(),
-            postcode = $('#shipping-postcode').val(),
-            address = $('#shipping-address').val();
-
-        if(suburb && postcode) {
-            updateShipping(suburb, postcode, address);
+    $('body').on('blur', '.billing-field[data-shipping-name]', function () {
+        let params = {
+            field: $(this).data('shipping-name'),
+            value: $(this).val(),
+        }
+        if(params.field && params.value) {
+            updateShipping(params);
         }
     });
 
