@@ -53,12 +53,14 @@
                     </ul>
                     @role('approved')
                     <div class="row">
+                        @if($product->istint)
                         <div class="col-12 mb-2">
                             <label>Available Size & Shade(s):</label>
                             <div class="input-select">
                                 {{ Form::select('variant', $productSizeShades, null, ['placeholder'=>'Select Size & Shade']) }}
                             </div>
                         </div>
+                        @endif
                         <div class="col-4">
                             <input type="number" name="quantity" placeholder="QTY" min="1" max="100" required>
                         </div>

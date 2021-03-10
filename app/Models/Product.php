@@ -22,7 +22,7 @@ class Product extends Model
      */
     protected $fillable = [
         'name', 'slug', 'shortDescription', 'body', 'shipping', 'inStock', 'metaDescription', 'metaKeywords', 'price', 'extraDescription',
-        'length', 'width', 'height', 'weight', 'category_id'
+        'length', 'width', 'height', 'weight', 'category_id', 'istint'
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -47,6 +47,7 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
     public function sizeshades()
     {
         return $this->belongsToMany(SizeShade::class, 'product_variants', 'product_id', 'size_shade_id')->withPivot('id');
@@ -68,6 +69,11 @@ class Product extends Model
         }
 
         return url('frontend/images/default-product.jpg');
+    }
+
+    public function isShippable()
+    {
+        return $this->weight && $this->length && $this->width && $this->height;
     }
 
 }

@@ -47,6 +47,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group row mt-4">
+                        {{ Form::label('istint', 'Is Tint',['class'=>'col-sm-4 col-form-label my-auto']) }}
+                        <div class="col-sm-3 my-auto">
+                            {{ Form::hidden('istint', 0,['id'=>'hidden-istint']) }}
+                            <div class="switch">
+                                <label>
+                                    {{ Form::checkbox('istint', 1,  old('istint')) }}<span class="lever switch-col-blue"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group row ">
                         {{ Form::label('length', 'Length (mm)',["class"=>"col-sm-4 col-form-label"]) }}
                         <div class="col-sm-8">

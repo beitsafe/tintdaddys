@@ -54,13 +54,16 @@ class CartController extends Controller
         if ($process) {
             $pid = $request->id;
             $qty = @$request->qty ?: 1;
+            $productCartId = "cart.{$pid}";
 
             if ($variant = @$request->variant) {
-                if ($process == 'add') {
-                    $request->session()->put("cart.{$pid}.{$variant}", $qty);
-                } else if ($process == 'remove') {
-                    $request->session()->forget("cart.{$pid}.{$variant}");
-                }
+                $productCartId .= ".{$variant}";
+            }
+
+            if ($process == 'add') {
+                $request->session()->put($productCartId, $qty);
+            } else if ($process == 'remove') {
+                $request->session()->forget($productCartId);
             }
 
             if ($process == 'shipping') {
@@ -91,10 +94,10 @@ class CartController extends Controller
         $fastWay = new FastwayHelper();
 
         foreach ($items as $k => $variants) {
-            foreach ($variants as $variant_id => $qty) {
-                $product = Product::find($k);
-                $variant = ProductVariant::with('sizeshade')->find($variant_id);
-                if ($product) {
+            $product = Product::find($k);
+            if (is_array($variants)) { // If Tint Product
+                foreach ($variants as $variant_id => $qty) {
+                    $variant = ProductVariant::with('sizeshade')->find($variant_id);
                     $data['cart_total'] += $total = ($qty * $variant->sizeshade->price);
 
                     $data['items'][$k][$variant_id] = [
@@ -115,6 +118,29 @@ class CartController extends Controller
                         'Height' => $product->height,
                     ];
                 }
+            } else {
+                $qty = $variants;
+                $data['cart_total'] += $total = ($qty * $product->price);
+
+                $data['items'][$k] = [
+                    'name' => $product->name,
+                    'thumb' => $product->default_thumb,
+                    'slug' => $product->slug,
+                    'qty' => $qty,
+                    'unitprice' => $product->price,
+                    'total' => $total,
+                ];
+
+                if ($product->isShippable()) {
+                    $shippingParams['Items'][] = [
+                        'Quantity' => $qty,
+                        'PackageType' => 'P',
+                        'WeightDead' => $product->weight,
+                        'Length' => $product->length,
+                        'Width' => $product->width,
+                        'Height' => $product->height,
+                    ];
+                }
             }
         }
 
@@ -122,7 +148,7 @@ class CartController extends Controller
             $shippingPrice = $fastWay->getQuote($shippingParams);
 
             if ($shippingPrice) {
-                $data['shippingfee'] = number_format($shippingPrice->total,2);
+                $data['shippingfee'] = number_format($shippingPrice->total, 2);
             }
         }
 
@@ -158,13 +184,24 @@ class CartController extends Controller
             $order->save();
 
             foreach ($cartSession['items'] as $pid => $product) {
-                foreach ($product as $variant => $item) {
+                if (isset($product['name'])) {
+                    $item = $product;
                     OrderItem::create([
                         'order_id' => $order->id,
-                        'product_variant_id' => $variant,
                         'quantity' => $item['qty'],
+                        'product_id' => $pid,
                         'unitprice' => $item['unitprice'],
                     ]);
+                } else {
+                    foreach ($product as $variant => $item) {
+                        OrderItem::create([
+                            'order_id' => $order->id,
+                            'product_id' => $pid,
+                            'product_variant_id' => $variant,
+                            'quantity' => $item['qty'],
+                            'unitprice' => $item['unitprice'],
+                        ]);
+                    }
                 }
             }
 

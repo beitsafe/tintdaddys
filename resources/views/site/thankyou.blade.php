@@ -54,15 +54,20 @@
                                     <tbody>
                                     @foreach($order->items as $item)
                                         @php
-                                            $variant = $item->variant;
-                                            $product = $variant->product;
+                                            if($item->product_variant_id){
+                                                $variant = $item->variant;
+                                                $name = $variant->name;
+                                                $product = $variant->product;
+                                            } else {
+                                                $product = $item->product;
+                                                $name = $product->name;
+                                            }
                                         @endphp
                                         <tr class="cart-item">
                                             <td class="text-center">
-                                                <img src="{{ @$product->default_thumb }}" class="img-fluid"
-                                                     width="67" alt="{{ $variant->name }}"/>
+                                                <img src="{{ @$product->default_thumb }}" class="img-fluid" width="67" alt="{{ $name }}"/>
                                             </td>
-                                            <td>{{ $variant->name }}</td>
+                                            <td>{{ $name }}</td>
                                             <td>${{ $item->unitprice }}</td>
                                             <td class="text-center">{{ $item->quantity }}</td>
                                             <td class="text-right">${{ number_format($item->total,2) }}</td>

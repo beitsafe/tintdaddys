@@ -23,8 +23,11 @@
             {{ Form::open(['route' => 'cart.store','id'=>'cart-form']) }}
             <div class="row">
                 @foreach($items as $id => $product)
-                    @foreach($product as $variant => $item)
-                        <div class="col-md-4 cart-item" data-pid="{{$id}}" data-variant="{{$variant}}" data-unitprice="{{ $item['unitprice'] }}">
+                    @if(isset($product['name']))
+                        @php
+                            $item = $product;
+                        @endphp
+                        <div class="col-md-4 cart-item" data-pid="{{$id}}" data-unitprice="{{ $item['unitprice'] }}">
                             <div class="product">
                                 <div class="product__controls row">
                                     <div class="col-3">
@@ -52,7 +55,38 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @else
+                        @foreach($product as $variant => $item)
+                            <div class="col-md-4 cart-item" data-pid="{{$id}}" data-variant="{{$variant}}" data-unitprice="{{ $item['unitprice'] }}">
+                                <div class="product">
+                                    <div class="product__controls row">
+                                        <div class="col-3">
+                                            <span class="label top-0 ml-auto">QTY:</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="input-number">
+                                                <input class="h-2em" type="number" name="quantity" placeholder="Quantity" value="{{ $item['qty'] }}" min="1" max="100"/>
+                                                <div class="input-number__controls">
+                                                    <span class="input-number__increase" data-trigger="change-qty" data-value="+"><i class="stack-up-open"></i></span>
+                                                    <span class="input-number__decrease" data-trigger="change-qty" data-value="-"><i class="stack-down-open"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                            <button class="checkmark checkmark--cross bg--error top-0 remove-cart"></button>
+                                        </div>
+                                    </div>
+                                    <img alt="{{ $item['name'] }}" src="{{ $item['thumb'] }}"/>
+                                    <div>
+                                        <h5>{{ $item['name'] }}</h5>
+                                    </div>
+                                    <div>
+                                        <span class="h4 inline-block row-total">${{ $item['total'] }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 @endforeach
             </div>
 
