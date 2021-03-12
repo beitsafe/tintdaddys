@@ -22,6 +22,7 @@
         "spatie/laravel-newsletter": "^4.9",
         "spatie/laravel-permission": "^3.18",
         "spatie/laravel-sluggable": "^2.6",
+        "spinen/laravel-quickbooks-client": "^4.0",
         "uxweb/sweet-alert": "^2.0",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"

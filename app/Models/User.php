@@ -9,10 +9,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
 use Spatie\Permission\Traits\HasRoles;
+use Spinen\QuickBooks\HasQuickBooksToken;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles, Billable, SoftDeletes;
+    use HasFactory, Notifiable, HasRoles, Billable, SoftDeletes, HasQuickBooksToken;
 
     const ROLE_ADMIN = 'admin';
     const ROLE_APPROVED = 'approved';
