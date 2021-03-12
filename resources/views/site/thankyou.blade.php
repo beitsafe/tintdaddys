@@ -54,13 +54,13 @@
                                     <tbody>
                                     @foreach($order->items as $item)
                                         @php
-                                            if($item->product_variant_id){
-                                                $variant = $item->variant;
-                                                $name = $variant->name;
-                                                $product = $variant->product;
-                                            } else {
-                                                $product = $item->product;
-                                                $name = $product->name;
+                                            $product = $item->product;
+                                            $name = $product->name;
+                                            if($size = $item->size){
+                                                $name .= " - {$size}";
+                                            }
+                                            if($shade = $item->shade){
+                                                $name .= " * {$shade}";
                                             }
                                         @endphp
                                         <tr class="cart-item">

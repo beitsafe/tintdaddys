@@ -1,0 +1,24 @@
+/*.tcol-axis {*/
+/*    -webkit-transform: rotate(27deg);*/
+/*}*/
+
+/*.tcol-axis .x-axis, .tcol-axis .y-axis {*/
+/*    display: block;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.tcol-axis hr {*/
+/*    margin: 0.5rem -1.5rem;*/
+/*}*/
+
+/*.table-sm .tcol-axis {*/
+/*    -webkit-transform: rotate(25deg);*/
+/*}*/
+/*.table-sm .tcol-axis hr {*/
+/*    margin: 0.5rem -0.8rem;*/
+/*}*/
+
+#size_shade_variation td {
+    text-align: center;
+    vertical-align: middle;
+}

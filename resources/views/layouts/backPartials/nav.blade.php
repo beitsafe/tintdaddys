@@ -43,7 +43,8 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{ route('admin.sizeshades.index') }}">Sizes & Shades</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.sizes.index') }}">Sizes</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.shades.index') }}">Shades</a></li>
                     </ul>
                 </li>
             </ul>

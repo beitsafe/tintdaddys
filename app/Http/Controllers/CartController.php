@@ -12,6 +12,8 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\Shade;
+use App\Models\Size;
 use Auspost;
 use Calendar;
 use Fontis\Auspost\Api\Postage\Domestic\Parcel\Cost\CalculationParams;
@@ -93,19 +95,21 @@ class CartController extends Controller
         $data['items'] = [];
         $fastWay = new FastwayHelper();
 
-        foreach ($items as $k => $variants) {
-            $product = Product::find($k);
+        foreach ($items as $product_id => $variants) {
+            $product = Product::find($product_id);
             if (is_array($variants)) { // If Tint Product
-                foreach ($variants as $variant_id => $qty) {
-                    $variant = ProductVariant::with('sizeshade')->find($variant_id);
-                    $data['cart_total'] += $total = ($qty * $variant->sizeshade->price);
+                foreach ($variants as $size_shade => $qty) {
+                    list($size_id, $shade_id) = explode('_', $size_shade, 2);
 
-                    $data['items'][$k][$variant_id] = [
+                    $variant = ProductVariant::with(['size', 'shade'])->where(['product_id' => $product_id, 'size_id' => $size_id, 'shade_id' => $shade_id])->first();
+                    $data['cart_total'] += $total = ($qty * $variant->price);
+
+                    $data['items'][$product_id][$size_shade] = [
                         'name' => $variant->name,
                         'thumb' => $product->default_thumb,
                         'slug' => $product->slug,
                         'qty' => $qty,
-                        'unitprice' => $variant->sizeshade->price,
+                        'unitprice' => $variant->price,
                         'total' => $total,
                     ];
 
@@ -122,7 +126,7 @@ class CartController extends Controller
                 $qty = $variants;
                 $data['cart_total'] += $total = ($qty * $product->price);
 
-                $data['items'][$k] = [
+                $data['items'][$product_id] = [
                     'name' => $product->name,
                     'thumb' => $product->default_thumb,
                     'slug' => $product->slug,
@@ -193,11 +197,15 @@ class CartController extends Controller
                         'unitprice' => $item['unitprice'],
                     ]);
                 } else {
-                    foreach ($product as $variant => $item) {
+                    foreach ($product as $size_shade => $item) {
+                        list($size_id, $shade_id) = explode('_', $size_shade, 2);
+                        $size = Size::find($size_id);
+                        $shade = Shade::find($shade_id);
                         OrderItem::create([
                             'order_id' => $order->id,
                             'product_id' => $pid,
-                            'product_variant_id' => $variant,
+                            'size' => $size->name,
+                            'shade' => $shade->name,
                             'quantity' => $item['qty'],
                             'unitprice' => $item['unitprice'],
                         ]);

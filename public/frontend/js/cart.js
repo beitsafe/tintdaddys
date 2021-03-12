@@ -125,7 +125,7 @@ $(document).ready(function () {
             field: $(this).data('shipping-name'),
             value: $(this).val(),
         }
-        if(params.field && params.value) {
+        if (params.field && params.value) {
             updateShipping(params);
         }
     });
@@ -136,16 +136,27 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.add-to-cart', function () {
-        _that = $(this);
-        if ($('select[name="variant"]').val() == '') {
-            toastr.error('Please select Size & Shade');
+        var _that = $(this),
+            qty = $('input[name="quantity"]').val(),
+            size = $('select[name="size"]').val(),
+            shade = $('select[name="shade"]').val(),
+            variantKey = null;
+
+        if (_that.data('istint') == '1') {
+            if((size == '' || shade == '')) {
+                toastr.error('Please select Size / Shade');
+                return false;
+            }
+
+            variantKey = `${size}_${shade}`;
+        }
+
+        if (qty == '') {
+            toastr.error('Please enter quantity');
             return false;
         }
 
-        var qty = $('input[name="quantity"]').val(),
-            variant = $('select[name="variant"]').val();
-
-        addToCart(_that.data('id'), (qty) ? qty : 1, variant);
+        addToCart(_that.data('id'), qty, variantKey);
         _that.addClass('added-cart');
         flashNotify(`${_that.data('name')} added to the cart`);
     });

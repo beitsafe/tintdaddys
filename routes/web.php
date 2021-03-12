@@ -1,21 +1,22 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\InstallerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ShadeController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WarrantyController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\EnquiryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\WarrantyController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ResourceController;
-use App\Http\Controllers\InstallerController;
-use App\Http\Controllers\SizeShadeController;
-use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,13 +81,13 @@ Route::middleware(['auth', 'role:' . User::ROLE_ADMIN])
             'resources' => ResourceController::class,
             'categories' => CategoryController::class,
             'installers' => InstallerController::class,
-            'sizeshades' => SizeShadeController::class,
+            'sizes' => SizeController::class,
+            'shades' => ShadeController::class,
         ]);
-        Route::post('/sizeshades/bulksave', [SizeShadeController::class, 'bulkSave'])->name('sizeshades.bulksave');
         Route::resource('warranties', WarrantyController::class)
             ->except([
-            'store',
-        ]);
+                'store',
+            ]);
     });
 
 
