@@ -5,20 +5,15 @@
             <div class="col-md-12 col-12 mb-5">
                 <div class="map-container border--round"
                      data-maps-api-key="AIzaSyBUFJONPML4woNBEInCsiHqhGkZ4rozUaA"
-                     @foreach ($installers as $installer)
-                     data-address="[
-                         Australia [nomarker];
-                            {{ $installer->fullAddress }};
-                         ]"
-                     data-marker-title="{{ $installer->name }}"
-                     @endforeach
+                     data-address="[Australia [nomarker];{{ $installers->implode('fullAddress',';') }}]"
+                     data-marker-title="[Australia;{{ $installers->implode('name',';') }}]"
                      data-map-zoom="4"
                      data-map-style="@include('layouts.frontPartials.mapStyle')">
                 </div>
             </div>
         </div>
 
-        @foreach ($nswInstallers as $installer)
+        @foreach ($installers->where('state','NSW') as $installer)
             <h3>New South Wales</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
@@ -50,7 +45,7 @@
             </div>
         @endforeach
 
-        @foreach ($qldInstallers as $installer)
+        @foreach ($installers->where('state','QLD') as $installer)
             <h3>Queensland</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
@@ -82,7 +77,7 @@
             </div>
         @endforeach
 
-        @foreach ($vicInstallers as $installer)
+        @foreach ($installers->where('state','VIC') as $installer)
             <h3>Victoria</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
@@ -114,7 +109,7 @@
             </div>
         @endforeach
 
-        @foreach ($tasInstallers as $installer)
+        @foreach ($installers->where('state','TAS') as $installer)
             <h3>Tasmania</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
@@ -146,7 +141,7 @@
             </div>
         @endforeach
 
-        @foreach ($actInstallers as $installer)
+        @foreach ($installers->where('state','ACT') as $installer)
             <h3>A.C.T.</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
@@ -178,7 +173,7 @@
             </div>
         @endforeach
 
-        @foreach ($ntInstallers as $installer)
+        @foreach ($installers->where('state','NT') as $installer)
             <h3>Northern Territory</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
@@ -210,7 +205,7 @@
             </div>
         @endforeach
 
-        @foreach ($saInstallers as $installer)
+        @foreach ($installers->where('state','SA') as $installer)
             <h3>South Australia</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
@@ -242,7 +237,7 @@
             </div>
         @endforeach
 
-        @foreach ($waInstallers as $installer)
+        @foreach ($installers->where('state','WA') as $installer)
             <h3>Western Australia</h3>
             <div class="row mb--1">
                 <div class="rounded col-sm-6">
