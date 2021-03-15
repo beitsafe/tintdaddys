@@ -64,9 +64,15 @@ class Product extends Model
         $variants = ProductVariant::query()->with(['size', 'shade'])->where('product_id', $this->id)->get();
 
         foreach ($variants as $variant) {
-            $rows['sizes'][$variant->size_id] = $variant->size->name;
-            $rows['shades'][$variant->shade_id] = $variant->shade->name;
-            $rows['prices'][$variant->size_id][$variant->shade_id] = $variant->price;
+            if($size = $variant->size) {
+                $rows['sizes'][$variant->size_id] = $size->name;
+            }
+            if($shade = $variant->shade) {
+                $rows['shades'][$variant->shade_id] = $shade->name;
+            }
+            if($size && $shade){
+                $rows['prices'][$variant->size_id][$variant->shade_id] = $variant->price;
+            }
         }
 
         return $rows;

@@ -123,11 +123,13 @@ class ProductController extends Controller
         }
         foreach ($request->get('variants', []) as $size => $shades) {
             foreach ($shades as $shade => $price) {
-                DB::table('product_variants')->updateOrInsert([
-                    'product_id' => $model->id,
-                    'size_id' => $size,
-                    'shade_id' => $shade,
-                ], ['price' => $price ?: 0]);
+                if($size && $shade) {
+                    DB::table('product_variants')->updateOrInsert([
+                        'product_id' => $model->id,
+                        'size_id' => $size,
+                        'shade_id' => $shade,
+                    ], ['price' => $price ?: 0]);
+                }
             }
         }
 
