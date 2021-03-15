@@ -102,11 +102,10 @@
                     <table id="size_shade_variation" class="table table-sm table-bordered">
                         <thead>
                         <tr>
-                            <td>
-                                <span>Shades ↓ </span> / <span>Sizes → </span>
+                            <td><span>Shades ↓ </span> / <span>Sizes → </span></td>
                             @if($variants && $sizes = @$variants['sizes'])
                                 @foreach($sizes as $id => $size)
-                                    <td date-size="{{ $id }}">{{ $size }}</td>
+                                    <td data-size="{{ $id }}">{{ $size }}</td>
                                 @endforeach
                             @endif
                         </tr>
@@ -170,15 +169,6 @@
 
     <script id="variantTmpl" type="text/x-jsrender">
         <td><input type="text" name="variants[[[:size]]][[[:shade]]]" class="form-control" /></td>
-
-
-
-
-
-
-
-
-
     </script>
 
     <script type="text/javascript">
@@ -198,6 +188,7 @@
             if (params.type == 'SHADE') {
                 let html = `<td>${params.text}</td>`;
                 $variantTable.find('thead tr td:gt(0)').each(function (e) {
+
                     html += $("#variantTmpl").render({size: $(this).data('size'), shade: params.value});
                 });
                 $variantTable.find('tbody').append(`<tr data-shade="${params.value}">${html}</tr>`);
@@ -206,14 +197,27 @@
 
         $('#size-select2, #shade-select2').on('select2:select', function (e) {
             let data = e.params.data,
-                params = {};
-            if ($(this).attr('id') == 'size-select2') {
+                params = {},
+                elemID = $(this).attr('id');
+            if (elemID == 'size-select2') {
                 params = {type: 'SIZE', text: data.text, value: data.id};
-            } else {
+            } else if(elemID == 'shade-select2') {
                 params = {type: 'SHADE', text: data.text, value: data.id};
             }
 
             addSizeShade(params);
+        }).on('select2:unselect', function (e) {
+            let data = e.params.data,
+                elemID = $(this).attr('id');
+
+            if (elemID == 'size-select2') {
+                let colIndex = $variantTable.find(`thead tr td[data-size="${data.id}"]`).index();
+                $variantTable.find('tr').each(function (e){
+                    $(this).find(`td:eq(${colIndex})`).remove();
+                });
+            } else if(elemID == 'shade-select2') {
+                $variantTable.find(`tr[data-shade="${data.id}"]`).remove();
+            }
         });
 
         $("#dropzone").dropzone({

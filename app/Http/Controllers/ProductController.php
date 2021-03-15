@@ -27,8 +27,8 @@ class ProductController extends Controller
     protected function _initForm()
     {
         $data['categories'] = Category::all()->pluck('name', 'id');
-        $data['sizes'] = Size::all()->pluck('name', 'id');
-        $data['shades'] = Shade::all()->pluck('name', 'id');
+        $data['sizes'] = Size::query()->orderBy('name')->get()->pluck('name', 'id');
+        $data['shades'] = Shade::query()->orderBy('name')->get()->pluck('name', 'id');
 
         return $data;
     }
