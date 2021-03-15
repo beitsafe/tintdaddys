@@ -5,6 +5,7 @@
         <tr>
             <th scope="col">Date</th>
             <th scope="col">Total</th>
+            <th scope="col">Status</th>
             <th scope="col">Details</th>
         </tr>
         </thead>
@@ -12,7 +13,12 @@
         @foreach($orders as $order)
             <tr>
                 <td>{{$order->created_at->format('jS \\of F Y')}}</td>
-                <td>{{$order->subtotal}}</td>
+                <td>${{$order->subtotal}}</td>
+                @if ($order->dispatched == 1)
+                    <td>Dispatched</td>
+                @else
+                    <td>Awaiting Dispatch</td>
+                @endif
                 <td>@include('auth.dashboard.partials.orderModal')</td>
             </tr>
         @endforeach
