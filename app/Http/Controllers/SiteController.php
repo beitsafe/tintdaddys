@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Faq;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Installer;
 
 class SiteController extends Controller
 {
@@ -15,7 +16,18 @@ class SiteController extends Controller
 
     public function about()
     {
-        return view('site.about');
+        $data['installers'] = Installer::all();
+
+        $data['nswInstallers'] = Installer::where('state', 'NSW')->get();
+        $data['qldInstallers'] = Installer::where('state', 'QLD')->get();
+        $data['vicInstallers'] = Installer::where('state', 'VIC')->get();
+        $data['tasInstallers'] = Installer::where('state', 'TAS')->get();
+        $data['ntInstallers'] = Installer::where('state', 'NT')->get();
+        $data['actInstallers'] = Installer::where('state', 'ACT')->get();
+        $data['saInstallers'] = Installer::where('state', 'SA')->get();
+        $data['waInstallers'] = Installer::where('state', 'WA')->get();
+
+        return view('site.about', $data);
     }
 
     public function faqs()

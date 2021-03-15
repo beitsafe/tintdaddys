@@ -18,6 +18,16 @@
     list-style-type: none !important;
 }
 
+.text-red-800{
+    color: #ee3124 !important;
+    font-weight: 800!important;
+}
+
+.pr-bottom-10{
+    position: relative!important;
+    bottom: 10px!important;
+}
+
 .btn--outline {
     color: #ee3124 !important;
     border-color: #ee3124 !important;

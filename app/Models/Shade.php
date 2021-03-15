@@ -18,4 +18,5 @@ class Shade extends Model
     protected $fillable = [
         'name'
     ];
+
 }

@@ -10,6 +10,15 @@ class Installer extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['longitude', 'latitude', 'name', 'phone', 'person', 'email'];
+    protected $fillable = ['longitude', 'latitude', 'name', 'phone', 'person', 'email', 'address', 'city', 'state', 'postcode'];
+
+    public function getFullAddressAttribute()
+    {
+        try {
+            return implode(',', array_filter([$this->address, $this->city, $this->state, $this->postcode]));
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
 
 }
