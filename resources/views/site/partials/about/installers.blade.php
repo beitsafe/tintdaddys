@@ -5,8 +5,9 @@
             <div class="col-md-12 col-12 mb-5">
                 <div class="map-container border--round"
                      data-maps-api-key="AIzaSyBUFJONPML4woNBEInCsiHqhGkZ4rozUaA"
-                     data-address="[Australia [nomarker];{{ $installers->implode('fullAddress',';') }}]"
-                     data-marker-title="[Australia;{{ $installers->implode('name',';') }}]"
+                     data-address="Australia [nomarker];{{ $installers->implode('fullAddress',';') }}"
+                     data-address-titles="Australia;{{ $installers->implode('name',';') }}"
+                     data-marker-title="Australia"
                      data-map-zoom="4"
                      data-map-style="@include('layouts.frontPartials.mapStyle')">
                 </div>

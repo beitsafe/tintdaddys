@@ -1422,6 +1422,7 @@ mr = (function (mr, $, window, document){
                         longitude       = latlong ? 1 * latlong.substr(latlong.indexOf(",") + 1) : false,
                         geocoder        = new google.maps.Geocoder(),
                         address         = typeof mapInstance.attr('data-address') !== typeof undefined ? mapInstance.attr('data-address').split(';'): [""],
+                        addressTitles   = typeof mapInstance.attr('data-address-titles') !== typeof undefined ? mapInstance.attr('data-address-titles').split(';'): [""],
                         map, marker, markerDefaults,mapDefaults,mapOptions, markerOptions, mapAo = {}, markerAo = {}, mapCreatedEvent;
 
                         mapCreatedEvent    = document.createEvent('Event');
@@ -1467,8 +1468,11 @@ mr = (function (mr, $, window, document){
                                 jQuery(mapElement).trigger('mapCreated.maps.mr').get(0).dispatchEvent(mapCreatedEvent);
                                 map.setCenter(results[0].geometry.location);
 
-                                address.forEach(function(address){
+                                address.forEach(function(address,i){
                                     var markerGeoCoder;
+                                    if(typeof addressTitles[i] !== typeof undefined){
+                                        markerOptions.title = addressTitles[i];
+                                    }
 
                                     if(/(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)/.test(address) ){
                                         var latlong = address.split(','),

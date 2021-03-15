@@ -3,8 +3,8 @@
 <script src="{{asset('frontend/js/flickity.min.js')}}"></script>
 <script src="{{asset('frontend/js/isotope.min.js')}}"></script>
 <script src="{{asset('frontend/js/smooth-scroll.min.js')}}"></script>
-<script src="{{asset('frontend/js/scripts.js')}}"></script>
-<script src="{{asset('frontend/js/cart.js?v'.time())}}"></script>
+<script src="{{asset('frontend/js/scripts.js?'.\Illuminate\Support\Facades\File::lastModified('frontend/js/scripts.js'))}}"></script>
+<script src="{{asset('frontend/js/cart.js?'.\Illuminate\Support\Facades\File::lastModified('frontend/js/cart.js'))}}"></script>
 <script src="//unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
