@@ -53,17 +53,25 @@
                     </ul>
                     @role('approved')
                     <div class="row">
-                        <div class="col-12 mb-2">
-                            <label>Available Size & Shade(s):</label>
-                            <div class="input-select">
-                                {{ Form::select('variant', $productSizeShades, null, ['placeholder'=>'Select Size & Shade']) }}
+                        @if($product->istint)
+                            <div class="col-6 mb-2">
+                                <label>Size(s):</label>
+                                <div class="input-select">
+                                    {{ Form::select('size', $sizes, null, ['placeholder'=>'Select Size']) }}
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-6">
+                                <label>Shade(s):</label>
+                                <div class="input-select">
+                                    {{ Form::select('shade', $shades, null, ['placeholder'=>'Select Shade']) }}
+                                </div>
+                            </div>
+                        @endif
                         <div class="col-4">
                             <input type="number" name="quantity" placeholder="QTY" min="1" max="100" required>
                         </div>
                         <div class="col-8">
-                            <button type="button" class="btn w-100 btn--primary add-to-cart" data-id="{{ $product->id }}" data-name="{{ $product->name }}">Add To Cart</button>
+                            <button type="button" class="btn w-100 btn--primary add-to-cart" data-istint="{{ $product->istint }}" data-id="{{ $product->id }}" data-name="{{ $product->name }}">Add To Cart</button>
                         </div>
                     </div>
                     @endrole

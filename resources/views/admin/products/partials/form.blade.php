@@ -47,6 +47,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group row mt-4">
+                        {{ Form::label('istint', 'Is Tint',['class'=>'col-sm-4 col-form-label my-auto']) }}
+                        <div class="col-sm-3 my-auto">
+                            {{ Form::hidden('istint', 0,['id'=>'hidden-istint']) }}
+                            <div class="switch">
+                                <label>
+                                    {{ Form::checkbox('istint', 1,  old('istint')) }}<span class="lever switch-col-blue"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group row ">
                         {{ Form::label('length', 'Length (mm)',["class"=>"col-sm-4 col-form-label"]) }}
                         <div class="col-sm-8">
@@ -73,9 +85,44 @@
                     </div>
                 </div>
 
-                <div class=" form-group col-md-12">
-                    {{ Form::label('sizeshades', 'Available Size & Shade(s)') }}
-                    {{ Form::select('sizeshades[]', $availSizeShades, old('sizeshades'), ['class' => 'form-control select2','multiple']) }}
+                <div class=" form-group col-md-6">
+                    {{ Form::label('sizes', 'Size(s)') }}
+                    {{ Form::select('sizes[]', $sizes, old('sizes'), ['class' => 'form-control select2','id'=>'size-select2','multiple']) }}
+                </div>
+
+                <div class=" form-group col-md-6">
+                    {{ Form::label('shades', 'Shade(s)') }}
+                    {{ Form::select('shades[]', $shades, old('shades'), ['class' => 'form-control select2','id'=>'shade-select2','multiple']) }}
+                </div>
+
+                <div class="col-12">
+                    @php
+                        $variants = $model->getSizeShadeVariants();
+                    @endphp
+                    <table id="size_shade_variation" class="table table-sm table-bordered">
+                        <thead>
+                        <tr>
+                            <td><span>Shades ↓ </span> / <span>Sizes → </span></td>
+                            @if($variants && $sizes = @$variants['sizes'])
+                                @foreach($sizes as $id => $size)
+                                    <td data-size="{{ $id }}">{{ $size }}</td>
+                                @endforeach
+                            @endif
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if($variants && $shades = @$variants['shades'])
+                            @foreach($shades as $shade_id => $shade)
+                                <tr data-shade="{{ $shade_id }}">
+                                    <td>{{ $shade }}</td>
+                                    @foreach($sizes as $size_id => $size)
+                                        <td><input type="text" name="variants[{{ $size_id }}][{{ $shade_id }}]" class="form-control" value="{{ @$variants['prices'][$size_id][$shade_id] }}"/></td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class=" form-group col-md-6">
@@ -118,10 +165,60 @@
 
     <script src="{{asset('backend/js/dropzone.js')}}" type="text/javascript"></script>
     <script src="{{asset('backend/js/slim.kickstart.min.js')}}" type="text/javascript"></script>
+    <script src="//www.jsviews.com/download/jsrender.min.js" type="text/javascript"></script>
+
+    <script id="variantTmpl" type="text/x-jsrender">
+        <td><input type="text" name="variants[[[:size]]][[[:shade]]]" class="form-control" /></td>
+    </script>
 
     <script type="text/javascript">
-        var id = '{{  @$model->id }}';
-        var drop = $('#dz-preview-template').html();
+        $.views.settings.delimiters("[[", "]]");
+        var id = '{{  @$model->id }}',
+            drop = $('#dz-preview-template').html(),
+            $variantTable = $('#size_shade_variation');
+
+        function addSizeShade(params) {
+            if (params.type == 'SIZE') {
+                $variantTable.find('thead tr').append(`<td data-size="${params.value}">${params.text}</td>`);
+                $variantTable.find('tbody tr').each(function (e) {
+                    $(this).append($("#variantTmpl").render({size: params.value, shade: $(this).data('shade')}));
+                });
+            }
+
+            if (params.type == 'SHADE') {
+                let html = `<td>${params.text}</td>`;
+                $variantTable.find('thead tr td:gt(0)').each(function (e) {
+
+                    html += $("#variantTmpl").render({size: $(this).data('size'), shade: params.value});
+                });
+                $variantTable.find('tbody').append(`<tr data-shade="${params.value}">${html}</tr>`);
+            }
+        }
+
+        $('#size-select2, #shade-select2').on('select2:select', function (e) {
+            let data = e.params.data,
+                params = {},
+                elemID = $(this).attr('id');
+            if (elemID == 'size-select2') {
+                params = {type: 'SIZE', text: data.text, value: data.id};
+            } else if(elemID == 'shade-select2') {
+                params = {type: 'SHADE', text: data.text, value: data.id};
+            }
+
+            addSizeShade(params);
+        }).on('select2:unselect', function (e) {
+            let data = e.params.data,
+                elemID = $(this).attr('id');
+
+            if (elemID == 'size-select2') {
+                let colIndex = $variantTable.find(`thead tr td[data-size="${data.id}"]`).index();
+                $variantTable.find('tr').each(function (e){
+                    $(this).find(`td:eq(${colIndex})`).remove();
+                });
+            } else if(elemID == 'shade-select2') {
+                $variantTable.find(`tr[data-shade="${data.id}"]`).remove();
+            }
+        });
 
         $("#dropzone").dropzone({
             url: "/upload_dropzone_file",

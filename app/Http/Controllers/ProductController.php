@@ -6,8 +6,10 @@ use App\DataTables\ProductDataTable;
 use App\Http\Requests\Auth\SaveProductRequest;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\SizeShade;
+use App\Models\Shade;
+use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -25,7 +27,8 @@ class ProductController extends Controller
     protected function _initForm()
     {
         $data['categories'] = Category::all()->pluck('name', 'id');
-        $data['availSizeShades'] = SizeShade::getVariants(SizeShade::all());
+        $data['sizes'] = Size::query()->orderBy('name')->get()->pluck('name', 'id');
+        $data['shades'] = Shade::query()->orderBy('name')->get()->pluck('name', 'id');
 
         return $data;
     }
@@ -112,10 +115,23 @@ class ProductController extends Controller
 
     protected function _save($request, $model)
     {
-        $model->fill($request->except(['_token', 'sizeshades']));
+        $model->fill($request->except(['_token', 'sizes', 'shades', 'variants']));
         $model->save();
 
-        $model->sizeshades()->sync($request->get('sizeshades', []));
+        if (!$model->wasRecentlyCreated) {
+            DB::table('product_variants')->where('product_id', $model->id)->delete();
+        }
+        foreach ($request->get('variants', []) as $size => $shades) {
+            foreach ($shades as $shade => $price) {
+                if($size && $shade) {
+                    DB::table('product_variants')->updateOrInsert([
+                        'product_id' => $model->id,
+                        'size_id' => $size,
+                        'shade_id' => $shade,
+                    ], ['price' => $price ?: 0]);
+                }
+            }
+        }
 
         if ($session_files = session()->get('filepath')) {
             $crop_path = session()->get('crop_path');

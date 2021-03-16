@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col">
-                                    {{ $order->billing['address'] }}
+                                    {{ $order->billing_address }}
                                 </div>
                             </div>
                         </div>
@@ -48,31 +48,40 @@
                                         <th><strong>Product</strong></th>
                                         <th><strong>Unit Price</strong></th>
                                         <th class="text-center" width="8%"><strong>Quantity</strong></th>
-                                        <th class="text-center" width="15%"><strong>Total</strong></th>
+                                        <th class="text-right" width="15%"><strong>Total</strong></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($order->items as $item)
                                         @php
-                                            $variant = $item->variant;
-                                            $product = $variant->product;
+                                            $product = $item->product;
+                                            $name = $product->name;
+                                            if($size = $item->size){
+                                                $name .= " - {$size}";
+                                            }
+                                            if($shade = $item->shade){
+                                                $name .= " * {$shade}";
+                                            }
                                         @endphp
                                         <tr class="cart-item">
                                             <td class="text-center">
-                                                <img src="{{ @$product->default_thumb }}" class="img-fluid"
-                                                     width="67" alt="{{ $variant->name }}"/>
+                                                <img src="{{ @$product->default_thumb }}" class="img-fluid" width="67" alt="{{ $name }}"/>
                                             </td>
-                                            <td>{{ $variant->name }}</td>
+                                            <td>{{ $name }}</td>
                                             <td>${{ $item->unitprice }}</td>
                                             <td class="text-center">{{ $item->quantity }}</td>
-                                            <td class="text-center">${{ $item->total }}</td>
+                                            <td class="text-right">${{ number_format($item->total,2) }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                     <tfoot>
                                     <tr>
+                                        <td colspan="4" class="text-right font-weight-bold">Shipping</td>
+                                        <td class="text-right">${{ $order->shippingfee }}</td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="4" class="text-right font-weight-bold">Total</td>
-                                        <td class="text-center">${{ $order->total }}</td>
+                                        <td class="text-right">${{ number_format($order->total,2) }}</td>
                                     </tr>
                                     </tfoot>
                                 </table>

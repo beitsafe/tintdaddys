@@ -36,6 +36,6 @@ return [
         /**
          * Allow purging all monitor entries.
          */
-        'allow_purge' => true,
+        'allow_purge' => false,
     ],
 ];

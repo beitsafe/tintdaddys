@@ -28,7 +28,7 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -47,14 +47,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]));
 
-        Client::create([
-            'user_id' => $user->id,
+        Client::updateOrCreate(['user_id' => $user->id], [
             'firstName' => @$request['firstName'],
             'lastName' => @$request['lastName'],
             'businessName' => @$request['businessName'],
             'address' => @$request['address'],
             'city' => @$request['city'],
-            'state' => @$request['state'],
+            'suburb' => @$request['suburb'],
             'postcode' => @$request['postcode'],
             'phone' => @$request['phone'],
             'abn' => @$request['abn'],

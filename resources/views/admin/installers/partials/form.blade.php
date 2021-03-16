@@ -24,13 +24,34 @@
 
 <div class="form-row">
     <div class="form-group col-md-6">
-        {{ Form::label('longitude', 'Longitude') }}
-        {{ Form::text('longitude', old('longitude'), ['class' => 'form-control']) }}
+        {{ Form::label('address', 'Address') }}
+        {{ Form::text('address', old('address'), ['class' => 'form-control']) }}
     </div>
 
     <div class="form-group col-md-6">
-        {{ Form::label('latitude', 'Latitude') }}
-        {{ Form::text('latitude', old('latitude'), ['class' => 'form-control']) }}
+        {{ Form::label('city', 'City') }}
+        {{ Form::text('city', old('city'), ['class' => 'form-control']) }}
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        {{ Form::label('state', 'State') }}
+        {{ Form::select('size', [
+            'QLD' => 'QLD',
+            'NSW' => 'NSW',
+            'VIC' => 'VIC',
+            'TAS' => 'TAS',
+            'ACT' => 'ACT',
+            'NT' => 'NT',
+            'SA' => 'SA',
+            'WA' => 'WA',
+            ], old('state'), ['class' => 'form-control']) }}
+    </div>
+
+    <div class="form-group col-md-6">
+        {{ Form::label('postcode', 'Postcode') }}
+        {{ Form::text('postcode', old('postcode'), ['class' => 'form-control']) }}
     </div>
 </div>
 

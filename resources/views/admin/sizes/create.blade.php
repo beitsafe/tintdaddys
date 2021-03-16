@@ -3,11 +3,11 @@
 @section('content')
     <div class="card ">
         <div class="card-header bg-dark text-white text-center">
-            <h2>Create Size Shade</h2>
+            <h2>Create Size</h2>
         </div>
         <div class="card-body">
-            {!! Form::model($model, array('route' => 'admin.sizeshades.store', 'class' => 'form-horizontal')) !!}
-            @include('admin.sizeshades.partials.form')
+            {!! Form::model($model, array('route' => 'admin.sizes.store', 'class' => 'form-horizontal')) !!}
+            @include('admin.sizes.partials.form')
             {!! Form::close() !!}
         </div>
     </div>

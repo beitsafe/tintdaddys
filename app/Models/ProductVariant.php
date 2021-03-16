@@ -11,20 +11,27 @@ class ProductVariant extends Model
     public $timestamps = true;
     public $incrementing = true;
 
-    use SoftDeletes;
+    protected $fillable = [
+        'product_id', 'size_id', 'shade_id', 'price'
+    ];
 
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function sizeshade()
+    public function size()
     {
-        return $this->belongsTo(SizeShade::class,'size_shade_id');
+        return $this->belongsTo(Size::class, 'size_id');
+    }
+
+    public function shade()
+    {
+        return $this->belongsTo(Shade::class, 'shade_id');
     }
 
     public function getNameAttribute()
     {
-        return $this->product->name . ' - ' . $this->sizeshade->name;
+        return $this->product->name . ' - ' . $this->size->name . ' * ' . $this->shade->name;
     }
 }

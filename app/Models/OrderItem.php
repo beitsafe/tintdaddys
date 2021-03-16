@@ -13,16 +13,16 @@ class OrderItem extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $fillable = ['order_id', 'product_variant_id', 'quantity', 'unitprice'];
+    protected $fillable = ['order_id', 'product_id', 'size', 'shade', 'quantity', 'unitprice'];
 
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
-    public function variant()
+    public function product()
     {
-        return $this->belongsTo(ProductVariant::class,'product_variant_id')->withTrashed();
+        return $this->belongsTo(Product::class, 'product_id')->withTrashed();
     }
 
     public function getTotalAttribute()

@@ -11,7 +11,7 @@ function sum(obj) {
 
 function refreshCart(response) {
     let count = 0;
-    if(response.items!=null){
+    if (response.items != null) {
         count = Object.keys(response.items).length;
     }
 
@@ -20,10 +20,10 @@ function refreshCart(response) {
             $('#empty-cart').removeClass('d-none');
             $('#cart-form').addClass('d-none');
         }
-    }else{
+    } else {
         if ($('.cartcount').length > 0) {
             $('.cartcount').html(count);
-            var totalfee = parseFloat(response.cart_total);
+            var totalfee = parseFloat(response.cart_total) + parseFloat(response.shippingfee);
             $('.cart-total').html('$ ' + totalfee.toFixed(2));
         }
 
@@ -51,8 +51,9 @@ function fetchCart() {
     }, "json");
 }
 
-function updateShipping(postcode) {
-    $.post('/cart/action/shipping',{postcode: postcode}, function (response) {
+function updateShipping(params) {
+    $('.cart-totals .spinner').addClass('spinning');
+    $.post('/cart/action/shipping', params, function (response) {
         refreshCart(response);
     }, "json");
 }
@@ -69,16 +70,23 @@ function cartSummaryRefresh(response) {
 
     const summaryTbl = $('.cart-totals'),
         subTotal = parseFloat(response.cart_total).toFixed(2),
-        taxFee = 0;
-        // taxFee = parseFloat(subTotal/10).toFixed(2);
+        taxFee = 0,
+        shippingFee = parseFloat(response.shippingfee).toFixed(2);
 
-    if(response.error){
-        Swal.fire('',response.error,'error');
+    if (response.error) {
+        Swal.fire('', response.error, 'error');
+    }
+
+    let shippingOption = `$${shippingFee}`;
+    if (response.shippingerror) {
+        shippingOption = response.shippingerror;
     }
 
     summaryTbl.find('#cart-tax').html(`$${taxFee}`);
+    summaryTbl.find('#cart-shippingfee').html(shippingOption);
     summaryTbl.find('#cart-subtotal').html('$' + parseFloat(parseFloat(subTotal)).toFixed(2));
-    summaryTbl.find('#cart-total').html('$' + parseFloat(parseFloat(subTotal) + parseFloat(taxFee)).toFixed(2));
+    summaryTbl.find('#cart-total').html('$' + parseFloat(parseFloat(subTotal) + parseFloat(taxFee) + parseFloat(shippingFee)).toFixed(2));
+    summaryTbl.find('.spinner').removeClass('spinning');
 }
 
 function flashNotify(message) {
@@ -109,11 +117,17 @@ $(document).ready(function () {
 
     $('body').on('click', '[data-trigger="change-qty"]', function () {
         _that = $(this).closest('.cart-item');
-        addToCart(_that.data('pid'), _that.find("[name='quantity']").val(),_that.data('variant'));
+        addToCart(_that.data('pid'), _that.find("[name='quantity']").val(), _that.data('variant'));
     });
 
-    $('body').on('change', '#shipping_postalcode', function () {
-        updateShipping($(this).val());
+    $('body').on('blur', '.billing-field[data-shipping-name]', function () {
+        let params = {
+            field: $(this).data('shipping-name'),
+            value: $(this).val(),
+        }
+        if (params.field && params.value) {
+            updateShipping(params);
+        }
     });
 
     $('body').on('change', '.prod-qty', function () {
@@ -122,16 +136,27 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.add-to-cart', function () {
-        _that = $(this);
-        if($('select[name="variant"]').val() == ''){
-            toastr.error('Please select Size & Shade');
+        var _that = $(this),
+            qty = $('input[name="quantity"]').val(),
+            size = $('select[name="size"]').val(),
+            shade = $('select[name="shade"]').val(),
+            variantKey = null;
+
+        if (_that.data('istint') == '1') {
+            if((size == '' || shade == '')) {
+                toastr.error('Please select Size / Shade');
+                return false;
+            }
+
+            variantKey = `${size}_${shade}`;
+        }
+
+        if (qty == '') {
+            toastr.error('Please enter quantity');
             return false;
         }
 
-        var qty = $('input[name="quantity"]').val(),
-            variant= $('select[name="variant"]').val();
-
-        addToCart(_that.data('id'), (qty)?qty:1, variant);
+        addToCart(_that.data('id'), qty, variantKey);
         _that.addClass('added-cart');
         flashNotify(`${_that.data('name')} added to the cart`);
     });

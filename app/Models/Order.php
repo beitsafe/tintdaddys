@@ -12,7 +12,7 @@ class Order extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $fillable = ['billing', 'instructions', 'subtotal', 'paymentid', 'responseinfos', 'user_id', 'invoiceno'];
+    protected $fillable = ['billing', 'instructions', 'subtotal', 'shippingfee', 'paymentid', 'responseinfos', 'user_id', 'invoiceno'];
     protected $casts = ['billing' => 'array', 'responseinfos' => 'array'];
 
 
@@ -41,7 +41,7 @@ class Order extends Model
 
     public function getTotalAttribute()
     {
-        return $this->subtotal;
+        return $this->subtotal + $this->shippingfee;
     }
 
     public function getInvoiceAttribute()
@@ -52,7 +52,14 @@ class Order extends Model
     public function getBillingNameAttribute()
     {
         $billing = $this->billing;
-        return trim(@$billing['firstname'] . " " . @$billing['lastname']);
+        return trim(@$billing['firstName']);
+    }
+
+    public function getBillingAddressAttribute()
+    {
+        $billing = $this->billing;
+
+        return implode(', ',array_filter([@$billing['address'],@$billing['city'],@$billing['suburb'],@$billing['postcode'],@$billing['country']]));
     }
 
     public function getBillingEmailAttribute()

@@ -13,7 +13,7 @@
         @foreach($orders as $order)
             <tr>
                 <td>{{$order->created_at->format('jS \\of F Y')}}</td>
-                <td>{{$order->subtotal}}</td>
+                <td>${{$order->subtotal}}</td>
                 @if ($order->dispatched == 1)
                     <td>Dispatched</td>
                 @else

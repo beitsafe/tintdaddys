@@ -1422,6 +1422,7 @@ mr = (function (mr, $, window, document){
                         longitude       = latlong ? 1 * latlong.substr(latlong.indexOf(",") + 1) : false,
                         geocoder        = new google.maps.Geocoder(),
                         address         = typeof mapInstance.attr('data-address') !== typeof undefined ? mapInstance.attr('data-address').split(';'): [""],
+                        addressTitles   = typeof mapInstance.attr('data-address-titles') !== typeof undefined ? mapInstance.attr('data-address-titles').split(';'): [""],
                         map, marker, markerDefaults,mapDefaults,mapOptions, markerOptions, mapAo = {}, markerAo = {}, mapCreatedEvent;
 
                         mapCreatedEvent    = document.createEvent('Event');
@@ -1431,12 +1432,12 @@ mr = (function (mr, $, window, document){
 
 
                     mapDefaults = {
-                        disableDefaultUI: true,
+                        disableDefaultUI: false,
                         draggable: isDraggable,
                         scrollwheel: false,
                         styles: [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}],
                         zoom: 17,
-                        zoomControl: false,
+                        zoomControl: true,
                     };
 
                     // Attribute overrides - allows data attributes on the map to override global options
@@ -1467,8 +1468,11 @@ mr = (function (mr, $, window, document){
                                 jQuery(mapElement).trigger('mapCreated.maps.mr').get(0).dispatchEvent(mapCreatedEvent);
                                 map.setCenter(results[0].geometry.location);
 
-                                address.forEach(function(address){
+                                address.forEach(function(address,i){
                                     var markerGeoCoder;
+                                    if(typeof addressTitles[i] !== typeof undefined){
+                                        markerOptions.title = addressTitles[i];
+                                    }
 
                                     if(/(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)/.test(address) ){
                                         var latlong = address.split(','),

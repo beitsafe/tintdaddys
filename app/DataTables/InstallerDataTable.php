@@ -58,8 +58,6 @@ class InstallerDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'longitude',
-            'latitude',
             'name'
         ];
     }

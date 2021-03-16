@@ -62,7 +62,7 @@
                     <div class="switchable__text">
                         <h3>3/9 Technology Dr<br> Arundel QLD 4214</h3>
                         <p class="lead"> E: <a href="#">admin@ozwindowfilm.com.au</a><br> P: (07) 5574 6000 </p>
-                        <p class="lead"> Give us a call or drop by anytime, we endeavour to answer all enquiries within 24 hours on business days. </p>
+                        <p class="lead"> Give us a call or send an email, We endeavour to answer all enquiries within 24 hours on business days. </p>
                         <p class="lead"> We are open from 9am — 5pm week days. </p>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\ProductVariant;
 
 class Product extends Model
 {
@@ -22,7 +23,7 @@ class Product extends Model
      */
     protected $fillable = [
         'name', 'slug', 'shortDescription', 'body', 'shipping', 'inStock', 'metaDescription', 'metaKeywords', 'price', 'extraDescription',
-        'length', 'width', 'height', 'weight', 'category_id'
+        'length', 'width', 'height', 'weight', 'category_id', 'istint'
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -47,10 +48,37 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    public function sizeshades()
+
+    public function sizes()
     {
-        return $this->belongsToMany(SizeShade::class, 'product_variants', 'product_id', 'size_shade_id')->withPivot('id');
+        return $this->belongsToMany(Size::class, 'product_variants', 'product_id', 'size_id');
     }
+
+    public function shades()
+    {
+        return $this->belongsToMany(Shade::class, 'product_variants', 'product_id', 'shade_id');
+    }
+
+    public function getSizeShadeVariants()
+    {
+        $rows = [];
+        $variants = ProductVariant::query()->with(['size', 'shade'])->where('product_id', $this->id)->get();
+
+        foreach ($variants as $variant) {
+            if($size = $variant->size) {
+                $rows['sizes'][$variant->size_id] = $size->name;
+            }
+            if($shade = $variant->shade) {
+                $rows['shades'][$variant->shade_id] = $shade->name;
+            }
+            if($size && $shade){
+                $rows['prices'][$variant->size_id][$variant->shade_id] = $variant->price;
+            }
+        }
+
+        return $rows;
+    }
+
 
     public function getDefaultImageAttribute()
     {
@@ -68,6 +96,11 @@ class Product extends Model
         }
 
         return url('frontend/images/default-product.jpg');
+    }
+
+    public function isShippable()
+    {
+        return $this->weight && $this->length && $this->width && $this->height;
     }
 
 }
